@@ -1,0 +1,48 @@
+body {
+  background-color: #121212;
+  color: white;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: large;
+}
+
+.gpus-list {
+  margin: 1rem auto;
+}
+
+.gpus-list-card {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 300px;
+  border: 2px solid gray;
+  border-style: outset;
+  border-radius: 0.5rem;
+}
+
+.gpus-list-card:hover {
+  background-color: #121212;
+  text-decoration: underline;
+}
+
+.gpus-list-card:active {
+  background-color: #202020;
+  border-style: inset;
+}
+
+.search-field {
+  background-color: black;
+  color: white;
+  padding: 0.25rem;
+  margin: 1rem auto;
+  border-style: inset;
+}
