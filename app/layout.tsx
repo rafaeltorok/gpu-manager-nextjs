@@ -13,6 +13,8 @@ export default function RootLayout({
           <Link href="/">Home</Link>
           {" | "}
           <Link href="/gpus">GPUs</Link>
+          {" | "}
+          <Link href="/gpus/add">Add new</Link>
         </nav>
         <main>{children}</main>
       </body>

@@ -1,0 +1,34 @@
+.add-gpu-form-row {
+  display: flex;
+  justify-content: center;
+}
+
+.add-gpu-form label {
+  width: 175px;
+  text-align: left;
+}
+
+.add-gpu-form input {
+  width: 200px;
+  background-color: black;
+  color: white;
+  border-style: inset;
+}
+
+.add-gpu-form button {
+  margin-top: 0.5rem;
+  padding: 0.2rem 1rem;
+  background-color: black;
+  color: white;
+  border-style: outset;
+  font-weight: bold;
+}
+
+.add-gpu-form button:hover {
+  background-color: #252525;
+}
+
+.add-gpu-form button:active {
+  background-color: #303030;
+  border-style: inset;
+}
