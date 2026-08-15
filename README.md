@@ -15,8 +15,8 @@ Simple GPU List style app to train Next.js.
 ### Screenshots
 
 <div>
-  <img src="../../img/training/nextjs/gpu-manager-1.png" alt="GPU Manager cards list" width="325"/>
-  <img src="../../img/training/nextjs/gpu-manager-2.png" alt="Full card information page" width="350"/>
+  <img src="./img/gpu-manager-list-view.png" alt="GPU Manager cards list" width="325"/>
+  <img src="./img/gpu-manager-data-view.png" alt="Full card information page" width="350"/>
 </div>
 
 
@@ -29,8 +29,8 @@ Simple GPU List style app to train Next.js.
 
 - Setup the `/gpu-manager/.env` file with the following variables
   ```conf
-  MONGODB_URI=mongodb+srv://myDatabaseUser:myPassword@cluster0.example.mongodb.net/?retryWrites=true&w=majority
-  TEST_MONGODB_URI=mongodb+srv://myDatabaseUser:myPassword@cluster0.example.mongodb.net/?retryWrites=true&w=majority
+  MONGODB_URI=<mongodb_uri>
+  TEST_MONGODB_URI=<test_mongodb_uri>
   ```
 
 
