@@ -1,5 +1,5 @@
 import Link from "next/link";
-import "./styles/layout.css";
+import "./layout.css";
 
 export default function RootLayout({
   children,

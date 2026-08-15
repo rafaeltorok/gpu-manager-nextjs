@@ -46,3 +46,21 @@ nav a {
   margin: 1rem auto;
   border-style: inset;
 }
+
+button {
+  margin-top: 0.5rem;
+  padding: 0.2rem 1rem;
+  background-color: black;
+  color: white;
+  border-style: outset;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #252525;
+}
+
+button:active {
+  background-color: #303030;
+  border-style: inset;
+}

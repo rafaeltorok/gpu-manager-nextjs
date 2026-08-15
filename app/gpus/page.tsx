@@ -10,7 +10,7 @@ import getManufacturerColor from "../utils/getManufacturerColor";
 import SearchBar from "@/components/SearchBar";
 
 // CSS styles
-import "../styles/manufacturer-colors.css";
+import "../manufacturer-colors.css";
 
 export default async function Gpus(props: {
   searchParams?: Promise<{
