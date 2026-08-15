@@ -76,7 +76,7 @@ export default async function Gpu({
             {renderRow("Base Clock", `${gpu.baseclock} MHz`)}
             {renderRow("Boost Clock", `${gpu.boostclock} MHz`)}
             {renderRow("Memory Clock", `${gpu.memclock} Gbps effective`)}
-            
+
             {renderDivision("Theoretical Performance")}
             {renderRow("FP32(float)", performance[0])}
             {renderRow("Texture Rate", performance[1])}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
@@ -11,9 +11,9 @@ export default function SearchBar() {
     const params = new URLSearchParams(searchParams);
 
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query');
+      params.delete("query");
     }
 
     // Add the search term to the url
@@ -26,7 +26,9 @@ export default function SearchBar() {
         className="search-field"
         type="search"
         placeholder="Search model name..."
-        onChange={(e) => { handleSearch(e.target.value.trimStart()) }}
+        onChange={(e) => {
+          handleSearch(e.target.value.trimStart());
+        }}
       />
     </div>
   );

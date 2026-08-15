@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 // Next
 import { redirect } from "next/navigation";
@@ -25,7 +25,7 @@ export async function createGpu(formData: FormData) {
     baseclock: Number(formData.get("baseclock")),
     boostclock: Number(formData.get("boostclock")),
     memclock: Number(formData.get("memclock")),
-  }
+  };
 
   const storedGpu = await addGpu(data);
   revalidatePath("/gpus");
