@@ -15,7 +15,7 @@ Simple GPU List style app to train Next.js.
 ### Screenshots
 
 <div>
-  <img src="./img/gpu-manager-list-view.png" alt="GPU Manager cards list" width="325"/>
+  <img src="./img/gpu-manager-list-view.png" alt="GPU Manager cards list" width="355"/>
   <img src="./img/gpu-manager-data-view.png" alt="Full card information page" width="350"/>
 </div>
 
