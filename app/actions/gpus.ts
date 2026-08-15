@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 // Services
-import { addGpu } from "../services/gpus";
+import { addGpu, removeGpu } from "../services/gpus";
 
 // Utils
 import { generateSlug } from "../utils/slug";
@@ -30,4 +30,12 @@ export async function createGpu(formData: FormData) {
   const storedGpu = await addGpu(data);
   revalidatePath("/gpus");
   redirect(`/gpus/${generateSlug(storedGpu)}`);
+}
+
+// Remove a graphics card form the database
+export async function deleteGpu(formData: FormData) {
+  const id = formData.get("id") as string;
+  await removeGpu(id);
+  revalidatePath("/gpus");
+  redirect("/gpus");
 }

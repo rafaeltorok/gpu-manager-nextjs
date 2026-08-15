@@ -33,3 +33,7 @@ export async function addGpu(data: NewGpu) {
   const storedGpu = await newGpu.save();
   return storedGpu;
 }
+
+export async function removeGpu(id: string) {
+  await Gpu.findByIdAndDelete(id);
+}
