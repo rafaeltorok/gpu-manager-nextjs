@@ -7,7 +7,7 @@ import { getGpus } from "@/app/services/gpus";
 import getManufacturerColor from "../utils/getManufacturerColor";
 
 // Components
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/app/gpus/components/SearchBar";
 
 // CSS styles
 import "../manufacturer-colors.css";

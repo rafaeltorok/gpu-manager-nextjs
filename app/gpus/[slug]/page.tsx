@@ -8,10 +8,15 @@ import { deleteGpu } from "@/app/actions/gpus";
 import calculatePerformance from "../../utils/calculatePerformance";
 import getManufacturerColor from "../../utils/getManufacturerColor";
 
+// Components
+import GpuTableRow from "@/app/gpus/components/GpuTableRow";
+import GpuTableDivision from "@/app/gpus/components/GpuTableDivision";
+
 // CSS styles
 import "../../gpus.css";
 import "../../manufacturer-colors.css";
 
+// Server component
 export default async function Gpu({
   params,
 }: {
@@ -33,24 +38,6 @@ export default async function Gpu({
   // Format the VRAM suffix in either MB or GB
   const vramToDisplay = gpu.vram < 1 ? `${gpu.vram * 1000}MB` : `${gpu.vram}GB`;
 
-  // Helper functions
-  function renderDivision(title: string) {
-    return (
-      <tr className="table-division-header">
-        <th colSpan={2}>{title}</th>
-      </tr>
-    );
-  }
-
-  function renderRow(header: string, data: string | number) {
-    return (
-      <tr>
-        <th className="row-label">{header}</th>
-        <td className={`row-data ${gpuClass}`}>{String(data)}</td>
-      </tr>
-    );
-  }
-
   return (
     <div>
       <form action={deleteGpu}>
@@ -65,23 +52,59 @@ export default async function Gpu({
             </tr>
           </thead>
           <tbody>
-            {renderDivision("Specifications")}
-            {renderRow("Cores", gpu.cores)}
-            {renderRow("TMUs", gpu.tmus)}
-            {renderRow("ROPs", gpu.rops)}
-            {renderRow("VRAM", `${vramToDisplay} ${gpu.memtype}`)}
-            {renderRow("Bus Width", `${gpu.bus} bit`)}
+            <GpuTableDivision title="Specifications" />
+            <GpuTableRow header="Cores" data={gpu.cores} gpuClass={gpuClass} />
+            <GpuTableRow header="TMUs" data={gpu.tmus} gpuClass={gpuClass} />
+            <GpuTableRow header="ROPs" data={gpu.rops} gpuClass={gpuClass} />
+            <GpuTableRow
+              header="VRAM"
+              data={`${vramToDisplay} ${gpu.memtype}`}
+              gpuClass={gpuClass}
+            />
+            <GpuTableRow
+              header="Bus Width"
+              data={`${gpu.bus} bit`}
+              gpuClass={gpuClass}
+            />
 
-            {renderDivision("Clock Speeds")}
-            {renderRow("Base Clock", `${gpu.baseclock} MHz`)}
-            {renderRow("Boost Clock", `${gpu.boostclock} MHz`)}
-            {renderRow("Memory Clock", `${gpu.memclock} Gbps effective`)}
+            <GpuTableDivision title="Clock Speeds" />
+            <GpuTableRow
+              header="Base Clock"
+              data={`${gpu.baseclock} MHz`}
+              gpuClass={gpuClass}
+            />
+            <GpuTableRow
+              header="Boost Clock"
+              data={`${gpu.boostclock} MHz`}
+              gpuClass={gpuClass}
+            />
+            <GpuTableRow
+              header="Memory Clock"
+              data={`${gpu.memclock} Gbps effective`}
+              gpuClass={gpuClass}
+            />
 
-            {renderDivision("Theoretical Performance")}
-            {renderRow("FP32(float)", performance[0])}
-            {renderRow("Texture Rate", performance[1])}
-            {renderRow("Pixel Rate", performance[2])}
-            {renderRow("Bandwidth", performance[3])}
+            <GpuTableDivision title="Theoretical Performance" />
+            <GpuTableRow
+              header="FP32(float)"
+              data={performance[0]}
+              gpuClass={gpuClass}
+            />
+            <GpuTableRow
+              header="Texture Rate"
+              data={performance[1]}
+              gpuClass={gpuClass}
+            />
+            <GpuTableRow
+              header="Pixel Rate"
+              data={performance[2]}
+              gpuClass={gpuClass}
+            />
+            <GpuTableRow
+              header="Bandwidth"
+              data={performance[3]}
+              gpuClass={gpuClass}
+            />
 
             <tr>
               <th colSpan={2}>
