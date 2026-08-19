@@ -6,7 +6,7 @@ import connectToDatabase from "@/lib/mongodb";
 import { mapSlugs } from "../utils/slug";
 
 // TypeScript types
-import type { NewGpu } from "../types/gpu";
+import type { NewGpu, GpuType, EditGpu } from "../types/gpu";
 
 // Fetch all cards from the database
 export async function getGpus() {
@@ -19,7 +19,7 @@ export async function getGpus() {
 }
 
 // Fetch a single card based on its slug
-export async function getGpu(slug: string) {
+export async function getGpu(slug: string): Promise<GpuType | undefined> {
   await connectToDatabase();
 
   const response = await Gpu.find();
@@ -28,12 +28,20 @@ export async function getGpu(slug: string) {
   return gpus.find((gpu) => gpu.slug === slug);
 }
 
-export async function addGpu(data: NewGpu) {
+export async function addGpu(data: NewGpu): Promise<GpuType | null> {
   const newGpu = new Gpu(data);
   const storedGpu = await newGpu.save();
   return storedGpu;
 }
 
-export async function removeGpu(id: string) {
+export async function updateSpecs(gpu: EditGpu): Promise<GpuType | null> {
+  const updatedGpu = await Gpu.findByIdAndUpdate(gpu.id, gpu, {
+    new: true,
+    runValidators: true,
+  });
+  return updatedGpu;
+}
+
+export async function removeGpu(id: string): Promise<void> {
   await Gpu.findByIdAndDelete(id);
 }
