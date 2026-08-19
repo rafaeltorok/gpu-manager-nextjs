@@ -1,3 +1,8 @@
+.add-gpu-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 .add-gpu-form-row {
   display: flex;
   justify-content: center;
