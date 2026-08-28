@@ -9,10 +9,6 @@ import getManufacturerColor from "../../utils/getManufacturerColor";
 // Components
 import GpuTable from "../components/GpuTable";
 
-// CSS styles
-import "../../gpus.css";
-import "../../manufacturer-colors.css";
-
 // Server component
 export default async function Gpu({
   params,
@@ -34,10 +30,10 @@ export default async function Gpu({
       <form>
         <input type="hidden" name="id" value={gpu.id} />
 
-        <table className="gpu-data-table">
+        <table className="w-full min-w-[300px] max-w-[400px] border-2 border-gray-700 mx-auto my-6 border-collapse">
           <thead>
             <tr>
-              <th colSpan={2} className={gpuClass}>
+              <th colSpan={2} className={`bg-black p-5 text-2xl font-extrabold ${gpuClass}`}>
                 {gpu.manufacturer} {gpu.gpuline} {gpu.model}
               </th>
             </tr>

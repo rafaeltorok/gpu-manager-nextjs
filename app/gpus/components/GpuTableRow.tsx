@@ -2,9 +2,6 @@
 
 import { useState } from "react";
 
-// CSS styles
-import "../../gpus.css";
-
 // TypeScript types
 interface ComponentProps {
   header: string;
@@ -29,11 +26,11 @@ export default function GpuTableRow({
   return (
     <>
       {editMode ? (
-        <tr>
-          <th className="row-label">{header}</th>
-          <td className={`row-data ${gpuClass}`}>
+        <tr className="flex w-full">
+          <th className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">{header}</th>
+          <td className={`text-left font-bold bg-black border-1 border-gray-600 px-2 py-1 w-3/5 ${gpuClass}`}>
             <input
-              className="data-table-edit-field"
+              className="w-full bg-black text-white border-[inset]"
               name={name}
               value={value}
               type="number"
@@ -42,9 +39,13 @@ export default function GpuTableRow({
           </td>
         </tr>
       ) : (
-        <tr>
-          <th className="row-label">{header}</th>
-          <td className={`row-data ${gpuClass}`}>{String(data)}</td>
+        <tr className="flex w-full">
+          <th className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">{header}</th>
+          <td className={`text-left font-bold bg-black border-1 border-gray-600 px-2 py-1 w-3/5`}>
+            <span className={`${gpuClass}`}>
+              {String(data)}
+            </span>
+          </td>
         </tr>
       )}
     </>

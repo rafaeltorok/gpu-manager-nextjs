@@ -1,8 +1,5 @@
 import { createGpu } from "@/app/actions/gpus";
 
-// CSS styles
-import "../../addform.css";
-
 // Render each row of the form
 function renderRow(
   label: string,
@@ -11,12 +8,21 @@ function renderRow(
   required: boolean,
 ) {
   return (
-    <div className="add-gpu-form-row">
-      <label>{label}</label>
+    <div className="flex justify-center space-y-1 text-left">
+      <label className="w-1/2 font-bold">{label}</label>
       {required ? (
-        <input type={type} name={name} required />
+        <input
+          className="w-1/2 bg-black mb-1 p-0.5 border-1 border-gray-900"
+          type={type}
+          name={name}
+          required
+        />
       ) : (
-        <input type={type} name={name} />
+        <input
+          className="w-1/2 bg-black mb-1 p-0.5 border-1 border-gray-900"
+          type={type}
+          name={name}
+        />
       )}
     </div>
   );
@@ -26,9 +32,9 @@ function renderRow(
 export default async function AddGpu() {
   return (
     <div>
-      <h2>Add new graphics card</h2>
+      <h2 className="text-center p-6 text-xl font-bold">Add new graphics card</h2>
 
-      <form action={createGpu} className="add-gpu-form">
+      <form action={createGpu} className="w-full max-w-[400px] mx-auto border-1 border-gray-700 p-3 rounded">
         {renderRow("Manufacturer", "text", "manufacturer", true)}
         {renderRow("Line", "text", "gpuline", false)}
         {renderRow("Model", "text", "model", true)}
@@ -42,7 +48,12 @@ export default async function AddGpu() {
         {renderRow("Boost Clock (in MHz)", "number", "boostclock", true)}
         {renderRow("Memory Clock (in Gbps)", "number", "memclock", true)}
 
-        <button type="submit">Add</button>
+        <button
+          type="submit"
+          className="w-full mt-1 px-1 py-1 bg-black font-bold border-1 border-gray-700 hover:bg-gray-900 rounded"
+        >
+          Add
+        </button>
       </form>
     </div>
   );

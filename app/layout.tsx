@@ -1,5 +1,5 @@
-import Link from "next/link";
-import "./layout.css";
+import NavBar from "./gpus/components/NavBar";
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -8,14 +8,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <nav>
-          <Link href="/">Home</Link>
-          {" | "}
-          <Link href="/gpus">GPUs</Link>
-          {" | "}
-          <Link href="/gpus/add">Add new</Link>
-        </nav>
+      <body className="min-w-[300px]">
+        <NavBar />
         <main>{children}</main>
       </body>
     </html>
