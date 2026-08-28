@@ -64,7 +64,7 @@ describe("POST route", () => {
   });
 
   test("The GPU Line field is optional", async () => {
-    // Get a card form the list that does not have a specific line
+    // Get a card from the list that does not have a specific line
     const gpuData = { ...gpuList[4] };
 
     // Create a new card

@@ -6,7 +6,6 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: [
       "./tests/integration/setup.ts",
-      "dotenv/config",
     ],
   },
 });

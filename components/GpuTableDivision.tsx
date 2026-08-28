@@ -9,8 +9,8 @@ export default function GpuTableDivision({ title }: ComponentProps) {
         colSpan={2}
         className="bg-[#161616] font-bold text-xl text-center p-2"
       >
-          {title}
-        </th>
+        {title}
+      </th>
     </tr>
   );
 }

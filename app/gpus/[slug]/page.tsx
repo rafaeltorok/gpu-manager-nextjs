@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 
 // Services
-import { getGpu } from "../../services/gpus";
+import { getGpu } from "@/services/gpus";
 
 // Utils
-import getManufacturerColor from "../../utils/getManufacturerColor";
+import getManufacturerColor from "@/utils/getManufacturerColor";
 
 // Components
-import GpuTable from "../components/GpuTable";
+import GpuTable from "@/components/GpuTable";
 
 // Server component
 export default async function Gpu({
@@ -33,7 +33,10 @@ export default async function Gpu({
         <table className="w-full min-w-[300px] max-w-[400px] border-2 border-gray-700 mx-auto my-6 border-collapse">
           <thead>
             <tr>
-              <th colSpan={2} className={`bg-black p-5 text-2xl font-extrabold ${gpuClass}`}>
+              <th
+                colSpan={2}
+                className={`bg-black p-5 text-2xl font-extrabold ${gpuClass}`}
+              >
                 {gpu.manufacturer} {gpu.gpuline} {gpu.model}
               </th>
             </tr>

@@ -1,6 +1,6 @@
-import type { GpuInputType } from "../types/types";
+import type { NewGpu } from "@/types/gpu";
 
-export const gpuList: GpuInputType[] = [
+export const gpuList: NewGpu[] = [
   {
     // Index 0
     manufacturer: "NVIDIA",

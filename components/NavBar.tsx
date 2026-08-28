@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function NavBar() {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
-  
+
   return (
     <div>
       <nav className="bg-black text-white px-6 py-3 flex items-center gap-4 overflow-auto">
