@@ -30,7 +30,11 @@ export default async function Gpus(props: {
   }
 
   if (gpus.length === 0 && !query) {
-    return <h3 className="text-center text-xl font-bold mt-10">No graphics cards are available</h3>;
+    return (
+      <h3 className="text-center text-xl font-bold mt-10">
+        No graphics cards are available
+      </h3>
+    );
   }
 
   return (
@@ -38,8 +42,10 @@ export default async function Gpus(props: {
       <SearchBar />
 
       {gpus.length === 0 ? (
-        <h3 className="text-center text-xl font-bold mt-10">No graphics cards were found...</h3>
-      ): (
+        <h3 className="text-center text-xl font-bold mt-10">
+          No graphics cards were found...
+        </h3>
+      ) : (
         <>
           {gpus.map((gpu) => (
             <div key={gpu.id}>
@@ -54,7 +60,6 @@ export default async function Gpus(props: {
           ))}
         </>
       )}
-
     </div>
   );
 }

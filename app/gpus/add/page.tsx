@@ -32,9 +32,14 @@ function renderRow(
 export default async function AddGpu() {
   return (
     <div>
-      <h2 className="text-center p-6 text-xl font-bold">Add new graphics card</h2>
+      <h2 className="text-center p-6 text-xl font-bold">
+        Add new graphics card
+      </h2>
 
-      <form action={createGpu} className="w-full max-w-[400px] mx-auto border-1 border-gray-700 p-3 rounded">
+      <form
+        action={createGpu}
+        className="w-full max-w-[400px] mx-auto border-1 border-gray-700 p-3 rounded"
+      >
         {renderRow("Manufacturer", "text", "manufacturer", true)}
         {renderRow("Line", "text", "gpuline", false)}
         {renderRow("Model", "text", "model", true)}
