@@ -4,8 +4,13 @@ interface ComponentProps {
 
 export default function GpuTableDivision({ title }: ComponentProps) {
   return (
-    <tr className="table-division-header">
-      <th colSpan={2}>{title}</th>
+    <tr>
+      <th
+        colSpan={2}
+        className="bg-[#161616] font-bold text-xl text-center p-2"
+      >
+          {title}
+        </th>
     </tr>
   );
 }

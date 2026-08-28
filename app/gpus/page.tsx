@@ -9,9 +9,6 @@ import getManufacturerColor from "../utils/getManufacturerColor";
 // Components
 import SearchBar from "@/app/gpus/components/SearchBar";
 
-// CSS styles
-import "../manufacturer-colors.css";
-
 export default async function Gpus(props: {
   searchParams?: Promise<{
     query?: string;
@@ -33,13 +30,15 @@ export default async function Gpus(props: {
   }
 
   return (
-    <div className="gpus-list">
+    <div className="my-2 text-center">
       <SearchBar />
 
       {gpus.map((gpu) => (
         <div key={gpu.id}>
           <Link href={`/gpus/${gpu.slug}`}>
-            <button className={`${getManufacturerColor(gpu)} gpus-list-card`}>
+            <button
+              className={`mx-auto font-bold p-2 my-1 w-[300px] border-1 border-gray-700 rounded bg-black text-xl hover:bg-gray-800 hover:underline ${getManufacturerColor(gpu)}`}
+            >
               {gpu.manufacturer} {gpu.gpuline} {gpu.model}
             </button>
           </Link>

@@ -14,9 +14,18 @@ Simple GPU List style app to train Next.js.
 
 ### Screenshots
 
-<div>
-  <img src="./img/gpu-manager-list-view.png" alt="GPU Manager cards list" width="350"/>
-  <img src="./img/gpu-manager-data-view.png" alt="Full card information page" width="350"/>
+#### Desktop web UI
+
+<div style="display: flex; gap: 1rem;">
+  <img src="./img/gpu-manager-list-view.png" alt="GPU Manager cards list" width="400"/>
+  <img src="./img/gpu-manager-data-view.png" alt="Full card information page" width="400"/>
+</div>
+
+#### Mobile web UI
+
+<div style="display: flex; gap: 1rem;">
+  <img src="./img/mobile-gpu-manager-list-view.png" alt="GPU Manager cards list on mobile" width="250"/>
+  <img src="./img/mobile-gpu-manager-data-view.png" alt="Full card information page on mobile" width="250"/>
 </div>
 
 

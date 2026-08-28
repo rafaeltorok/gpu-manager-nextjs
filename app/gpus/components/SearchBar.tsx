@@ -23,7 +23,7 @@ export default function SearchBar() {
   return (
     <div>
       <input
-        className="search-field"
+        className="bg-black p-2 mx-auto my-1 rounded"
         type="search"
         placeholder="Search model name..."
         onChange={(e) => {
