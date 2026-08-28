@@ -5,13 +5,13 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 // Services
-import { addGpu, updateSpecs, removeGpu } from "../services/gpus";
+import { addGpu, updateSpecs, removeGpu } from "@/services/gpus";
 
 // Utils
-import { generateSlug } from "../utils/slug";
+import { generateSlug } from "@/utils/slug";
 
 // TypeScript types
-import type { EditGpu } from "../types/gpu";
+import type { EditGpu } from "@/types/gpu";
 
 // Create and store a new graphics card into MongoDB
 export async function createGpu(formData: FormData) {

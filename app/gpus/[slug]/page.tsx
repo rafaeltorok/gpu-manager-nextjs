@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 
 // Services
-import { getGpu } from "../../services/gpus";
+import { getGpu } from "@/services/gpus";
 
 // Utils
-import getManufacturerColor from "../../utils/getManufacturerColor";
+import getManufacturerColor from "@/utils/getManufacturerColor";
 
 // Components
-import GpuTable from "../components/GpuTable";
+import GpuTable from "@/components/GpuTable";
 
 // Server component
 export default async function Gpu({

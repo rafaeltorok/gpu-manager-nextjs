@@ -75,7 +75,7 @@ export async function PATCH(
   }
 }
 
-// Remove a graphics card form the database
+// Remove a graphics card from the database
 export async function DELETE(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },

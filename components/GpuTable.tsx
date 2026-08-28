@@ -7,16 +7,16 @@ import { useState } from "react";
 import { deleteGpu, editGpu } from "@/app/actions/gpus";
 
 // Utils
-import calculatePerformance from "../../utils/calculatePerformance";
-import { generateSlug } from "@/app/utils/slug";
+import calculatePerformance from "@/utils/calculatePerformance";
+import { generateSlug } from "@/utils/slug";
 
 // Components
-import GpuTableRow from "@/app/gpus/components/GpuTableRow";
-import GpuTableDivision from "@/app/gpus/components/GpuTableDivision";
+import GpuTableRow from "./GpuTableRow";
+import GpuTableDivision from "./GpuTableDivision";
 import GpuTablePerformanceRow from "./GpuTablePerformanceRow";
 
 // TypeScript types
-import type { GpuType } from "@/app/types/gpu";
+import type { GpuType } from "../types/gpu";
 
 interface ComponentProps {
   gpu: GpuType;
