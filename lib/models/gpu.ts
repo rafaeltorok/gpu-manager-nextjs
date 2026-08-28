@@ -2,7 +2,7 @@
 import { Schema, model, models } from "mongoose";
 
 // TypeScript types
-import type { GpuType } from "@/app/types/gpu";
+import type { GpuType } from "@/types/gpu";
 import type { Types } from "mongoose";
 
 interface GpuMongoDocument {
