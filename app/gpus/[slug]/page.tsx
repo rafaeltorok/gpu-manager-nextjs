@@ -30,7 +30,16 @@ export default async function Gpu({
       <form>
         <input type="hidden" name="id" value={gpu.id} />
 
-        <table className="w-full min-w-[300px] max-w-[400px] border-2 border-gray-700 mx-auto my-6 border-collapse">
+        <table
+          className="
+          w-full
+          min-w-[300px] max-w-[400px]
+          border-4 border-gray-700
+          mx-auto my-6
+          border-collapse
+          rounded-xl
+        "
+        >
           <thead>
             <tr>
               <th
