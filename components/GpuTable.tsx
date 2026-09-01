@@ -131,7 +131,16 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
         <th colSpan={2}>
           {editMode ? (
             <button
-              className="w-full mt-1 px-1 py-1 bg-black font-bold border-1 border-gray-700 hover:bg-gray-900"
+              className="
+                w-full
+                mt-1
+                px-1 py-1
+                bg-black
+                font-bold
+                border-1 border-gray-700
+                hover:bg-gray-900
+                rounded-xl
+              "
               type="submit"
               formAction={(formData) => {
                 setEditMode(false);
@@ -142,7 +151,16 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
             </button>
           ) : (
             <button
-              className="w-full mt-1 px-1 py-1 bg-black font-bold border-1 border-gray-700 hover:bg-gray-900"
+              className="
+                w-full
+                mt-1
+                px-1 py-1
+                bg-black
+                font-bold
+                border-1 border-gray-700
+                hover:bg-gray-900
+                rounded-xl
+              "
               type="submit"
               formAction={() => setEditMode(true)}
             >
@@ -155,7 +173,16 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
       <tr>
         <th colSpan={2}>
           <button
-            className="w-full mt-1 mb-1 px-1 py-1 bg-black font-bold border-1 border-gray-700 hover:bg-gray-900"
+            className="
+              w-full
+              mt-1 mb-1
+              px-1 py-1
+              bg-black
+              font-bold
+              border-1 border-gray-700
+              hover:bg-gray-900
+              rounded-xl
+            "
             type="submit"
             formAction={deleteGpu}
           >
