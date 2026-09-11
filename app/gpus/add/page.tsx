@@ -1,4 +1,9 @@
 import { createGpu } from "@/app/actions/gpus";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Add new | GPUs Manager",
+};
 
 // Render each row of the form
 function renderRow(
