@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GPUs Manager",
+};
+
 export default function Home() {
   return (
     <div className="mx-auto text-center">

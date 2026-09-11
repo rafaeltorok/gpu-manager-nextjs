@@ -9,6 +9,28 @@ import getManufacturerColor from "@/utils/getManufacturerColor";
 // Components
 import GpuTable from "@/components/GpuTable";
 
+import type { Metadata } from "next";
+
+// Generate a custom page title based on the model name
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const gpu = await getGpu(slug);
+
+  if (gpu) {
+    return {
+      title: `${gpu.model} | GPUs Manager`,
+    };
+  } else {
+    return {
+      title: "GPUs Manager",
+    };
+  }
+}
+
 // Server component
 export default async function Gpu({
   params,

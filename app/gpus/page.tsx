@@ -9,6 +9,12 @@ import getManufacturerColor from "@/utils/getManufacturerColor";
 // Components
 import SearchBar from "@/components/SearchBar";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GPUs | GPUs Manager",
+};
+
 export default async function Gpus(props: {
   searchParams?: Promise<{
     query?: string;
