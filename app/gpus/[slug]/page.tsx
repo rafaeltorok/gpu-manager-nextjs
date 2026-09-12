@@ -55,10 +55,11 @@ export default async function Gpu({
         <div
           className="
           w-full
-          min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px]
+          min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
           border-5 border-gray-700
           mx-auto my-6
           rounded-xl
+          wrap-break-word
         "
         >
           <div

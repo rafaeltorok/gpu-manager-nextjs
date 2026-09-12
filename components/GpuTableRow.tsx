@@ -26,7 +26,7 @@ export default function GpuTableRow({
   return (
     <>
       {editMode ? (
-        <div className="flex w-full md:flex-1">
+        <div className="flex w-full sm:flex-1">
           <div className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
             {header}
           </div>
@@ -43,7 +43,7 @@ export default function GpuTableRow({
           </div>
         </div>
       ) : (
-        <div className="flex w-full md:flex-1">
+        <div className="flex w-full sm:flex-1">
           <div className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
             {header}
           </div>

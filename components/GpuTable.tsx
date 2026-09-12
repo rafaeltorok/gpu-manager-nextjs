@@ -37,8 +37,8 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
 
   return (
     <div>
-      <div className="md:grid md:grid-cols-3 lg:h-[250px] md:h-[300px]">
-        <div className="md:flex md:flex-col">
+      <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
+        <div className="sm:flex sm:flex-col">
           <GpuTableDivision title="Specifications" />
           <GpuTableRow
             header="Cores"
@@ -82,7 +82,7 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
           />
         </div>
 
-        <div className="md:flex md:flex-col">
+        <div className="sm:flex sm:flex-col">
           <GpuTableDivision title="Clock Speeds" />
           <GpuTableRow
             header="Base Clock"
@@ -110,7 +110,7 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
           />
         </div>
 
-        <div className="md:flex md:flex-col">
+        <div className="sm:flex sm:flex-col">
           <GpuTableDivision title="Theoretical Performance" />
           <GpuTablePerformanceRow
             header="FP32(float)"
