@@ -10,7 +10,7 @@ export default function GpuTablePerformanceRow({
   gpuClass,
 }: ComponentProps) {
   return (
-    <div className="flex w-full">
+    <div className="flex w-full md:flex-1">
       <div className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
         {header}
       </div>

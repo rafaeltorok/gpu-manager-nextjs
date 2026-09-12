@@ -37,95 +37,103 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
 
   return (
     <div>
-      <GpuTableDivision title="Specifications" />
-      <GpuTableRow
-        header="Cores"
-        data={gpu.cores}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.cores}
-        name="cores"
-      />
-      <GpuTableRow
-        header="TMUs"
-        data={gpu.tmus}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.tmus}
-        name="tmus"
-      />
-      <GpuTableRow
-        header="ROPs"
-        data={gpu.rops}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.rops}
-        name="rops"
-      />
-      <GpuTableRow
-        header="VRAM"
-        data={`${vramToDisplay} ${gpu.memtype}`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.vram}
-        name="vram"
-      />
-      <GpuTableRow
-        header="Bus Width"
-        data={`${gpu.bus} bit`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.bus}
-        name="bus"
-      />
+      <div className="md:grid md:grid-cols-3 lg:h-[250px] md:h-[300px]">
+        <div className="md:flex md:flex-col">
+          <GpuTableDivision title="Specifications" />
+          <GpuTableRow
+            header="Cores"
+            data={gpu.cores}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.cores}
+            name="cores"
+          />
+          <GpuTableRow
+            header="TMUs"
+            data={gpu.tmus}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.tmus}
+            name="tmus"
+          />
+          <GpuTableRow
+            header="ROPs"
+            data={gpu.rops}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.rops}
+            name="rops"
+          />
+          <GpuTableRow
+            header="VRAM"
+            data={`${vramToDisplay} ${gpu.memtype}`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.vram}
+            name="vram"
+          />
+          <GpuTableRow
+            header="Bus Width"
+            data={`${gpu.bus} bit`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.bus}
+            name="bus"
+          />
+        </div>
 
-      <GpuTableDivision title="Clock Speeds" />
-      <GpuTableRow
-        header="Base Clock"
-        data={`${gpu.baseclock} MHz`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.baseclock}
-        name="baseclock"
-      />
-      <GpuTableRow
-        header="Boost Clock"
-        data={`${gpu.boostclock} MHz`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.boostclock}
-        name="boostclock"
-      />
-      <GpuTableRow
-        header="Memory Clock"
-        data={`${gpu.memclock} Gbps effective`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.memclock}
-        name="memclock"
-      />
+        <div className="md:flex md:flex-col">
+          <GpuTableDivision title="Clock Speeds" />
+          <GpuTableRow
+            header="Base Clock"
+            data={`${gpu.baseclock} MHz`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.baseclock}
+            name="baseclock"
+          />
+          <GpuTableRow
+            header="Boost Clock"
+            data={`${gpu.boostclock} MHz`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.boostclock}
+            name="boostclock"
+          />
+          <GpuTableRow
+            header="Memory Clock"
+            data={`${gpu.memclock} Gbps effective`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.memclock}
+            name="memclock"
+          />
+        </div>
 
-      <GpuTableDivision title="Theoretical Performance" />
-      <GpuTablePerformanceRow
-        header="FP32(float)"
-        data={performance[0]}
-        gpuClass={gpuClass}
-      />
-      <GpuTablePerformanceRow
-        header="Texture Rate"
-        data={performance[1]}
-        gpuClass={gpuClass}
-      />
-      <GpuTablePerformanceRow
-        header="Pixel Rate"
-        data={performance[2]}
-        gpuClass={gpuClass}
-      />
-      <GpuTablePerformanceRow
-        header="Bandwidth"
-        data={performance[3]}
-        gpuClass={gpuClass}
-      />
+        <div className="md:flex md:flex-col">
+          <GpuTableDivision title="Theoretical Performance" />
+          <GpuTablePerformanceRow
+            header="FP32(float)"
+            data={performance[0]}
+            gpuClass={gpuClass}
+          />
+          <GpuTablePerformanceRow
+            header="Texture Rate"
+            data={performance[1]}
+            gpuClass={gpuClass}
+          />
+          <GpuTablePerformanceRow
+            header="Pixel Rate"
+            data={performance[2]}
+            gpuClass={gpuClass}
+          />
+          <GpuTablePerformanceRow
+            header="Bandwidth"
+            data={performance[3]}
+            gpuClass={gpuClass}
+          />
+        </div>
+      </div>
 
       {editMode ? (
         <button

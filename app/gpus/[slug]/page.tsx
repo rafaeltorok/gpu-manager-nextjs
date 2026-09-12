@@ -55,14 +55,21 @@ export default async function Gpu({
         <div
           className="
           w-full
-          min-w-[300px] max-w-[400px]
+          min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px]
           border-5 border-gray-700
           mx-auto my-6
           rounded-xl
         "
         >
           <div
-            className={`bg-black p-5 text-2xl font-extrabold ${gpuClass} rounded-tl-xl rounded-tr-xl`}
+            className={`
+              bg-black
+              p-5
+              text-2xl font-extrabold
+              ${gpuClass}
+              rounded-tl-xl rounded-tr-xl
+              text-center
+            `}
           >
             {gpu.manufacturer} {gpu.gpuline} {gpu.model}
           </div>
