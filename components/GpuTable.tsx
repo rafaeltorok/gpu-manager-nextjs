@@ -36,160 +36,160 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
   const vramToDisplay = gpu.vram < 1 ? `${gpu.vram * 1000}MB` : `${gpu.vram}GB`;
 
   return (
-    <tbody>
-      <GpuTableDivision title="Specifications" />
-      <GpuTableRow
-        header="Cores"
-        data={gpu.cores}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.cores}
-        name="cores"
-      />
-      <GpuTableRow
-        header="TMUs"
-        data={gpu.tmus}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.tmus}
-        name="tmus"
-      />
-      <GpuTableRow
-        header="ROPs"
-        data={gpu.rops}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.rops}
-        name="rops"
-      />
-      <GpuTableRow
-        header="VRAM"
-        data={`${vramToDisplay} ${gpu.memtype}`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.vram}
-        name="vram"
-      />
-      <GpuTableRow
-        header="Bus Width"
-        data={`${gpu.bus} bit`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.bus}
-        name="bus"
-      />
+    <div>
+      <div className="md:grid md:grid-cols-3 lg:h-[250px] md:h-[300px]">
+        <div className="md:flex md:flex-col">
+          <GpuTableDivision title="Specifications" />
+          <GpuTableRow
+            header="Cores"
+            data={gpu.cores}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.cores}
+            name="cores"
+          />
+          <GpuTableRow
+            header="TMUs"
+            data={gpu.tmus}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.tmus}
+            name="tmus"
+          />
+          <GpuTableRow
+            header="ROPs"
+            data={gpu.rops}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.rops}
+            name="rops"
+          />
+          <GpuTableRow
+            header="VRAM"
+            data={`${vramToDisplay} ${gpu.memtype}`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.vram}
+            name="vram"
+          />
+          <GpuTableRow
+            header="Bus Width"
+            data={`${gpu.bus} bit`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.bus}
+            name="bus"
+          />
+        </div>
 
-      <GpuTableDivision title="Clock Speeds" />
-      <GpuTableRow
-        header="Base Clock"
-        data={`${gpu.baseclock} MHz`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.baseclock}
-        name="baseclock"
-      />
-      <GpuTableRow
-        header="Boost Clock"
-        data={`${gpu.boostclock} MHz`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.boostclock}
-        name="boostclock"
-      />
-      <GpuTableRow
-        header="Memory Clock"
-        data={`${gpu.memclock} Gbps effective`}
-        gpuClass={gpuClass}
-        editMode={editMode}
-        originalValue={gpu.memclock}
-        name="memclock"
-      />
+        <div className="md:flex md:flex-col">
+          <GpuTableDivision title="Clock Speeds" />
+          <GpuTableRow
+            header="Base Clock"
+            data={`${gpu.baseclock} MHz`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.baseclock}
+            name="baseclock"
+          />
+          <GpuTableRow
+            header="Boost Clock"
+            data={`${gpu.boostclock} MHz`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.boostclock}
+            name="boostclock"
+          />
+          <GpuTableRow
+            header="Memory Clock"
+            data={`${gpu.memclock} Gbps effective`}
+            gpuClass={gpuClass}
+            editMode={editMode}
+            originalValue={gpu.memclock}
+            name="memclock"
+          />
+        </div>
 
-      <GpuTableDivision title="Theoretical Performance" />
-      <GpuTablePerformanceRow
-        header="FP32(float)"
-        data={performance[0]}
-        gpuClass={gpuClass}
-      />
-      <GpuTablePerformanceRow
-        header="Texture Rate"
-        data={performance[1]}
-        gpuClass={gpuClass}
-      />
-      <GpuTablePerformanceRow
-        header="Pixel Rate"
-        data={performance[2]}
-        gpuClass={gpuClass}
-      />
-      <GpuTablePerformanceRow
-        header="Bandwidth"
-        data={performance[3]}
-        gpuClass={gpuClass}
-      />
+        <div className="md:flex md:flex-col">
+          <GpuTableDivision title="Theoretical Performance" />
+          <GpuTablePerformanceRow
+            header="FP32(float)"
+            data={performance[0]}
+            gpuClass={gpuClass}
+          />
+          <GpuTablePerformanceRow
+            header="Texture Rate"
+            data={performance[1]}
+            gpuClass={gpuClass}
+          />
+          <GpuTablePerformanceRow
+            header="Pixel Rate"
+            data={performance[2]}
+            gpuClass={gpuClass}
+          />
+          <GpuTablePerformanceRow
+            header="Bandwidth"
+            data={performance[3]}
+            gpuClass={gpuClass}
+          />
+        </div>
+      </div>
 
-      <tr>
-        <th colSpan={2}>
-          {editMode ? (
-            <button
-              className="
-                w-full
-                mt-1
-                px-1 py-1
-                bg-black
-                font-bold
-                border-1 border-gray-700
-                hover:bg-gray-900
-                rounded-xl
-              "
-              type="submit"
-              formAction={(formData) => {
-                setEditMode(false);
-                editGpu(formData, slug);
-              }}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              className="
-                w-full
-                mt-1
-                px-1 py-1
-                bg-black
-                font-bold
-                border-1 border-gray-700
-                hover:bg-gray-900
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => setEditMode(true)}
-            >
-              Edit
-            </button>
-          )}
-        </th>
-      </tr>
+      {editMode ? (
+        <button
+          className="
+            w-full
+            mt-1
+            px-1 py-1
+            bg-black
+            font-bold
+            border-1 border-gray-700
+            hover:bg-gray-900
+            rounded-xl
+          "
+          type="submit"
+          formAction={(formData) => {
+            setEditMode(false);
+            editGpu(formData, slug);
+          }}
+        >
+          Save
+        </button>
+      ) : (
+        <button
+          className="
+            w-full
+            mt-1
+            px-1 py-1
+            bg-black
+            font-bold
+            border-1 border-gray-700
+            hover:bg-gray-900
+            rounded-xl
+          "
+          type="submit"
+          formAction={() => setEditMode(true)}
+        >
+          Edit
+        </button>
+      )}
 
-      <tr>
-        <th colSpan={2}>
-          <button
-            className="
-              w-full
-              mt-1 mb-1
-              px-1 py-1
-              bg-black
-              font-bold
-              border-1 border-gray-700
-              hover:bg-gray-900
-              rounded-xl
-            "
-            type="submit"
-            formAction={deleteGpu}
-          >
-            Remove
-          </button>
-        </th>
-      </tr>
-    </tbody>
+      <button
+        className="
+          w-full
+          mt-1 mb-1
+          px-1 py-1
+          bg-black
+          font-bold
+          border-1 border-gray-700
+          hover:bg-gray-900
+          rounded-xl
+        "
+        type="submit"
+        formAction={deleteGpu}
+      >
+        Remove
+      </button>
+    </div>
   );
 }
