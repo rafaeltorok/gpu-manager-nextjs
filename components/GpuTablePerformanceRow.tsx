@@ -10,15 +10,15 @@ export default function GpuTablePerformanceRow({
   gpuClass,
 }: ComponentProps) {
   return (
-    <tr className="flex w-full">
-      <th className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
+    <div className="flex w-full">
+      <div className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
         {header}
-      </th>
-      <td
+      </div>
+      <div
         className={`text-left font-bold bg-black border-1 border-gray-600 px-2 py-1 w-3/5`}
       >
         <span className={`${gpuClass}`}>{String(data)}</span>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }

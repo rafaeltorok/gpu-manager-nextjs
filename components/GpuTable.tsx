@@ -36,7 +36,7 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
   const vramToDisplay = gpu.vram < 1 ? `${gpu.vram * 1000}MB` : `${gpu.vram}GB`;
 
   return (
-    <tbody>
+    <div>
       <GpuTableDivision title="Specifications" />
       <GpuTableRow
         header="Cores"
@@ -127,69 +127,61 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
         gpuClass={gpuClass}
       />
 
-      <tr>
-        <th colSpan={2}>
-          {editMode ? (
-            <button
-              className="
-                w-full
-                mt-1
-                px-1 py-1
-                bg-black
-                font-bold
-                border-1 border-gray-700
-                hover:bg-gray-900
-                rounded-xl
-              "
-              type="submit"
-              formAction={(formData) => {
-                setEditMode(false);
-                editGpu(formData, slug);
-              }}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              className="
-                w-full
-                mt-1
-                px-1 py-1
-                bg-black
-                font-bold
-                border-1 border-gray-700
-                hover:bg-gray-900
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => setEditMode(true)}
-            >
-              Edit
-            </button>
-          )}
-        </th>
-      </tr>
+      {editMode ? (
+        <button
+          className="
+            w-full
+            mt-1
+            px-1 py-1
+            bg-black
+            font-bold
+            border-1 border-gray-700
+            hover:bg-gray-900
+            rounded-xl
+          "
+          type="submit"
+          formAction={(formData) => {
+            setEditMode(false);
+            editGpu(formData, slug);
+          }}
+        >
+          Save
+        </button>
+      ) : (
+        <button
+          className="
+            w-full
+            mt-1
+            px-1 py-1
+            bg-black
+            font-bold
+            border-1 border-gray-700
+            hover:bg-gray-900
+            rounded-xl
+          "
+          type="submit"
+          formAction={() => setEditMode(true)}
+        >
+          Edit
+        </button>
+      )}
 
-      <tr>
-        <th colSpan={2}>
-          <button
-            className="
-              w-full
-              mt-1 mb-1
-              px-1 py-1
-              bg-black
-              font-bold
-              border-1 border-gray-700
-              hover:bg-gray-900
-              rounded-xl
-            "
-            type="submit"
-            formAction={deleteGpu}
-          >
-            Remove
-          </button>
-        </th>
-      </tr>
-    </tbody>
+      <button
+        className="
+          w-full
+          mt-1 mb-1
+          px-1 py-1
+          bg-black
+          font-bold
+          border-1 border-gray-700
+          hover:bg-gray-900
+          rounded-xl
+        "
+        type="submit"
+        formAction={deleteGpu}
+      >
+        Remove
+      </button>
+    </div>
   );
 }
