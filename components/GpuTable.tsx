@@ -1,7 +1,7 @@
 "use client";
 
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Services
 import { deleteGpu, editGpu } from "@/app/actions/gpus";
@@ -31,6 +31,14 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
 
   // Create a copy of the original GPU data to modify it
   const [gpuData, setGpuData] = useState(gpu);
+
+  // Sync the data of the copy after a successful database update
+  useEffect(() => {
+    async function handleUpdate() {
+      setGpuData(gpu);
+    }
+    handleUpdate();
+  }, [gpu]);
 
   // Generate a slug to be used on the edit action
   const slug = generateSlug(gpu);
@@ -218,10 +226,9 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
                   rounded-xl
                 "
                 type="submit"
-                formAction={(formData) => {
+                formAction={async (formData) => {
                   setEditMode(false);
-                  setGpuData(gpu);
-                  editGpu(formData, slug);
+                  await editGpu(formData, slug);
                 }}
               >
                 Save
