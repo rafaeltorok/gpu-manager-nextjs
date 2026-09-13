@@ -26,6 +26,7 @@ export default function SearchBar() {
         className="bg-black p-2 mx-auto my-1 rounded"
         type="search"
         placeholder="Search model name..."
+        defaultValue={searchParams.get("query")?.toString()}
         onChange={(e) => {
           handleSearch(e.target.value.trimStart());
         }}
