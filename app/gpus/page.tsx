@@ -58,7 +58,9 @@ export default async function Page(props: {
   // Get the current page number
   const requestedPage = Number(searchParams?.page);
   const currentPage =
-    Number.isInteger(requestedPage) && requestedPage > 0 && requestedPage <= totalPages
+    Number.isInteger(requestedPage) &&
+    requestedPage > 0 &&
+    requestedPage <= totalPages
       ? requestedPage
       : 1;
 

@@ -34,10 +34,10 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         {allPages.map((page, index) => {
           let position: "first" | "last" | "single" | "middle" | undefined;
 
-          if (index === 0) position = 'first';
-          if (index === allPages.length - 1) position = 'last';
-          if (allPages.length === 1) position = 'single';
-          if (page === '...') position = 'middle';
+          if (index === 0) position = "first";
+          if (index === allPages.length - 1) position = "last";
+          if (allPages.length === 1) position = "single";
+          if (page === "...") position = "middle";
 
           return (
             <PaginationNumber
@@ -76,14 +76,10 @@ function PaginationArrow({
       "hover:bg-gray-700": !isDisabled,
       "mr-2 md:mr-4": direction === "left",
       "ml-2 md:ml-4": direction === "right",
-    }
+    },
   );
 
-  const icon = direction === "left" ? (
-    <div>◄</div>
-  ) : (
-    <div>►</div>
-  );
+  const icon = direction === "left" ? <div>◄</div> : <div>►</div>;
 
   return isDisabled ? (
     <div className={className}>{icon}</div>
@@ -99,7 +95,7 @@ function PaginationNumber({
   href,
   isActive,
   position,
-} : {
+}: {
   page: number | string;
   href: string;
   position?: "first" | "last" | "middle" | "single";
@@ -118,9 +114,9 @@ function PaginationNumber({
 
   return isActive || position === "middle" ? (
     <div className={className}>{page}</div>
-  ): (
+  ) : (
     <Link href={href} className={className}>
       {page}
     </Link>
-  )
+  );
 }
