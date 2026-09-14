@@ -38,11 +38,15 @@ export default function GpuTableRow({
             <input
               className="w-full bg-black text-white border-[inset]"
               name={name}
-              value={originalData[name]}
+              value={originalData[name] || ""}
               type="number"
               onChange={
                 (e) => {
-                  setData({ ...originalData, [name]: Number(e.target.value) });
+                  if (Number(e.target.value) < 0) {
+                    setData({ ...originalData, [name]: 0 });
+                  } else {
+                    setData({ ...originalData, [name]: Number(e.target.value) });
+                  }
                 }
               }
             />
