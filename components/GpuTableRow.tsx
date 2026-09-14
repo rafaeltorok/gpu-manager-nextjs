@@ -42,7 +42,7 @@ export default function GpuTableRow({
               type="number"
               onChange={
                 (e) => {
-                  if (Number(e.target.value) < 0) {
+                  if (Number(e.target.value) < 0 || isNaN(Number(e.target.value))) {
                     setData({ ...originalData, [name]: 0 });
                   } else {
                     setData({ ...originalData, [name]: Number(e.target.value) });
