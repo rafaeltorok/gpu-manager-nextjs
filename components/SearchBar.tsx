@@ -10,6 +10,10 @@ export default function SearchBar() {
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
 
+    // Reset the pagination to 1
+    params.set("page", "1");
+
+    // Set the search term on the URL
     if (term) {
       params.set("query", term);
     } else {
@@ -23,7 +27,7 @@ export default function SearchBar() {
   return (
     <div>
       <input
-        className="bg-black p-2 mx-auto my-1 rounded"
+        className="bg-black p-4 mx-auto my-2 rounded"
         type="search"
         placeholder="Search model name..."
         defaultValue={searchParams.get("query")?.toString()}
