@@ -62,10 +62,8 @@ export async function editGpu(formData: FormData, slug: string) {
   }
 }
 
-// Remove a graphics card form the database
-export async function deleteGpu(formData: FormData) {
-  const id = formData.get("id") as string;
+// Remove a graphics card from the database
+export async function deleteGpu(id: string) {
   await removeGpu(id);
   revalidatePath("/gpus");
-  redirect("/gpus");
 }
