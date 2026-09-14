@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 // React
 import { useState, useEffect } from "react";
 
@@ -28,6 +30,7 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
   // Define the table modes
   const [editMode, setEditMode] = useState(false);
   const [calculateMode, setCalculateMode] = useState(false);
+  const router = useRouter();
 
   // Create a copy of the original GPU data to modify it
   const [gpuData, setGpuData] = useState(gpu);
@@ -39,6 +42,23 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
     }
     handleUpdate();
   }, [gpu]);
+
+  // Handle removing the graphics card from the list
+  async function handleDelete() {
+    const removeConfirm = window.confirm(
+      `Remove ${gpu.manufacturer} ${gpu.gpuline} ${gpu.model} from the list?`
+    );
+
+    if (!removeConfirm) return;
+
+    try {
+      await deleteGpu(gpu.id);
+      router.push("/gpus");
+    } catch (err: unknown) {
+      console.error(err);
+      window.alert("Failed to remove the graphics card");
+    }
+  }
 
   // Generate a slug to be used on the edit action
   const slug = generateSlug(gpu);
@@ -282,8 +302,8 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
               hover:bg-gray-900
               rounded-xl
             "
-            type="submit"
-            formAction={deleteGpu}
+            type="button"
+            onClick={handleDelete}
           >
             Remove
           </button>
