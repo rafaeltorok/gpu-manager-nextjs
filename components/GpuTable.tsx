@@ -46,7 +46,7 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
   // Handle removing the graphics card from the list
   async function handleDelete() {
     const removeConfirm = window.confirm(
-      `Remove ${gpu.manufacturer} ${gpu.gpuline} ${gpu.model} from the list?`
+      `Remove ${gpu.manufacturer} ${gpu.gpuline} ${gpu.model} from the list?`,
     );
 
     if (!removeConfirm) return;
@@ -67,13 +67,13 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
   const performance = calculatePerformance(gpuData);
 
   // Format the VRAM suffix in either MB or GB
-  const vramToDisplay = gpuData.vram < 1 ? `${gpuData.vram * 1000}MB` : `${gpuData.vram}GB`;
+  const vramToDisplay =
+    gpuData.vram < 1 ? `${gpuData.vram * 1000}MB` : `${gpuData.vram}GB`;
 
   return (
     <div>
       {/* Wrapper for the entire data table */}
       <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
-
         {/* Wrapper for the Specifications section */}
         <div className="sm:flex sm:flex-col">
           <GpuTableDivision title="Specifications" />
@@ -185,7 +185,8 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
       </div>
 
       {/* Wrapper for the table controls */}
-      <div className="
+      <div
+        className="
         flex flex-col
         sm:flex-row
         w-full

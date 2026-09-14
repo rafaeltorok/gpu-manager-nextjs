@@ -30,9 +30,7 @@ export default function GpuTableRow({
       {editMode || calculateMode ? (
         <div className="flex w-full sm:flex-1">
           <div className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
-            <label htmlFor={name}>
-              {header}
-            </label>
+            <label htmlFor={name}>{header}</label>
           </div>
           <div
             className={`text-left font-bold bg-black border-1 border-gray-600 px-2 py-1 w-3/5 ${gpuClass}`}
@@ -43,15 +41,16 @@ export default function GpuTableRow({
               name={name}
               value={originalData[name] || ""}
               type="number"
-              onChange={
-                (e) => {
-                  if (Number(e.target.value) < 0 || isNaN(Number(e.target.value))) {
-                    setData({ ...originalData, [name]: 0 });
-                  } else {
-                    setData({ ...originalData, [name]: Number(e.target.value) });
-                  }
+              onChange={(e) => {
+                if (
+                  Number(e.target.value) < 0 ||
+                  isNaN(Number(e.target.value))
+                ) {
+                  setData({ ...originalData, [name]: 0 });
+                } else {
+                  setData({ ...originalData, [name]: Number(e.target.value) });
                 }
-              }
+              }}
             />
           </div>
         </div>

@@ -5,36 +5,8 @@ export const metadata: Metadata = {
   title: "Add new | GPUs Manager",
 };
 
-// Render each row of the form
-function renderRow(
-  label: string,
-  type: string,
-  name: string,
-  required: boolean,
-) {
-  return (
-    <div className="flex justify-center space-y-1 text-left">
-      <label className="w-1/2 font-bold">{label}</label>
-      {required ? (
-        <input
-          className="w-1/2 bg-black mb-1 p-0.5 border-1 border-gray-900"
-          type={type}
-          name={name}
-          required
-        />
-      ) : (
-        <input
-          className="w-1/2 bg-black mb-1 p-0.5 border-1 border-gray-900"
-          type={type}
-          name={name}
-        />
-      )}
-    </div>
-  );
-}
-
 // Server component
-export default async function AddGpu() {
+export default async function Page() {
   return (
     <div>
       <h2 className="text-center p-6 text-xl font-bold">
@@ -65,6 +37,34 @@ export default async function AddGpu() {
           Add
         </button>
       </form>
+    </div>
+  );
+}
+
+// Render each row of the form
+function renderRow(
+  label: string,
+  type: string,
+  name: string,
+  required: boolean,
+) {
+  return (
+    <div className="flex justify-center space-y-1 text-left">
+      <label className="w-1/2 font-bold">{label}</label>
+      {required ? (
+        <input
+          className="w-1/2 bg-black mb-1 p-0.5 border-1 border-gray-900"
+          type={type}
+          name={name}
+          required
+        />
+      ) : (
+        <input
+          className="w-1/2 bg-black mb-1 p-0.5 border-1 border-gray-900"
+          type={type}
+          name={name}
+        />
+      )}
     </div>
   );
 }

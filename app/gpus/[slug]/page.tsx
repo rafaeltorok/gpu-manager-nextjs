@@ -32,7 +32,7 @@ export async function generateMetadata({
 }
 
 // Server component
-export default async function Gpu({
+export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>;
