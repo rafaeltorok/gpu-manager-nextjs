@@ -29,15 +29,3 @@ export interface NewGpu {
   boostclock: number;
   memclock: number;
 }
-
-export interface EditGpu {
-  id: string;
-  cores: number;
-  tmus: number;
-  rops: number;
-  vram: number;
-  bus: number;
-  baseclock: number;
-  boostclock: number;
-  memclock: number;
-}
