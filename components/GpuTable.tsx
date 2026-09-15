@@ -5,17 +5,18 @@ import { useRouter } from "next/navigation";
 // React
 import { useState, useEffect } from "react";
 
-// Services
-import { deleteGpu, editGpu } from "@/app/actions/gpus";
+// Server actions
+import { deleteGpu } from "@/app/actions/gpus";
 
 // Utils
 import calculatePerformance from "@/utils/calculatePerformance";
-import { generateSlug } from "@/utils/slug";
 
 // Components
-import GpuTableRow from "./GpuTableRow";
-import GpuTableDivision from "./GpuTableDivision";
-import GpuTablePerformanceRow from "./GpuTablePerformanceRow";
+import Title from "./TableSections/Title";
+import Specifications from "./TableSections/Specifications";
+import ClockSpeeds from "./TableSections/ClockSpeeds";
+import Performance from "./TableSections/Performance";
+import Controls from "./TableSections/Controls";
 
 // TypeScript types
 import type { GpuType } from "../types/gpu";
@@ -60,256 +61,60 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
     }
   }
 
-  // Generate a slug to be used on the edit action
-  const slug = generateSlug(gpu);
-
   // Get the theoretical performance for a card
   const performance = calculatePerformance(gpuData);
 
-  // Format the VRAM suffix in either MB or GB
-  const vramToDisplay =
-    gpuData.vram < 1 ? `${gpuData.vram * 1000}MB` : `${gpuData.vram}GB`;
-
   return (
-    <div>
-      {/* Wrapper for the entire data table */}
+    <div
+      className="
+      w-full
+      min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
+      border-5 border-gray-700
+      mx-auto my-6
+      rounded-xl
+      wrap-break-word
+    "
+    >
+      <Title
+        gpuData={gpuData}
+        setGpuData={setGpuData}
+        editMode={editMode}
+        gpuClass={gpuClass}
+      />
+
+      {/* Wrapper for the data section of the table */}
       <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
         {/* Wrapper for the Specifications section */}
-        <div className="sm:flex sm:flex-col">
-          <GpuTableDivision title="Specifications" />
-          <GpuTableRow
-            header="Cores"
-            data={gpuData.cores}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="cores"
-          />
-          <GpuTableRow
-            header="TMUs"
-            data={gpuData.tmus}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="tmus"
-          />
-          <GpuTableRow
-            header="ROPs"
-            data={gpuData.rops}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="rops"
-          />
-          <GpuTableRow
-            header="VRAM"
-            data={`${vramToDisplay} ${gpuData.memtype}`}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="vram"
-          />
-          <GpuTableRow
-            header="Bus Width"
-            data={`${gpuData.bus} bit`}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="bus"
-          />
-        </div>
+        <Specifications
+          gpuData={gpuData}
+          setGpuData={setGpuData}
+          editMode={editMode}
+          gpuClass={gpuClass}
+        />
 
         {/* Wrapper for the Clock speeds section */}
-        <div className="sm:flex sm:flex-col">
-          <GpuTableDivision title="Clock Speeds" />
-          <GpuTableRow
-            header="Base Clock"
-            data={`${gpuData.baseclock} MHz`}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="baseclock"
-          />
-          <GpuTableRow
-            header="Boost Clock"
-            data={`${gpuData.boostclock} MHz`}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            calculateMode={calculateMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="boostclock"
-          />
-          <GpuTableRow
-            header="Memory Clock"
-            data={`${gpuData.memclock} Gbps effective`}
-            gpuClass={gpuClass}
-            editMode={editMode}
-            calculateMode={calculateMode}
-            originalData={gpuData}
-            setData={setGpuData}
-            name="memclock"
-          />
-        </div>
+        <ClockSpeeds
+          gpuData={gpuData}
+          setGpuData={setGpuData}
+          editMode={editMode}
+          calculateMode={calculateMode}
+          gpuClass={gpuClass}
+        />
 
         {/* Wrapper for the Performance section */}
-        <div className="sm:flex sm:flex-col">
-          <GpuTableDivision title="Theoretical Performance" />
-          <GpuTablePerformanceRow
-            header="FP32(float)"
-            data={performance[0]}
-            gpuClass={gpuClass}
-          />
-          <GpuTablePerformanceRow
-            header="Texture Rate"
-            data={performance[1]}
-            gpuClass={gpuClass}
-          />
-          <GpuTablePerformanceRow
-            header="Pixel Rate"
-            data={performance[2]}
-            gpuClass={gpuClass}
-          />
-          <GpuTablePerformanceRow
-            header="Bandwidth"
-            data={performance[3]}
-            gpuClass={gpuClass}
-          />
-        </div>
+        <Performance performance={performance} gpuClass={gpuClass} />
       </div>
 
       {/* Wrapper for the table controls */}
-      <div
-        className="
-        flex flex-col
-        sm:flex-row
-        w-full
-        my-1
-        font-bold
-        gap-1"
-      >
-        {/* Calculate mode */}
-        {!editMode && (
-          <>
-            {calculateMode ? (
-              <button
-                className="
-                  w-full
-                  px-1 py-1
-                  bg-black
-                  border-1 border-gray-700
-                  hover:bg-gray-900
-                  rounded-xl
-                "
-                type="submit"
-                formAction={() => {
-                  setCalculateMode(false);
-                }}
-              >
-                Confirm
-              </button>
-            ) : (
-              <button
-                className="
-                  w-full
-                  px-1 py-1
-                  bg-black
-                  border-1 border-gray-700
-                  hover:bg-gray-900
-                  rounded-xl
-                "
-                type="submit"
-                formAction={() => setCalculateMode(true)}
-              >
-                Calculate performance
-              </button>
-            )}
-          </>
-        )}
-
-        {/* Edit mode */}
-        {!calculateMode && (
-          <>
-            {editMode ? (
-              <button
-                className="
-                  w-full
-                  px-1 py-1
-                  bg-black
-                  border-1 border-gray-700
-                  hover:bg-gray-900
-                  rounded-xl
-                "
-                type="submit"
-                formAction={async (formData) => {
-                  setEditMode(false);
-                  await editGpu(formData, slug);
-                }}
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                className="
-                  w-full
-                  px-1 py-1
-                  bg-black
-                  border-1 border-gray-700
-                  hover:bg-gray-900
-                  rounded-xl
-                "
-                type="submit"
-                formAction={() => setEditMode(true)}
-              >
-                Edit
-              </button>
-            )}
-          </>
-        )}
-
-        {/* When using any table modes, show the "Cancel" button instead of the "Remove" one */}
-        {editMode || calculateMode ? (
-          <button
-            className="
-              w-full
-              px-1 py-1
-              bg-black
-              border-1 border-gray-700
-              hover:bg-gray-900
-              rounded-xl
-            "
-            type="submit"
-            formAction={() => {
-              setEditMode(false);
-              setCalculateMode(false);
-              setGpuData(gpu);
-            }}
-          >
-            Cancel
-          </button>
-        ) : (
-          <button
-            className="
-              w-full
-              px-1 py-1
-              bg-black
-              border-1 border-gray-700
-              hover:bg-gray-900
-              rounded-xl
-            "
-            type="button"
-            onClick={handleDelete}
-          >
-            Remove
-          </button>
-        )}
-      </div>
+      <Controls
+        gpu={gpu}
+        setGpuData={setGpuData}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        calculateMode={calculateMode}
+        setCalculateMode={setCalculateMode}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 }
