@@ -13,7 +13,13 @@ interface ClockSpeedsProps {
   gpuClass: string;
 }
 
-export default function ClockSpeeds({ gpuData, setGpuData, editMode, calculateMode, gpuClass }: ClockSpeedsProps) {
+export default function ClockSpeeds({
+  gpuData,
+  setGpuData,
+  editMode,
+  calculateMode,
+  gpuClass,
+}: ClockSpeedsProps) {
   return (
     <div className="sm:flex sm:flex-col">
       <Division title="Clock Speeds" />

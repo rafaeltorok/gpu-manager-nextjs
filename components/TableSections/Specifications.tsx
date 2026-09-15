@@ -12,7 +12,12 @@ interface SpecificationsProps {
   gpuClass: string;
 }
 
-export default function Specifications({ gpuData, setGpuData, editMode, gpuClass }: SpecificationsProps) {
+export default function Specifications({
+  gpuData,
+  setGpuData,
+  editMode,
+  gpuClass,
+}: SpecificationsProps) {
   // Format the VRAM suffix in either MB or GB
   const vramToDisplay =
     gpuData.vram < 1 ? `${gpuData.vram * 1000}MB` : `${gpuData.vram}GB`;

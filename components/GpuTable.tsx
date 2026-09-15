@@ -84,14 +84,13 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
 
       {/* Wrapper for the data section of the table */}
       <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
-        
         {/* Wrapper for the Specifications section */}
         <Specifications
           gpuData={gpuData}
           setGpuData={setGpuData}
           editMode={editMode}
           gpuClass={gpuClass}
-        />        
+        />
 
         {/* Wrapper for the Clock speeds section */}
         <ClockSpeeds
@@ -103,10 +102,7 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
         />
 
         {/* Wrapper for the Performance section */}
-        <Performance
-          performance={performance}
-          gpuClass={gpuClass}
-        />
+        <Performance performance={performance} gpuClass={gpuClass} />
       </div>
 
       {/* Wrapper for the table controls */}

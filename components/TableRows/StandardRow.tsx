@@ -52,7 +52,10 @@ export default function StandardRow({
                     ) {
                       setData({ ...originalData, vram: 0 });
                     } else {
-                      setData({ ...originalData, vram: Number(e.target.value) });
+                      setData({
+                        ...originalData,
+                        vram: Number(e.target.value),
+                      });
                     }
                   }}
                 />
@@ -62,7 +65,9 @@ export default function StandardRow({
                   name="memtype"
                   value={originalData["memtype"] || ""}
                   type="text"
-                  onChange={(e) => setData({ ...originalData, memtype: e.target.value.trim() })}
+                  onChange={(e) =>
+                    setData({ ...originalData, memtype: e.target.value.trim() })
+                  }
                 />
               </div>
             ) : (
@@ -81,7 +86,10 @@ export default function StandardRow({
                     ) {
                       setData({ ...originalData, [name]: 0 });
                     } else {
-                      setData({ ...originalData, [name]: Number(e.target.value) });
+                      setData({
+                        ...originalData,
+                        [name]: Number(e.target.value),
+                      });
                     }
                   }}
                 />

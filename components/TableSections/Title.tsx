@@ -7,7 +7,12 @@ interface TitleProps {
   gpuClass: string;
 }
 
-export default function Title({ gpuData, setGpuData, editMode, gpuClass }: TitleProps) {
+export default function Title({
+  gpuData,
+  setGpuData,
+  editMode,
+  gpuClass,
+}: TitleProps) {
   return (
     <div
       className={`
@@ -35,7 +40,10 @@ export default function Title({ gpuData, setGpuData, editMode, gpuClass }: Title
             value={gpuData.manufacturer || ""}
             onChange={(e) => {
               if (e.target.value.trim() !== "") {
-                setGpuData({ ...gpuData, manufacturer: e.target.value.trimStart() })
+                setGpuData({
+                  ...gpuData,
+                  manufacturer: e.target.value.trimStart(),
+                });
               }
             }}
           />
@@ -44,7 +52,9 @@ export default function Title({ gpuData, setGpuData, editMode, gpuClass }: Title
             className="text-center sm:w-1/3 border-1 border-gray-600 rounded"
             type="text"
             value={gpuData.gpuline || ""}
-            onChange={(e) => setGpuData({ ...gpuData, gpuline: e.target.value.trimStart() })}
+            onChange={(e) =>
+              setGpuData({ ...gpuData, gpuline: e.target.value.trimStart() })
+            }
           />
           <input
             name="model"
@@ -53,7 +63,7 @@ export default function Title({ gpuData, setGpuData, editMode, gpuClass }: Title
             value={gpuData.model || ""}
             onChange={(e) => {
               if (e.target.value.trim() !== "") {
-                setGpuData({ ...gpuData, model: e.target.value.trimStart() })
+                setGpuData({ ...gpuData, model: e.target.value.trimStart() });
               }
             }}
           />

@@ -8,7 +8,10 @@ interface PerformanceProps {
   gpuClass: string;
 }
 
-export default function Performance({ performance, gpuClass }: PerformanceProps) {
+export default function Performance({
+  performance,
+  gpuClass,
+}: PerformanceProps) {
   return (
     <div className="sm:flex sm:flex-col">
       <Division title="Theoretical Performance" />
