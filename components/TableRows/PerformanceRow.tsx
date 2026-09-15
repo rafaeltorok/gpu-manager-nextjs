@@ -4,7 +4,7 @@ interface ComponentProps {
   gpuClass: string;
 }
 
-export default function GpuTablePerformanceRow({
+export default function PerformanceRow({
   header,
   data,
   gpuClass,
