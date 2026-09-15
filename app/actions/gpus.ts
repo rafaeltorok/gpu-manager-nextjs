@@ -61,8 +61,6 @@ export async function editGpu(formData: FormData) {
   // Update the database GPU specs
   const updatedGpu = await updateSpecs(data);
 
-  console.log(updatedGpu)
-
   // On a successful updated, redirect to the GPU data page
   if (updatedGpu) {
     const slug = generateSlug(updatedGpu);
