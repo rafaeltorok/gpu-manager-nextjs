@@ -52,31 +52,7 @@ export default async function Page({
       <form>
         <input type="hidden" name="id" value={gpu.id} />
 
-        <div
-          className="
-          w-full
-          min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
-          border-5 border-gray-700
-          mx-auto my-6
-          rounded-xl
-          wrap-break-word
-        "
-        >
-          <div
-            className={`
-              bg-black
-              p-5
-              text-2xl font-extrabold
-              ${gpuClass}
-              rounded-tl-xl rounded-tr-xl
-              text-center
-            `}
-          >
-            {gpu.manufacturer} {gpu.gpuline} {gpu.model}
-          </div>
-
-          <GpuTable gpu={gpu} gpuClass={gpuClass} />
-        </div>
+        <GpuTable gpu={gpu} gpuClass={gpuClass} />
       </form>
     </div>
   );
