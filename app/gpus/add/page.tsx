@@ -15,7 +15,7 @@ export default async function Page() {
 
       <form
         action={createGpu}
-        className="w-full max-w-[400px] mx-auto border-1 border-gray-700 p-3 rounded"
+        className="w-full max-w-[400px] mx-auto border-1 border-gray-700 p-3 rounded bg-black/50"
       >
         {renderRow("Manufacturer", "text", "manufacturer", true)}
         {renderRow("Line", "text", "gpuline", false)}
@@ -32,7 +32,7 @@ export default async function Page() {
 
         <button
           type="submit"
-          className="w-full mt-1 px-1 py-1 bg-black font-bold border-1 border-gray-700 hover:bg-gray-900 rounded"
+          className="w-full mt-1 px-1 py-1 bg-black/50 font-bold border-1 border-gray-700 hover:bg-gray-900 rounded"
         >
           Add
         </button>

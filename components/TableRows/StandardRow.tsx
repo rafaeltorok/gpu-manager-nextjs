@@ -30,18 +30,18 @@ export default function StandardRow({
       {/* Render an input field to allow the user to edit the row data */}
       {editMode || calculateMode ? (
         <div className="flex w-full sm:flex-1">
-          <div className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
+          <div className="text-left font-normal bg-[#252525]/50 border-1 border-gray-600 px-2 py-1 w-2/5">
             <label htmlFor={name}>{header}</label>
           </div>
           <div
-            className={`text-left font-bold bg-black border-1 border-gray-600 px-2 py-1 w-3/5 ${gpuClass}`}
+            className={`text-left font-bold bg-black/50 border-1 border-gray-600 px-2 py-1 w-3/5 ${gpuClass}`}
           >
             {name === "vram" ? (
               <div className="flex">
                 {/* Display two inputs fields for the VRAM, one for the memory amount and other for the type */}
                 <input
                   id="vram"
-                  className="bg-black text-white border-[inset] w-1/2"
+                  className="bg-black/50 text-white border-[inset] w-1/2"
                   name="vram"
                   value={originalData["vram"] || ""}
                   type="number"
@@ -61,7 +61,7 @@ export default function StandardRow({
                 />
                 <input
                   id="memtype"
-                  className="bg-black text-white border-[inset] w-1/2"
+                  className="bg-black/50 text-white border-[inset] w-1/2"
                   name="memtype"
                   value={originalData["memtype"] || ""}
                   type="text"
@@ -75,7 +75,7 @@ export default function StandardRow({
                 {/* For all other fields, display the standard input field for numeric values */}
                 <input
                   id={name}
-                  className="w-full bg-black text-white border-[inset]"
+                  className="w-full bg-black/50 text-white border-[inset]"
                   name={name}
                   value={originalData[name] || ""}
                   type="number"
@@ -101,11 +101,11 @@ export default function StandardRow({
         <>
           {/* Render a read-only field to display the data */}
           <div className="flex w-full sm:flex-1">
-            <div className="text-left font-normal bg-[#252525] border-1 border-gray-600 px-2 py-1 w-2/5">
+            <div className="text-left font-normal bg-[#252525]/50 border-1 border-gray-600 px-2 py-1 w-2/5">
               {header}
             </div>
             <div
-              className={`text-left font-bold bg-black border-1 border-gray-600 px-2 py-1 w-3/5`}
+              className={`text-left font-bold bg-black/50 border-1 border-gray-600 px-2 py-1 w-3/5`}
             >
               <span className={`${gpuClass}`}>{String(data)}</span>
             </div>

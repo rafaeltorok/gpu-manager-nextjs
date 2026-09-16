@@ -8,7 +8,7 @@ export default function NavBar() {
 
   return (
     <div>
-      <nav className="bg-black text-white px-6 py-3 flex items-center gap-4 overflow-auto">
+      <nav className="bg-black/50 text-white px-6 py-3 flex items-center gap-4 overflow-auto">
         <section className="MOBILE-MENU flex lg:hidden w-full">
           <div
             className="HAMBURGER-ICON space-y-2"
