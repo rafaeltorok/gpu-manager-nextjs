@@ -41,7 +41,7 @@ export default function Controls({
               className="
                 w-full
                 px-1 py-1
-                bg-black
+                bg-black/50
                 border-1 border-gray-700
                 hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
@@ -58,7 +58,7 @@ export default function Controls({
               className="
                 w-full
                 px-1 py-1
-                bg-black
+                bg-black/50
                 border-1 border-gray-700
                 hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
@@ -80,7 +80,7 @@ export default function Controls({
               className="
                 w-full
                 px-1 py-1
-                bg-black
+                bg-black/50
                 border-1 border-gray-700
                 hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
@@ -98,7 +98,7 @@ export default function Controls({
               className="
                 w-full
                 px-1 py-1
-                bg-black
+                bg-black/50
                 border-1 border-gray-700
                 hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
@@ -118,7 +118,7 @@ export default function Controls({
           className="
             w-full
             px-1 py-1
-            bg-black
+            bg-black/50
             border-1 border-gray-700
             hover:bg-gray-800 active:bg-gray-800
             rounded-xl
@@ -137,7 +137,7 @@ export default function Controls({
           className="
             w-full
             px-1 py-1
-            bg-black
+            bg-black/50
             border-1 border-gray-700
             hover:bg-gray-800 active:bg-gray-800
             rounded-xl

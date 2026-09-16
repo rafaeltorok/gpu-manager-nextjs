@@ -16,7 +16,7 @@ export default function Title({
   return (
     <div
       className={`
-        bg-black
+        bg-black/25
         p-5
         text-2xl font-extrabold
         ${gpuClass}
@@ -35,7 +35,7 @@ export default function Title({
         >
           <input
             name="manufacturer"
-            className="text-center sm:w-1/3 border-1 border-gray-600 rounded"
+            className="bg-black/50 text-center sm:w-1/3 border-1 border-gray-600 rounded"
             type="text"
             value={gpuData.manufacturer || ""}
             onChange={(e) => {
@@ -49,7 +49,7 @@ export default function Title({
           />
           <input
             name="gpuline"
-            className="text-center sm:w-1/3 border-1 border-gray-600 rounded"
+            className="bg-black/50 text-center sm:w-1/3 border-1 border-gray-600 rounded"
             type="text"
             value={gpuData.gpuline || ""}
             onChange={(e) =>
@@ -58,7 +58,7 @@ export default function Title({
           />
           <input
             name="model"
-            className="text-center sm:w-1/3 border-1 border-gray-600 rounded"
+            className="bg-black/50 text-center sm:w-1/3 border-1 border-gray-600 rounded"
             type="text"
             value={gpuData.model || ""}
             onChange={(e) => {
