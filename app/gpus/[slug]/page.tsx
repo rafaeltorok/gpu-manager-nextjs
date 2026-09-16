@@ -9,6 +9,7 @@ import getManufacturerColor from "@/utils/getManufacturerColor";
 // Components
 import GpuTable from "@/components/GpuTable";
 
+// TypeScript types
 import type { Metadata } from "next";
 
 // Generate a custom page title based on the model name

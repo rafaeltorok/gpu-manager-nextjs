@@ -2,11 +2,11 @@
 
 import { useRouter } from "next/navigation";
 
-// React
-import { useState, useEffect } from "react";
-
 // Server actions
 import { deleteGpu } from "@/app/actions/gpus";
+
+// React
+import { useState, useEffect } from "react";
 
 // Utils
 import calculatePerformance from "@/utils/calculatePerformance";
@@ -20,6 +20,7 @@ import Controls from "./TableSections/Controls";
 
 // TypeScript types
 import type { GpuType } from "../types/gpu";
+import ConfirmMessage from "./ConfirmMessage";
 
 interface ComponentProps {
   gpu: GpuType;
@@ -31,6 +32,8 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
   // Define the table modes
   const [editMode, setEditMode] = useState(false);
   const [calculateMode, setCalculateMode] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
   const router = useRouter();
 
   // Create a copy of the original GPU data to modify it
@@ -44,16 +47,13 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
     handleUpdate();
   }, [gpu]);
 
-  // Handle removing the graphics card from the list
-  async function handleDelete() {
-    const removeConfirm = window.confirm(
-      `Remove ${gpu.manufacturer} ${gpu.gpuline} ${gpu.model} from the list?`,
-    );
+  // Get the theoretical performance for a card
+  const performance = calculatePerformance(gpuData);
 
-    if (!removeConfirm) return;
-
+  // Handle removing a graphics card from the list
+  async function handleDelete(id: string) {
     try {
-      await deleteGpu(gpu.id);
+      await deleteGpu(id);
       router.push("/gpus");
     } catch (err: unknown) {
       console.error(err);
@@ -61,19 +61,16 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
     }
   }
 
-  // Get the theoretical performance for a card
-  const performance = calculatePerformance(gpuData);
-
   return (
     <div
       className="
-      w-full
-      min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
-      border-5 border-gray-700
-      mx-auto my-6
-      rounded-xl
-      wrap-break-word
-    "
+        w-full
+        min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
+        border-5 border-gray-700
+        mx-auto my-6
+        rounded-xl
+        wrap-break-word
+      "
     >
       <Title
         gpuData={gpuData}
@@ -113,7 +110,16 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
         setEditMode={setEditMode}
         calculateMode={calculateMode}
         setCalculateMode={setCalculateMode}
+        setOpenModal={setOpenModal}
+      />
+
+      <ConfirmMessage
+        id={gpu.id}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
         handleDelete={handleDelete}
+        fullModelName={`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`}
+        gpuClass={gpuClass}
       />
     </div>
   );
