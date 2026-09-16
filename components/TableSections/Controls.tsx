@@ -11,7 +11,7 @@ interface ControlsProps {
   setEditMode: (mode: boolean) => void;
   calculateMode: boolean;
   setCalculateMode: (mode: boolean) => void;
-  handleDelete: () => void;
+  setOpenModal: (open: boolean) => void;
 }
 
 export default function Controls({
@@ -21,7 +21,7 @@ export default function Controls({
   setEditMode,
   calculateMode,
   setCalculateMode,
-  handleDelete,
+  setOpenModal,
 }: ControlsProps) {
   return (
     <div
@@ -43,7 +43,7 @@ export default function Controls({
                 px-1 py-1
                 bg-black
                 border-1 border-gray-700
-                hover:bg-gray-900
+                hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
               "
               type="submit"
@@ -60,7 +60,7 @@ export default function Controls({
                 px-1 py-1
                 bg-black
                 border-1 border-gray-700
-                hover:bg-gray-900
+                hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
               "
               type="submit"
@@ -82,7 +82,7 @@ export default function Controls({
                 px-1 py-1
                 bg-black
                 border-1 border-gray-700
-                hover:bg-gray-900
+                hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
               "
               type="submit"
@@ -100,7 +100,7 @@ export default function Controls({
                 px-1 py-1
                 bg-black
                 border-1 border-gray-700
-                hover:bg-gray-900
+                hover:bg-gray-800 active:bg-gray-800
                 rounded-xl
               "
               type="submit"
@@ -120,7 +120,7 @@ export default function Controls({
             px-1 py-1
             bg-black
             border-1 border-gray-700
-            hover:bg-gray-900
+            hover:bg-gray-800 active:bg-gray-800
             rounded-xl
           "
           type="submit"
@@ -139,11 +139,11 @@ export default function Controls({
             px-1 py-1
             bg-black
             border-1 border-gray-700
-            hover:bg-gray-900
+            hover:bg-gray-800 active:bg-gray-800
             rounded-xl
           "
           type="button"
-          onClick={handleDelete}
+          onClick={() => setOpenModal(true)}
         >
           Remove
         </button>
