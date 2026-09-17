@@ -42,17 +42,23 @@ export default function Selection({ gpus }: SelectionProps) {
 
   function getDefaultValue (slug: string | undefined) {
     const gpuFound = gpus.find((g) => slug === g.slug);
-    
-    if (!gpuFound) {
-      return "NVIDIA GeForce RTX 3060";
-    }
-    return `${gpuFound.manufacturer} ${gpuFound.gpuline} ${gpuFound.model}`;
+    return gpuFound?.slug || "";
   }
 
   return (
     <form
       action={handleSelection}
-      className="flex flex-col mx-auto align-left max-w-[300px] gap-5"
+      className="
+        flex flex-col
+        mx-auto mb-10
+        align-left
+        max-w-[400px]
+        min-w-[300px]
+        gap-5
+        bg-black/50
+        border-2 border-gray-700 rounded
+        p-5
+      "
     >
       {renderSelectField("First card:", "first", gpus, getDefaultValue(searchParams.get("first")?.toString()))}
       {renderSelectField("Second card:", "second", gpus, getDefaultValue(searchParams.get("second")?.toString()))}
@@ -62,7 +68,7 @@ export default function Selection({ gpus }: SelectionProps) {
         className="
           border-2 border-gray-600 rounded-xl
           p-2
-          hover:bg-gray-700 active:bg-gray-700
+          bg-black/50 hover:bg-gray-700 active:bg-gray-700
         "
       >
         Confirm
@@ -77,14 +83,15 @@ function renderSelectField(label: string, order: string, gpus: GpuType[], defaul
     <label>
       {label}
       <select
+        key={defaultValue}
         name={order}
         defaultValue={defaultValue}
-        className="ml-2"
+        className="ml-2 bg-black p-1 w-full"
       >
         {gpus.map((g) => (
           <option
             key={g.id}
-            value={`${g.manufacturer} ${g.gpuline} ${g.model}`}
+            value={g.slug}
           >
             {g.manufacturer} {g.gpuline} {g.model}
           </option>

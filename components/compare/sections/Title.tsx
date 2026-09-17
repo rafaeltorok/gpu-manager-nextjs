@@ -1,18 +1,21 @@
-interface ComparisonTitleProps {
+interface TitleProps {
   firstModelName: string;
   secondModelName: string;
   firstGpuClass: string;
   secondGpuClass: string;
 }
 
-export default function ComparisonTitle({ 
+export default function Title({ 
   firstModelName, secondModelName,
   firstGpuClass, secondGpuClass
-}: ComparisonTitleProps) {
+}: TitleProps) {
   return (
     <div className="flex mx-auto">
+      <div className="w-1/4"></div>
+
       <div
         className={`
+          w-1/4
           bg-black/25
           p-5
           text-2xl font-extrabold
@@ -25,6 +28,7 @@ export default function ComparisonTitle({
       </div>
       <div
         className={`
+          w-1/4
           bg-black/25
           p-5
           text-2xl font-extrabold
@@ -34,6 +38,19 @@ export default function ComparisonTitle({
         `}
       >
         {secondModelName}
+      </div>
+
+      <div
+        className="
+          w-1/4
+          bg-black/25
+          p-5
+          text-md font-extrabold
+          rounded-tr-xl
+          text-center
+        "
+      >
+        Difference (in %)
       </div>
     </div>
   );
