@@ -7,7 +7,10 @@ interface PercentageDifferenceProps {
   secondValue: number;
 }
 
-export default function PercentageDifference({ firstValue, secondValue }: PercentageDifferenceProps) {
+export default function PercentageDifference({
+  firstValue,
+  secondValue,
+}: PercentageDifferenceProps) {
   return (
     <div className="w-1/4 p-2 bg-[#252525]/50">
       {firstValue === 0 || secondValue === 0 ? (

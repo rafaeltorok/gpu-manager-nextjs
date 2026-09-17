@@ -12,13 +12,13 @@ import ComparisonTable from "@/components/compare/ComparisonTable";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Compare Specs and Performance | GPUs Manager"
-}
+  title: "Compare Specs and Performance | GPUs Manager",
+};
 
 export default async function Page(props: {
   searchParams?: Promise<{
     first?: string;
-    second?:string;
+    second?: string;
   }>;
 }) {
   // Get all available cards for the selection list

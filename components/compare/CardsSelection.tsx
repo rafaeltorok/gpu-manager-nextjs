@@ -40,7 +40,7 @@ export default function Selection({ gpus }: SelectionProps) {
     replace(`${pathname}?${params.toString()}`);
   }
 
-  function getDefaultValue (slug: string | undefined) {
+  function getDefaultValue(slug: string | undefined) {
     const gpuFound = gpus.find((g) => slug === g.slug);
     return gpuFound?.slug || "";
   }
@@ -60,8 +60,18 @@ export default function Selection({ gpus }: SelectionProps) {
         p-5
       "
     >
-      {renderSelectField("First card:", "first", gpus, getDefaultValue(searchParams.get("first")?.toString()))}
-      {renderSelectField("Second card:", "second", gpus, getDefaultValue(searchParams.get("second")?.toString()))}
+      {renderSelectField(
+        "First card:",
+        "first",
+        gpus,
+        getDefaultValue(searchParams.get("first")?.toString()),
+      )}
+      {renderSelectField(
+        "Second card:",
+        "second",
+        gpus,
+        getDefaultValue(searchParams.get("second")?.toString()),
+      )}
 
       <button
         type="submit"
@@ -78,7 +88,12 @@ export default function Selection({ gpus }: SelectionProps) {
 }
 
 // Helper function
-function renderSelectField(label: string, order: string, gpus: GpuType[], defaultValue: string) {
+function renderSelectField(
+  label: string,
+  order: string,
+  gpus: GpuType[],
+  defaultValue: string,
+) {
   return (
     <label>
       {label}
@@ -89,10 +104,7 @@ function renderSelectField(label: string, order: string, gpus: GpuType[], defaul
         className="ml-2 bg-black p-1 w-full"
       >
         {gpus.map((g) => (
-          <option
-            key={g.id}
-            value={g.slug}
-          >
+          <option key={g.id} value={g.slug}>
             {g.manufacturer} {g.gpuline} {g.model}
           </option>
         ))}

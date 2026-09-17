@@ -16,7 +16,10 @@ interface ComparisonTableProps {
   secondGpuData: GpuType | undefined;
 }
 
-export default function ComparisonTable({ firstGpuData, secondGpuData }: ComparisonTableProps) {
+export default function ComparisonTable({
+  firstGpuData,
+  secondGpuData,
+}: ComparisonTableProps) {
   // Calculate the performance for both cards
   let firstGpuDisplayPerformance: string[] = ["N/A", "N/A", "N/A", "N/A"];
   let secondGpuDisplayPerformance: string[] = ["N/A", "N/A", "N/A", "N/A"];
@@ -39,9 +42,7 @@ export default function ComparisonTable({ firstGpuData, secondGpuData }: Compari
 
   const vramAmount = (vram: number | undefined) => {
     if (vram) {
-      return vram < 1 ?
-        `${vram * 1000}MB` :
-        `${vram}GB`;
+      return vram < 1 ? `${vram * 1000}MB` : `${vram}GB`;
     }
     return null;
   };

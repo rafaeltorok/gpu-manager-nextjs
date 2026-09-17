@@ -5,9 +5,11 @@ interface TitleProps {
   secondGpuClass: string;
 }
 
-export default function Title({ 
-  firstModelName, secondModelName,
-  firstGpuClass, secondGpuClass
+export default function Title({
+  firstModelName,
+  secondModelName,
+  firstGpuClass,
+  secondGpuClass,
 }: TitleProps) {
   return (
     <div className="flex mx-auto">

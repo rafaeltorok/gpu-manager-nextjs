@@ -14,10 +14,14 @@ interface ComparisonRowProps {
   secondGpuClass: string;
 }
 
-export default function ComparisonRow({ 
+export default function ComparisonRow({
   header,
-  firstGpuDisplayData, firstGpuValue, firstGpuClass,
-  secondGpuDisplayData, secondGpuValue, secondGpuClass,
+  firstGpuDisplayData,
+  firstGpuValue,
+  firstGpuClass,
+  secondGpuDisplayData,
+  secondGpuValue,
+  secondGpuClass,
 }: ComparisonRowProps) {
   return (
     <div className="flex mx-auto text-center align-center">
