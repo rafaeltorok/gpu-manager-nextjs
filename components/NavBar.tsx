@@ -44,6 +44,7 @@ export default function NavBar() {
             >
               <Link href="/">Home</Link>
               <Link href="/gpus">GPUs</Link>
+              <Link href="/gpus/compare">Compare</Link>
               <Link href="/gpus/add">Add new</Link>
             </div>
           </div>
@@ -53,6 +54,7 @@ export default function NavBar() {
           <div className="space-x-8">
             <Link href="/">Home</Link>
             <Link href="/gpus">GPUs</Link>
+            <Link href="/gpus/compare">Compare</Link>
             <Link href="/gpus/add">Add new</Link>
           </div>
         </div>
