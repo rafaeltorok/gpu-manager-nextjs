@@ -34,7 +34,7 @@ export async function createGpu(formData: FormData) {
 
   if (storedGpu) {
     revalidatePath("/gpus");
-    redirect(`/gpus/${generateSlug(storedGpu)}`);
+    redirect(`/gpus/${generateSlug(`${storedGpu.manufacturer} ${storedGpu.gpuline} ${storedGpu.model}`)}`);
   }
 }
 
@@ -63,7 +63,7 @@ export async function editGpu(formData: FormData) {
 
   // On a successful updated, redirect to the GPU data page
   if (updatedGpu) {
-    const slug = generateSlug(updatedGpu);
+    const slug = generateSlug(`${updatedGpu.manufacturer} ${updatedGpu.gpuline} ${updatedGpu.model}`);
     revalidatePath(`/gpus/${slug}`);
     redirect(`/gpus/${slug}`);
   }
