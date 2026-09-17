@@ -7,7 +7,7 @@ import { getGpu } from "@/services/gpus";
 import getManufacturerColor from "@/utils/getManufacturerColor";
 
 // Components
-import GpuTable from "@/components/GpuTable";
+import GpuTable from "@/components/gpu/GpuTable";
 
 // TypeScript types
 import type { Metadata } from "next";
