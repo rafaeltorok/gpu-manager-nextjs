@@ -19,7 +19,7 @@ import Performance from "./TableSections/Performance";
 import Controls from "./TableSections/Controls";
 
 // TypeScript types
-import type { GpuType } from "../types/gpu";
+import type { GpuType } from "../../types/gpu";
 import ConfirmMessage from "./ConfirmMessage";
 
 interface ComponentProps {
