@@ -14,22 +14,31 @@ interface SelectFieldProps {
   mappedModelNames: MappedModel[];
   order: string;
   label: string;
-  value: string;
+  selectOption: string;
+  setSelection: (option: string) => void;
 }
 
 export default function SelectField({
   mappedModelNames,
   order,
   label,
-  value,
+  selectOption,
+  setSelection,
 }: SelectFieldProps) {
+  // Allow the Combobox to use the slug values internally only,
+  // displaying the properly formatted full model name to the user
   const items = Combobox.createItems(mappedModelNames, {
     getValue: (item) => item.slug,
     getLabel: (item) => item.model,
   });
 
   return (
-    <Combobox.Root items={items} name={order} defaultValue={value}>
+    <Combobox.Root
+      items={items}
+      name={order}
+      value={selectOption}
+      onValueChange={(newValue) => setSelection(newValue || "")}
+    >
       <label htmlFor={`${order}-search`}>
         {label}
         <Combobox.InputGroup className="flex w-full border-2 border-gray-700 rounded p-1">

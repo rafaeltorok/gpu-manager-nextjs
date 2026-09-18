@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 // Components
@@ -17,21 +18,32 @@ export default function Selection({ gpus }: SelectionProps) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  // React controls the value for the Combobox.Root element
+  const [firstSelection, setFirstSelection] = useState(
+    searchParams.get("first")?.toString() || "",
+  );
+  const [secondSelection, setSecondSelection] = useState(
+    searchParams.get("second")?.toString() || "",
+  );
+
+  // Update the URL with the selected graphics cards slugs
   function handleSelection(formData: FormData) {
     const params = new URLSearchParams(searchParams);
 
-    // Get both card names from the form
+    // Get both graphics cards slugs from the form
     const first = formData.get("first") as string;
     const second = formData.get("second") as string;
 
     // Set the params for the first card
     if (first) {
       params.set("first", first);
+      setFirstSelection(first);
     }
 
     // Set the params for the second card
     if (second) {
       params.set("second", second);
+      setSecondSelection(second);
     }
 
     // Add both cards names on the URL
@@ -43,14 +55,6 @@ export default function Selection({ gpus }: SelectionProps) {
     slug: g.slug || "",
     model: `${g.manufacturer} ${g.gpuline} ${g.model}` || "",
   }));
-
-  // Get the respective mapped model based on the URL parameters
-  function getDefaultValue(order: string): string {
-    const found = mappedModelNames.find(
-      (m) => m.slug === searchParams.get(order)?.toString(),
-    );
-    return found?.slug || "";
-  }
 
   return (
     <form
@@ -71,13 +75,15 @@ export default function Selection({ gpus }: SelectionProps) {
         mappedModelNames={mappedModelNames}
         order="first"
         label="First card:"
-        value={getDefaultValue("first")}
+        selectOption={firstSelection}
+        setSelection={setFirstSelection}
       />
       <SelectField
         mappedModelNames={mappedModelNames}
         order="second"
         label="Second card:"
-        value={getDefaultValue("second")}
+        selectOption={secondSelection}
+        setSelection={setSecondSelection}
       />
 
       <button
