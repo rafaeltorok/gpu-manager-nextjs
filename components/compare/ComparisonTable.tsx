@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Utils
 import calculatePerformance from "@/utils/calculatePerformance";
@@ -39,6 +39,23 @@ export default function ComparisonTable({
     boostclock: secondGpuData?.boostclock || 0,
     memclock: secondGpuData?.memclock || 0,
   });
+
+  // The effects keep both clock speeds at sync after selecting a different card
+  useEffect(() => {
+    setFirstCardClockSpeeds({
+      baseclock: firstGpuData?.baseclock || 0,
+      boostclock: firstGpuData?.boostclock || 0,
+      memclock: firstGpuData?.memclock || 0,
+    })
+  }, [firstGpuData]);
+
+  useEffect(() => {
+    setFirstCardClockSpeeds({
+      baseclock: firstGpuData?.baseclock || 0,
+      boostclock: firstGpuData?.boostclock || 0,
+      memclock: firstGpuData?.memclock || 0,
+    })
+  }, [firstGpuData]);
 
   // Store the original clock speed values
   const firstOriginalClocks = {

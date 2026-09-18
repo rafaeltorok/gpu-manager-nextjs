@@ -38,9 +38,7 @@ export default async function Page(props: {
     <div>
       <Selection gpus={mappedSlugs} />
 
-      {/* The key forces React to update the clock speed values after a selection */}
       <ComparisonTable
-        key={`${firstSlug}-${secondSlug}`}
         firstGpuData={firstGpuData}
         secondGpuData={secondGpuData}
       />
