@@ -1,17 +1,14 @@
-import type { GpuType } from "../types/gpu";
+export default function getManufacturerColor(fullModelName: string): string {
+  const lowercaseModel = fullModelName.toLowerCase().trim();
 
-export default function getManufacturerColor(gpu: GpuType): string {
-  const fullModelName =
-    `${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`.toLowerCase();
-
-  if (fullModelName.includes("nvidia") || fullModelName.includes("geforce")) {
+  if (lowercaseModel.includes("nvidia") || lowercaseModel.includes("geforce")) {
     return "nvidia-model";
   } else if (
-    fullModelName.includes("amd") ||
-    fullModelName.includes("radeon")
+    lowercaseModel.includes("amd") ||
+    lowercaseModel.includes("radeon")
   ) {
     return "amd-model";
-  } else if (fullModelName.includes("intel") || fullModelName.includes("arc")) {
+  } else if (lowercaseModel.includes("intel") || lowercaseModel.includes("arc")) {
     return "intel-model";
   }
   return "model";
