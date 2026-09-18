@@ -19,9 +19,7 @@ export default function Home() {
               Calculate the Theoretical performance for any modern graphics card
               (FP32(float), Texture rate, Pixel rate and Memory bandwidth)
             </li>
-            <li>
-              Compare two graphics cards against each other
-            </li>
+            <li>Compare two graphics cards against each other</li>
           </ul>
         </section>
 

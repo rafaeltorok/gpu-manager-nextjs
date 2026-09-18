@@ -19,8 +19,10 @@ interface ClockSpeedsProps {
 }
 
 export default function ClockSpeeds({
-  firstGpuClockSpeeds, secondGpuClockSpeeds,
-  firstGpuClass, secondGpuClass,
+  firstGpuClockSpeeds,
+  secondGpuClockSpeeds,
+  firstGpuClass,
+  secondGpuClass,
   editMode,
 }: ClockSpeedsProps) {
   return (
@@ -29,21 +31,16 @@ export default function ClockSpeeds({
       {/* Base Clock */}
       <div className="flex mx-auto text-center align-center">
         <Header header={"Base Clock"} />
-        <div
-          className={`${firstGpuClass} w-1/4 p-2`}
-        >
+        <div className={`${firstGpuClass} w-1/4 p-2`}>
           {String(firstGpuClockSpeeds.baseclock || "N/A")} MHz
         </div>
-        <div
-          className={`${secondGpuClass} w-1/4 p-2`}
-        >
+        <div className={`${secondGpuClass} w-1/4 p-2`}>
           {String(secondGpuClockSpeeds.baseclock || "N/A")} MHz
         </div>
         <PercentageDifference
           firstValue={firstGpuClockSpeeds.baseclock || 0}
           secondValue={secondGpuClockSpeeds.baseclock || 0}
         />
-
       </div>
 
       {/* Boost Clock */}
@@ -66,14 +63,10 @@ export default function ClockSpeeds({
           </>
         ) : (
           <>
-            <div
-              className={`${firstGpuClass} w-1/4 p-2`}
-            >
+            <div className={`${firstGpuClass} w-1/4 p-2`}>
               {String(firstGpuClockSpeeds.boostclock || "N/A")} MHz
             </div>
-            <div
-              className={`${secondGpuClass} w-1/4 p-2`}
-            >
+            <div className={`${secondGpuClass} w-1/4 p-2`}>
               {String(secondGpuClockSpeeds.boostclock || "N/A")} MHz
             </div>
             <PercentageDifference
@@ -106,14 +99,10 @@ export default function ClockSpeeds({
           </>
         ) : (
           <>
-            <div
-              className={`${firstGpuClass} w-1/4 p-2`}
-            >
+            <div className={`${firstGpuClass} w-1/4 p-2`}>
               {String(firstGpuClockSpeeds.memclock || "N/A")} Gbps effective
             </div>
-            <div
-              className={`${secondGpuClass} w-1/4 p-2`}
-            >
+            <div className={`${secondGpuClass} w-1/4 p-2`}>
               {String(secondGpuClockSpeeds.memclock || "N/A")} Gbps effective
             </div>
             <PercentageDifference

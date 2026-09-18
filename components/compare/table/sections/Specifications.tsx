@@ -13,8 +13,10 @@ interface SpecificationsProps {
 }
 
 export default function Specifications({
-  firstGpuData, secondGpuData,
-  firstGpuClass, secondGpuClass
+  firstGpuData,
+  secondGpuData,
+  firstGpuClass,
+  secondGpuClass,
 }: SpecificationsProps) {
   // Format the VRAM output in either MB or GB
   const vramAmount = (vram: number | undefined) => {

@@ -4,7 +4,11 @@ interface ControlsProps {
   handleClocksReset: () => void;
 }
 
-export default function Controls({ editMode, setEditMode, handleClocksReset }: ControlsProps) {
+export default function Controls({
+  editMode,
+  setEditMode,
+  handleClocksReset,
+}: ControlsProps) {
   return (
     <div className="flex">
       {editMode ? (

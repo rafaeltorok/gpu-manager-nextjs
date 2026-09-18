@@ -13,9 +13,12 @@ interface PerformanceProps {
 }
 
 export default function Performance({
-  firstGpuClass, secondGpuClass,
-  firstGpuDisplayPerformance, secondGpuDisplayPerformance,
-  firstGpuRawPerformance, secondGpuRawPerformance,
+  firstGpuClass,
+  secondGpuClass,
+  firstGpuDisplayPerformance,
+  secondGpuDisplayPerformance,
+  firstGpuRawPerformance,
+  secondGpuRawPerformance,
 }: PerformanceProps) {
   return (
     <div>

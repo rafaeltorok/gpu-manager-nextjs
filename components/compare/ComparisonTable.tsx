@@ -46,7 +46,7 @@ export default function ComparisonTable({
       baseclock: firstGpuData?.baseclock || 0,
       boostclock: firstGpuData?.boostclock || 0,
       memclock: firstGpuData?.memclock || 0,
-    })
+    });
   }, [firstGpuData]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function ComparisonTable({
       baseclock: firstGpuData?.baseclock || 0,
       boostclock: firstGpuData?.boostclock || 0,
       memclock: firstGpuData?.memclock || 0,
-    })
+    });
   }, [firstGpuData]);
 
   // Store the original clock speed values
@@ -79,16 +79,28 @@ export default function ComparisonTable({
   let secondGpuClass = "";
 
   if (firstGpuData) {
-    firstGpuDisplayPerformance = calculatePerformance({ ...firstGpuData, ...firstCardClockSpeeds });
-    firstGpuRawPerformance = getRawPerformance({ ...firstGpuData, ...firstCardClockSpeeds });
+    firstGpuDisplayPerformance = calculatePerformance({
+      ...firstGpuData,
+      ...firstCardClockSpeeds,
+    });
+    firstGpuRawPerformance = getRawPerformance({
+      ...firstGpuData,
+      ...firstCardClockSpeeds,
+    });
     firstGpuClass = getManufacturerColor(
       `${firstGpuData.manufacturer} ${firstGpuData.gpuline} ${firstGpuData.model}`,
     );
   }
 
   if (secondGpuData) {
-    secondGpuDisplayPerformance = calculatePerformance({ ...secondGpuData, ...secondCardClockSpeeds });
-    secondGpuRawPerformance = getRawPerformance({ ...secondGpuData, ...secondCardClockSpeeds });
+    secondGpuDisplayPerformance = calculatePerformance({
+      ...secondGpuData,
+      ...secondCardClockSpeeds,
+    });
+    secondGpuRawPerformance = getRawPerformance({
+      ...secondGpuData,
+      ...secondCardClockSpeeds,
+    });
     secondGpuClass = getManufacturerColor(
       `${secondGpuData.manufacturer} ${secondGpuData.gpuline} ${secondGpuData.model}`,
     );
