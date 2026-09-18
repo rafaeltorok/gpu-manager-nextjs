@@ -1,6 +1,6 @@
 // Components
 import Header from "./Header";
-import Data from "./Data";
+import DataField from "./DataField";
 import PercentageDifference from "./PercentageDifference";
 
 // TypeScript Types
@@ -26,8 +26,8 @@ export default function ComparisonRow({
   return (
     <div className="flex mx-auto text-center align-center">
       <Header header={header} />
-      <Data value={firstGpuDisplayData} gpuClass={firstGpuClass} />
-      <Data value={secondGpuDisplayData} gpuClass={secondGpuClass} />
+      <DataField value={firstGpuDisplayData} gpuClass={firstGpuClass} />
+      <DataField value={secondGpuDisplayData} gpuClass={secondGpuClass} />
       <PercentageDifference
         firstValue={firstGpuValue || 0}
         secondValue={secondGpuValue || 0}
