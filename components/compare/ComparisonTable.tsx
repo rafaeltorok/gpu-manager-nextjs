@@ -134,7 +134,7 @@ export default function ComparisonTable({
           secondGpuClass={secondGpuClass}
         />
         <ComparisonRow
-          header="Base Clock"
+          header="Boost Clock"
           firstGpuDisplayData={`${String(firstGpuData?.boostclock || "N/A")} MHz`}
           firstGpuValue={firstGpuData?.boostclock}
           firstGpuClass={firstGpuClass}
