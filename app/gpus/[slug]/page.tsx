@@ -46,7 +46,9 @@ export default async function Page({
   if (!gpu) notFound();
 
   // Add the manufacturer color scheme to the data table
-  const gpuClass = getManufacturerColor(gpu);
+  const gpuClass = getManufacturerColor(
+    `${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`,
+  );
 
   return (
     <div>

@@ -94,7 +94,7 @@ export default async function Page(props: {
                     bg-black hover:bg-gray-800
                     text-xl
                     hover:underline
-                    ${getManufacturerColor(gpu)}
+                    ${getManufacturerColor(`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`)}
                   `}
                 >
                   {gpu.manufacturer} {gpu.gpuline} {gpu.model}

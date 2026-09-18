@@ -1,12 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
-// Utils
-import { generateSlug } from "@/utils/slug";
+// Components
+import SelectField from "./selection/SelectField";
 
 // TypeScript types
-import type { GpuType } from "@/types/gpu";
+import type { GpuType, MappedModel } from "@/types/gpu";
 
 interface SelectionProps {
   gpus: GpuType[];
@@ -17,33 +18,43 @@ export default function Selection({ gpus }: SelectionProps) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  // React controls the value for the Combobox.Root element
+  const [firstSelection, setFirstSelection] = useState(
+    searchParams.get("first")?.toString() || "",
+  );
+  const [secondSelection, setSecondSelection] = useState(
+    searchParams.get("second")?.toString() || "",
+  );
+
+  // Update the URL with the selected graphics cards slugs
   function handleSelection(formData: FormData) {
     const params = new URLSearchParams(searchParams);
 
-    // Get both card names from the form
+    // Get both graphics cards slugs from the form
     const first = formData.get("first") as string;
     const second = formData.get("second") as string;
 
     // Set the params for the first card
     if (first) {
-      const firstSlug = generateSlug(first);
-      params.set("first", firstSlug);
+      params.set("first", first);
+      setFirstSelection(first);
     }
 
     // Set the params for the second card
     if (second) {
-      const secondSlug = generateSlug(second);
-      params.set("second", secondSlug);
+      params.set("second", second);
+      setSecondSelection(second);
     }
 
     // Add both cards names on the URL
     replace(`${pathname}?${params.toString()}`);
   }
 
-  function getDefaultValue(slug: string | undefined) {
-    const gpuFound = gpus.find((g) => slug === g.slug);
-    return gpuFound?.slug || "";
-  }
+  // Map only the slugs and full model names for the select list presentation
+  const mappedModelNames: MappedModel[] = gpus.map((g) => ({
+    slug: g.slug || "",
+    model: `${g.manufacturer} ${g.gpuline} ${g.model}` || "",
+  }));
 
   return (
     <form
@@ -60,18 +71,20 @@ export default function Selection({ gpus }: SelectionProps) {
         p-5
       "
     >
-      {renderSelectField(
-        "First card:",
-        "first",
-        gpus,
-        getDefaultValue(searchParams.get("first")?.toString()),
-      )}
-      {renderSelectField(
-        "Second card:",
-        "second",
-        gpus,
-        getDefaultValue(searchParams.get("second")?.toString()),
-      )}
+      <SelectField
+        mappedModelNames={mappedModelNames}
+        order="first"
+        label="First card:"
+        selectOption={firstSelection}
+        setSelection={setFirstSelection}
+      />
+      <SelectField
+        mappedModelNames={mappedModelNames}
+        order="second"
+        label="Second card:"
+        selectOption={secondSelection}
+        setSelection={setSecondSelection}
+      />
 
       <button
         type="submit"
@@ -84,31 +97,5 @@ export default function Selection({ gpus }: SelectionProps) {
         Confirm
       </button>
     </form>
-  );
-}
-
-// Helper function
-function renderSelectField(
-  label: string,
-  order: string,
-  gpus: GpuType[],
-  defaultValue: string,
-) {
-  return (
-    <label>
-      {label}
-      <select
-        key={defaultValue}
-        name={order}
-        defaultValue={defaultValue}
-        className="ml-2 bg-black p-1 w-full"
-      >
-        {gpus.map((g) => (
-          <option key={g.id} value={g.slug}>
-            {g.manufacturer} {g.gpuline} {g.model}
-          </option>
-        ))}
-      </select>
-    </label>
   );
 }

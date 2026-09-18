@@ -4,8 +4,8 @@ import getRawPerformance from "@/utils/getRawPerformance";
 import getManufacturerColor from "@/utils/getManufacturerColor";
 
 // Components
-import ComparisonTitle from "./sections/Title";
-import ComparisonRow from "./sections/ComparisonRow";
+import ComparisonTitle from "./table/Title";
+import ComparisonRow from "./table/ComparisonRow";
 import Division from "../gpu/TableRows/Division";
 
 // TypeScript types
@@ -31,13 +31,17 @@ export default function ComparisonTable({
   if (firstGpuData) {
     firstGpuDisplayPerformance = calculatePerformance(firstGpuData);
     firstGpuRawPerformance = getRawPerformance(firstGpuData);
-    firstGpuClass = getManufacturerColor(firstGpuData);
+    firstGpuClass = getManufacturerColor(
+      `${firstGpuData.manufacturer} ${firstGpuData.gpuline} ${firstGpuData.model}`,
+    );
   }
 
   if (secondGpuData) {
     secondGpuDisplayPerformance = calculatePerformance(secondGpuData);
     secondGpuRawPerformance = getRawPerformance(secondGpuData);
-    secondGpuClass = getManufacturerColor(secondGpuData);
+    secondGpuClass = getManufacturerColor(
+      `${secondGpuData.manufacturer} ${secondGpuData.gpuline} ${secondGpuData.model}`,
+    );
   }
 
   const vramAmount = (vram: number | undefined) => {
