@@ -29,3 +29,7 @@ export interface NewGpu {
   boostclock: number;
   memclock: number;
 }
+export interface MappedModel {
+  slug: string;
+  model: string;
+}

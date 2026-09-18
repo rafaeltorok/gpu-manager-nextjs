@@ -12,6 +12,7 @@
     "test": "TEST=true vitest run --maxWorkers=1"
   },
   "dependencies": {
+    "@base-ui/react": "^1.8.0",
     "axios": "^1.19.0",
     "clsx": "^2.1.1",
     "mongoose": "^9.9.1",

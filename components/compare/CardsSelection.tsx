@@ -2,11 +2,11 @@
 
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
-// Utils
-import { generateSlug } from "@/utils/slug";
+// Components
+import SelectField from "./selection/SelectField";
 
 // TypeScript types
-import type { GpuType } from "@/types/gpu";
+import type { GpuType, MappedModel } from "@/types/gpu";
 
 interface SelectionProps {
   gpus: GpuType[];
@@ -26,23 +26,32 @@ export default function Selection({ gpus }: SelectionProps) {
 
     // Set the params for the first card
     if (first) {
-      const firstSlug = generateSlug(first);
-      params.set("first", firstSlug);
+      params.set("first", first);
     }
 
     // Set the params for the second card
     if (second) {
-      const secondSlug = generateSlug(second);
-      params.set("second", secondSlug);
+      params.set("second", second);
     }
 
     // Add both cards names on the URL
     replace(`${pathname}?${params.toString()}`);
   }
 
-  function getDefaultValue(slug: string | undefined) {
-    const gpuFound = gpus.find((g) => slug === g.slug);
-    return gpuFound?.slug || "";
+  // Map only the slugs and full model names for the select list presentation
+  const mappedModelNames: MappedModel[] = gpus.map((g) => (
+    {
+      slug: g.slug || "",
+      model: `${g.manufacturer} ${g.gpuline} ${g.model}` || "",
+    }
+  ));
+
+  // Get the respective mapped model based on the URL parameters
+  function getDefaultValue(order: string): string {
+    const found = mappedModelNames.find((m) => (
+      m.slug === searchParams.get(order)?.toString()
+    ));
+    return found?.slug || "";
   }
 
   return (
@@ -60,18 +69,18 @@ export default function Selection({ gpus }: SelectionProps) {
         p-5
       "
     >
-      {renderSelectField(
-        "First card:",
-        "first",
-        gpus,
-        getDefaultValue(searchParams.get("first")?.toString()),
-      )}
-      {renderSelectField(
-        "Second card:",
-        "second",
-        gpus,
-        getDefaultValue(searchParams.get("second")?.toString()),
-      )}
+      <SelectField
+        mappedModelNames={mappedModelNames}
+        order="first"
+        label="First card:"
+        value={getDefaultValue("first")}
+      />
+      <SelectField
+        mappedModelNames={mappedModelNames}
+        order="second"
+        label="Second card:"
+        value={getDefaultValue("second")}
+      />
 
       <button
         type="submit"
@@ -84,31 +93,5 @@ export default function Selection({ gpus }: SelectionProps) {
         Confirm
       </button>
     </form>
-  );
-}
-
-// Helper function
-function renderSelectField(
-  label: string,
-  order: string,
-  gpus: GpuType[],
-  defaultValue: string,
-) {
-  return (
-    <label>
-      {label}
-      <select
-        key={defaultValue}
-        name={order}
-        defaultValue={defaultValue}
-        className="ml-2 bg-black p-1 w-full"
-      >
-        {gpus.map((g) => (
-          <option key={g.id} value={g.slug}>
-            {g.manufacturer} {g.gpuline} {g.model}
-          </option>
-        ))}
-      </select>
-    </label>
   );
 }
