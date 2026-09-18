@@ -1,4 +1,4 @@
-export default function CaretDownIcon(props: React.ComponentProps<'svg'>) {
+export default function CaretDownIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg
       width="20"
@@ -7,7 +7,7 @@ export default function CaretDownIcon(props: React.ComponentProps<'svg'>) {
       viewBox="0 0 8 16"
       fill="currentColor"
       {...props}
-      style={{ display: 'block', ...props.style }}
+      style={{ display: "block", ...props.style }}
     >
       <path d="M12 6H4l4 4.5z" />
     </svg>

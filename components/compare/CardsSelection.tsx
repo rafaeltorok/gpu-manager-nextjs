@@ -39,18 +39,16 @@ export default function Selection({ gpus }: SelectionProps) {
   }
 
   // Map only the slugs and full model names for the select list presentation
-  const mappedModelNames: MappedModel[] = gpus.map((g) => (
-    {
-      slug: g.slug || "",
-      model: `${g.manufacturer} ${g.gpuline} ${g.model}` || "",
-    }
-  ));
+  const mappedModelNames: MappedModel[] = gpus.map((g) => ({
+    slug: g.slug || "",
+    model: `${g.manufacturer} ${g.gpuline} ${g.model}` || "",
+  }));
 
   // Get the respective mapped model based on the URL parameters
   function getDefaultValue(order: string): string {
-    const found = mappedModelNames.find((m) => (
-      m.slug === searchParams.get(order)?.toString()
-    ));
+    const found = mappedModelNames.find(
+      (m) => m.slug === searchParams.get(order)?.toString(),
+    );
     return found?.slug || "";
   }
 

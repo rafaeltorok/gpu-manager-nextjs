@@ -32,7 +32,7 @@ export default function ComparisonTable({
     firstGpuDisplayPerformance = calculatePerformance(firstGpuData);
     firstGpuRawPerformance = getRawPerformance(firstGpuData);
     firstGpuClass = getManufacturerColor(
-      `${firstGpuData.manufacturer} ${firstGpuData.gpuline} ${firstGpuData.model}`
+      `${firstGpuData.manufacturer} ${firstGpuData.gpuline} ${firstGpuData.model}`,
     );
   }
 
@@ -40,7 +40,7 @@ export default function ComparisonTable({
     secondGpuDisplayPerformance = calculatePerformance(secondGpuData);
     secondGpuRawPerformance = getRawPerformance(secondGpuData);
     secondGpuClass = getManufacturerColor(
-      `${secondGpuData.manufacturer} ${secondGpuData.gpuline} ${secondGpuData.model}`
+      `${secondGpuData.manufacturer} ${secondGpuData.gpuline} ${secondGpuData.model}`,
     );
   }
 

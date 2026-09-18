@@ -17,18 +17,19 @@ interface SelectFieldProps {
   value: string;
 }
 
-export default function SelectField({ mappedModelNames, order, label, value }: SelectFieldProps) {
+export default function SelectField({
+  mappedModelNames,
+  order,
+  label,
+  value,
+}: SelectFieldProps) {
   const items = Combobox.createItems(mappedModelNames, {
     getValue: (item) => item.slug,
     getLabel: (item) => item.model,
   });
 
   return (
-    <Combobox.Root
-      items={items}
-      name={order}
-      defaultValue={value}
-    >
+    <Combobox.Root items={items} name={order} defaultValue={value}>
       <label htmlFor={`${order}-search`}>
         {label}
         <Combobox.InputGroup className="flex w-full border-2 border-gray-700 rounded p-1">
@@ -39,7 +40,7 @@ export default function SelectField({ mappedModelNames, order, label, value }: S
             className="w-9/10 p-1"
           />
           <div className="flex w-1/10 align-center">
-            <Combobox.Trigger aria-label="Open popup" className="w-full" >
+            <Combobox.Trigger aria-label="Open popup" className="w-full">
               <CaretDownIcon />
             </Combobox.Trigger>
           </div>
@@ -74,9 +75,7 @@ export default function SelectField({ mappedModelNames, order, label, value }: S
                     `}
                   >
                     <div className="flex">
-                      <span>
-                        {g.model}
-                      </span>
+                      <span>{g.model}</span>
                       <Combobox.ItemIndicator>
                         <CheckIcon className="ml-2 text-white" />
                       </Combobox.ItemIndicator>
