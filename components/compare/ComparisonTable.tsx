@@ -50,12 +50,12 @@ export default function ComparisonTable({
   }, [firstGpuData]);
 
   useEffect(() => {
-    setFirstCardClockSpeeds({
-      baseclock: firstGpuData?.baseclock || 0,
-      boostclock: firstGpuData?.boostclock || 0,
-      memclock: firstGpuData?.memclock || 0,
+    setSecondCardClockSpeeds({
+      baseclock: secondGpuData?.baseclock || 0,
+      boostclock: secondGpuData?.boostclock || 0,
+      memclock: secondGpuData?.memclock || 0,
     });
-  }, [firstGpuData]);
+  }, [secondGpuData]);
 
   // Store the original clock speed values
   const firstOriginalClocks = {
