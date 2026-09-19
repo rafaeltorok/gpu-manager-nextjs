@@ -11,7 +11,8 @@ interface AddFormProps {
 }
 
 export default function AddForm({ createGpu }: AddFormProps) {
-  // Disable the add button while the form action runs
+  // Display a UI notification to prevent the user from modifying any data
+  // while the form action is running
   const [showMessage, setShowMessage] = useState(false);
 
   return (
