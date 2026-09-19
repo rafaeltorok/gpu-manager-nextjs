@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 // Components
 import SelectField from "./selection/SelectField";
+import Notification from "../Notification";
 
 // TypeScript types
 import type { GpuType, MappedModel } from "@/types/gpu";
@@ -17,6 +18,9 @@ export default function Selection({ gpus }: SelectionProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+
+  // Handle displaying a notification message while the comparison is loading
+  const [isPending, startTransition] = useTransition();
 
   // Makes React control the value for the Combobox.Root element
   const [firstSelection, setFirstSelection] = useState(
@@ -47,7 +51,9 @@ export default function Selection({ gpus }: SelectionProps) {
     }
 
     // Add the slug values into the URL params
-    replace(`${pathname}?${params.toString()}`);
+    startTransition(() => {
+      replace(`${pathname}?${params.toString()}`);
+    });
   }
 
   // Generate an array containing only the slug value and full model name
@@ -97,6 +103,11 @@ export default function Selection({ gpus }: SelectionProps) {
       >
         Confirm
       </button>
+
+      <Notification
+        showMessage={isPending}
+        message="Loading comparison, please wait..."
+      />
     </form>
   );
 }
