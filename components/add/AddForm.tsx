@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 // Components
-import SendingDataMessage from "./SendingDataMessage";
+import Notification from "../Notification";
 
 // TypeScript types
 interface AddFormProps {
@@ -11,7 +11,8 @@ interface AddFormProps {
 }
 
 export default function AddForm({ createGpu }: AddFormProps) {
-  // Disable the add button while the form action runs
+  // Display a UI notification to prevent the user from modifying any data
+  // while the form action is running
   const [showMessage, setShowMessage] = useState(false);
 
   return (
@@ -51,7 +52,10 @@ export default function AddForm({ createGpu }: AddFormProps) {
         </button>
       </form>
 
-      <SendingDataMessage showMessage={showMessage} />
+      <Notification
+        showMessage={showMessage}
+        message="Sending data, please wait..."
+      />
     </div>
   );
 }

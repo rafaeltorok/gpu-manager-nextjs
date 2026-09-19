@@ -25,12 +25,12 @@ export default async function Page(props: {
   const allGpus = await getGpus();
   const mappedSlugs = mapSlugs(allGpus);
 
-  // Get each of the cards names from the URL
+  // Get the slug values from the URL
   const searchParams = await props.searchParams;
   const firstSlug = searchParams?.first;
   const secondSlug = searchParams?.second;
 
-  // Get the cards data
+  // Fetch the data for each of the selected graphics cards
   const firstGpuData = await getGpu(firstSlug || "");
   const secondGpuData = await getGpu(secondSlug || "");
 

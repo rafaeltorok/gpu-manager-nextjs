@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 // Components
 import SelectField from "./selection/SelectField";
+import Notification from "../Notification";
 
 // TypeScript types
 import type { GpuType, MappedModel } from "@/types/gpu";
@@ -18,7 +19,10 @@ export default function Selection({ gpus }: SelectionProps) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  // React controls the value for the Combobox.Root element
+  // Handle displaying a notification message while the comparison is loading
+  const [isPending, startTransition] = useTransition();
+
+  // Makes React control the value for the Combobox.Root element
   const [firstSelection, setFirstSelection] = useState(
     searchParams.get("first")?.toString() || "",
   );
@@ -26,11 +30,11 @@ export default function Selection({ gpus }: SelectionProps) {
     searchParams.get("second")?.toString() || "",
   );
 
-  // Update the URL with the selected graphics cards slugs
+  // Handle the cards selection after clicking on the "Confirm" button
   function handleSelection(formData: FormData) {
     const params = new URLSearchParams(searchParams);
 
-    // Get both graphics cards slugs from the form
+    // Extract the slug values from the form
     const first = formData.get("first") as string;
     const second = formData.get("second") as string;
 
@@ -46,11 +50,14 @@ export default function Selection({ gpus }: SelectionProps) {
       setSecondSelection(second);
     }
 
-    // Add both cards names on the URL
-    replace(`${pathname}?${params.toString()}`);
+    // Add the slug values into the URL params
+    startTransition(() => {
+      replace(`${pathname}?${params.toString()}`);
+    });
   }
 
-  // Map only the slugs and full model names for the select list presentation
+  // Generate an array containing only the slug value and full model name
+  // of each card, for the select list presentation only
   const mappedModelNames: MappedModel[] = gpus.map((g) => ({
     slug: g.slug || "",
     model: `${g.manufacturer} ${g.gpuline} ${g.model}` || "",
@@ -96,6 +103,11 @@ export default function Selection({ gpus }: SelectionProps) {
       >
         Confirm
       </button>
+
+      <Notification
+        showMessage={isPending}
+        message="Loading comparison, please wait..."
+      />
     </form>
   );
 }

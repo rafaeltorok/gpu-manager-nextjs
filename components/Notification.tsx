@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 
-interface SendingDataMessageProps {
+interface NotificationProps {
   showMessage: boolean;
+  message?: string;
 }
 
-export default function SendingDataMessage({
+export default function Notification({
   showMessage,
-}: SendingDataMessageProps) {
+  message,
+}: NotificationProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -20,6 +22,7 @@ export default function SendingDataMessage({
   return (
     <dialog
       ref={ref}
+      onCancel={(e) => e.preventDefault()} // stop Esc from closing it mid-load
       className="
         justify-center
         align-center
@@ -40,7 +43,7 @@ export default function SendingDataMessage({
           p-3
         "
       >
-        Sending data, please wait...
+        {message}
       </p>
     </dialog>
   );
