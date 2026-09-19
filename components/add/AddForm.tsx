@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 // Components
-import SendingDataMessage from "./SendingDataMessage";
+import Notification from "../Notification";
 
 // TypeScript types
 interface AddFormProps {
@@ -52,7 +52,10 @@ export default function AddForm({ createGpu }: AddFormProps) {
         </button>
       </form>
 
-      <SendingDataMessage showMessage={showMessage} />
+      <Notification
+        showMessage={showMessage}
+        message="Sending data, please wait..."
+      />
     </div>
   );
 }
