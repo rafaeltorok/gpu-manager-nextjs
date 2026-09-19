@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Utils
 import calculatePerformance from "@/utils/calculatePerformance";
@@ -22,117 +22,98 @@ interface ComparisonTableProps {
   secondGpuData: GpuType | undefined;
 }
 
+type Clocks = { baseclock: number; boostclock: number; memclock: number };
+type ClockOverride = { slug: string; boostclock: number; memclock: number };
+
 export default function ComparisonTable({
   firstGpuData,
   secondGpuData,
 }: ComparisonTableProps) {
   const [editMode, setEditMode] = useState(false);
 
-  // Allow the user to modify the clock speeds during edit mode
-  const [firstCardClockSpeeds, setFirstCardClockSpeeds] = useState({
-    baseclock: firstGpuData?.baseclock || 0,
-    boostclock: firstGpuData?.boostclock || 0,
-    memclock: firstGpuData?.memclock || 0,
-  });
-  const [secondCardClockSpeeds, setSecondCardClockSpeeds] = useState({
-    baseclock: secondGpuData?.baseclock || 0,
-    boostclock: secondGpuData?.boostclock || 0,
-    memclock: secondGpuData?.memclock || 0,
-  });
+  // Define the clock override during the "Edit" mode
+  const [firstOverride, setFirstOverride] = useState<ClockOverride | null>(
+    null,
+  );
+  const [secondOverride, setSecondOverride] = useState<ClockOverride | null>(
+    null,
+  );
 
-  // The effects keep both clock speeds at sync after selecting a different card
-  useEffect(() => {
-    setFirstCardClockSpeeds({
-      baseclock: firstGpuData?.baseclock || 0,
-      boostclock: firstGpuData?.boostclock || 0,
-      memclock: firstGpuData?.memclock || 0,
-    });
-  }, [firstGpuData]);
+  // Define the initial clocks speeds for both cards
+  const firstClocks = getClocks(firstGpuData, firstOverride);
+  const secondClocks = getClocks(secondGpuData, secondOverride);
 
-  useEffect(() => {
-    setSecondCardClockSpeeds({
-      baseclock: secondGpuData?.baseclock || 0,
-      boostclock: secondGpuData?.boostclock || 0,
-      memclock: secondGpuData?.memclock || 0,
-    });
-  }, [secondGpuData]);
-
-  // Store the original clock speed values
-  const firstOriginalClocks = {
-    baseclock: firstGpuData?.baseclock || 0,
-    boostclock: firstGpuData?.boostclock || 0,
-    memclock: firstGpuData?.memclock || 0,
-  };
-  const secondOriginalClocks = {
-    baseclock: secondGpuData?.baseclock || 0,
-    boostclock: secondGpuData?.boostclock || 0,
-    memclock: secondGpuData?.memclock || 0,
-  };
-
-  // Calculate the performance for both cards
+  // Calculate the performance for the graphics cards
   let firstGpuDisplayPerformance: string[] = ["N/A", "N/A", "N/A", "N/A"];
   let secondGpuDisplayPerformance: string[] = ["N/A", "N/A", "N/A", "N/A"];
   let firstGpuRawPerformance: number[] = [0, 0, 0, 0];
   let secondGpuRawPerformance: number[] = [0, 0, 0, 0];
 
+  // Define the color scheme for each card based on their manufacturer
   let firstGpuClass = "";
   let secondGpuClass = "";
 
+  // Apply the performance calculation only if the first card has been selected
   if (firstGpuData) {
     firstGpuDisplayPerformance = calculatePerformance({
       ...firstGpuData,
-      ...firstCardClockSpeeds,
+      ...firstClocks,
     });
     firstGpuRawPerformance = getRawPerformance({
       ...firstGpuData,
-      ...firstCardClockSpeeds,
+      ...firstClocks,
     });
     firstGpuClass = getManufacturerColor(
       `${firstGpuData.manufacturer} ${firstGpuData.gpuline} ${firstGpuData.model}`,
     );
   }
 
+  // Apply the performance calculation only if the second card has been selected
   if (secondGpuData) {
     secondGpuDisplayPerformance = calculatePerformance({
       ...secondGpuData,
-      ...secondCardClockSpeeds,
+      ...secondClocks,
     });
     secondGpuRawPerformance = getRawPerformance({
       ...secondGpuData,
-      ...secondCardClockSpeeds,
+      ...secondClocks,
     });
     secondGpuClass = getManufacturerColor(
       `${secondGpuData.manufacturer} ${secondGpuData.gpuline} ${secondGpuData.model}`,
     );
   }
 
+  // Handle the "Reset" button from the table controls
   function handleClocksReset() {
-    setFirstCardClockSpeeds({ ...firstOriginalClocks });
-    setSecondCardClockSpeeds({ ...secondOriginalClocks });
+    setFirstOverride(null);
+    setSecondOverride(null);
   }
 
+  // Handle the user clock override input on the "Edit" mode
   function handleClocksUpdate(formData: FormData) {
     const firstBoostClock = Number(formData.get("f-boostclock"));
     const firstMemClock = Number(formData.get("f-memclock"));
     const secondBoostClock = Number(formData.get("s-boostclock"));
     const secondMemClock = Number(formData.get("s-memclock"));
 
-    if (firstBoostClock > 0 && firstMemClock > 0) {
-      setFirstCardClockSpeeds((previous) => ({
-        ...previous,
+    // Allow only valid values (positive and non-zero)
+    if (firstGpuData && firstBoostClock > 0 && firstMemClock > 0) {
+      setFirstOverride({
+        slug: firstGpuData.slug || "",
         boostclock: firstBoostClock,
         memclock: firstMemClock,
-      }));
+      });
     }
 
-    if (secondBoostClock > 0 && secondMemClock > 0) {
-      setSecondCardClockSpeeds((previous) => ({
-        ...previous,
+    if (secondGpuData && secondBoostClock > 0 && secondMemClock > 0) {
+      setSecondOverride({
+        slug: secondGpuData.slug || "",
         boostclock: secondBoostClock,
         memclock: secondMemClock,
-      }));
+      });
     }
 
+    // After clicking on "Confirm", return the table to the standard display mode
     setEditMode(false);
   }
 
@@ -150,6 +131,7 @@ export default function ComparisonTable({
         border-4 border-gray-700 rounded-xl
       "
     >
+      {/* Wrapper to the main title containing both cards' model names */}
       <ComparisonTitle
         firstModelName={firstGpuData?.model || "N/A"}
         secondModelName={secondGpuData?.model || "N/A"}
@@ -167,8 +149,8 @@ export default function ComparisonTable({
 
       {/* Wrapper for the Clock Speeds section */}
       <ClockSpeeds
-        firstGpuClockSpeeds={firstCardClockSpeeds}
-        secondGpuClockSpeeds={secondCardClockSpeeds}
+        firstGpuClockSpeeds={firstClocks}
+        secondGpuClockSpeeds={secondClocks}
         firstGpuClass={firstGpuClass}
         secondGpuClass={secondGpuClass}
         editMode={editMode}
@@ -192,4 +174,28 @@ export default function ComparisonTable({
       />
     </form>
   );
+}
+
+// Handle the clocks speeds on the table "Edit" mode
+function getClocks(
+  gpu: GpuType | undefined,
+  override: ClockOverride | null,
+): Clocks {
+  const original = {
+    baseclock: gpu?.baseclock || 0,
+    boostclock: gpu?.boostclock || 0,
+    memclock: gpu?.memclock || 0,
+  };
+
+  // Apply the user clock override only if that edit was made for this exact card
+  if (gpu && override && override.slug === gpu.slug) {
+    return {
+      ...original,
+      boostclock: override.boostclock,
+      memclock: override.memclock,
+    };
+  }
+
+  // Otherwise, return the original clock speeds
+  return original;
 }
