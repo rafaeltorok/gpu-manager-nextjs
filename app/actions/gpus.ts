@@ -49,7 +49,9 @@ import { z } from "zod";
 
 const FormSchema = z.object({
   id: z.string(),
-  manufacturer: z.string().min(3, "Manufacturer name must be at least 3 chars long."),
+  manufacturer: z
+    .string()
+    .min(3, "Manufacturer name must be at least 3 chars long."),
   gpuline: z.string().default(""),
   model: z.string().min(3, "Model must be at least 3 chars long."),
   cores: z.coerce.number().gt(0, { message: "Cores must be greater than 0" }),
@@ -58,15 +60,24 @@ const FormSchema = z.object({
   vram: z.coerce.number().gt(0, { message: "VRAM must be greater than 0" }),
   bus: z.coerce.number().gt(0, { message: "Bus width must be greater than 0" }),
   memtype: z.string().min(3, "Memory type must be at least 3 chars long."),
-  baseclock: z.coerce.number().gt(0, { message: "Base clock must be greater than 0" }),
-  boostclock: z.coerce.number().gt(0, { message: "Boost clock must be greater than 0" }),
-  memclock: z.coerce.number().gt(0, { message: "Memory clock must be greater than 0" }),
+  baseclock: z.coerce
+    .number()
+    .gt(0, { message: "Base clock must be greater than 0" }),
+  boostclock: z.coerce
+    .number()
+    .gt(0, { message: "Boost clock must be greater than 0" }),
+  memclock: z.coerce
+    .number()
+    .gt(0, { message: "Memory clock must be greater than 0" }),
 });
 
 const CreateGpu = FormSchema.omit({ id: true });
 
 // Create and store a new graphics card into MongoDB
-export async function createGpu(prevState: State, formData: FormData): Promise<State> {
+export async function createGpu(
+  prevState: State,
+  formData: FormData,
+): Promise<State> {
   // Validate fields with Zod
   const validatedFields = CreateGpu.safeParse({
     manufacturer: formData.get("manufacturer"),
@@ -126,7 +137,7 @@ export async function createGpu(prevState: State, formData: FormData): Promise<S
 
   try {
     // Store the new graphics card into MongoDB
-    storedGpu = await addGpu({
+    storedGpu = (await addGpu({
       manufacturer,
       gpuline,
       model,
@@ -139,7 +150,7 @@ export async function createGpu(prevState: State, formData: FormData): Promise<S
       baseclock,
       boostclock,
       memclock,
-    }) as GpuType;
+    })) as GpuType;
   } catch (err: unknown) {
     if (err instanceof Error) {
       console.error(err);
