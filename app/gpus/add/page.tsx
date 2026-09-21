@@ -1,5 +1,3 @@
-import { createGpu } from "@/app/actions/gpus";
-
 // Components
 import AddForm from "@/components/add/AddForm";
 
@@ -18,7 +16,7 @@ export default async function Page() {
         Add new graphics card
       </h2>
 
-      <AddForm createGpu={createGpu} />
+      <AddForm />
     </div>
   );
 }
