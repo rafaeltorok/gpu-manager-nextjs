@@ -165,12 +165,12 @@ export async function createGpu(
     redirect(
       `/gpus/${generateSlug(`${storedGpu.manufacturer} ${storedGpu.gpuline} ${storedGpu.model}`)}`,
     );
+  } else {
+    // On an unsuccessful database storage, return a proper error message
+    return {
+      message: "Database Error: Failed to add graphics card.",
+    };
   }
-
-  // On an unsuccessful database storage, return a proper error message
-  return {
-    message: "Database Error: Failed to add graphics card.",
-  };
 }
 
 // Update an existing graphics card specs

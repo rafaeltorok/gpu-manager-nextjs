@@ -6,6 +6,7 @@ import { useActionState } from "react";
 import { createGpu } from "@/app/actions/gpus";
 
 // Components
+import FormRow from "./FormRow";
 import Notification from "../Notification";
 
 // TypeScript types
@@ -14,6 +15,8 @@ import type { State } from "@/app/actions/gpus";
 export default function AddForm() {
   // Handles the form validation messages
   const initialState: State = { message: null, errors: {} };
+
+  // Handle submitting the form data
   const [state, formAction, isPending] = useActionState(
     createGpu,
     initialState,
@@ -25,106 +28,113 @@ export default function AddForm() {
         action={formAction}
         className="w-full max-w-[400px] mx-auto border-1 border-gray-700 p-3 rounded bg-black/50"
       >
-        {renderRow(
-          "Manufacturer",
-          "text",
-          "manufacturer",
-          true,
-          state?.values?.manufacturer,
-          state?.errors?.manufacturer,
-          "manufacturer-error",
-        )}
-        {renderRow("Line", "text", "gpuline", false, state?.values?.gpuline)}
-        {renderRow(
-          "Model",
-          "text",
-          "model",
-          true,
-          state?.values?.model,
-          state?.errors?.model,
-          "model-error",
-        )}
-        {renderRow(
-          "Cores",
-          "number",
-          "cores",
-          true,
-          state?.values?.cores,
-          state?.errors?.cores,
-          "cores-error",
-        )}
-        {renderRow(
-          "TMUs",
-          "number",
-          "tmus",
-          true,
-          state?.values?.tmus,
-          state?.errors?.tmus,
-          "tmus-error",
-        )}
-        {renderRow(
-          "ROPs",
-          "number",
-          "rops",
-          true,
-          state?.values?.rops,
-          state?.errors?.rops,
-          "rops-error",
-        )}
-        {renderRow(
-          "VRAM (in GB)",
-          "number",
-          "vram",
-          true,
-          state?.values?.vram,
-          state?.errors?.vram,
-          "vram-error",
-        )}
-        {renderRow(
-          "Bus Width",
-          "number",
-          "bus",
-          true,
-          state?.values?.bus,
-          state?.errors?.bus,
-          "bus-error",
-        )}
-        {renderRow(
-          "Memory Type",
-          "text",
-          "memtype",
-          true,
-          state?.values?.memtype,
-          state?.errors?.memtype,
-          "memtype-error",
-        )}
-        {renderRow(
-          "Base Clock (in MHz)",
-          "number",
-          "baseclock",
-          true,
-          state?.values?.baseclock,
-          state?.errors?.baseclock,
-          "baseclock-error",
-        )}
-        {renderRow(
-          "Boost Clock (in MHz)",
-          "number",
-          "boostclock",
-          true,
-          state?.values?.boostclock,
-          state?.errors?.boostclock,
-          "boostclock-error",
-        )}
-        {renderRow(
-          "Memory Clock (in Gbps)",
-          "number",
-          "memclock",
-          true,
-          state?.values?.memclock,
-          state?.errors?.memclock,
-          "memclock-error",
-        )}
+        <FormRow
+          label={"Manufacturer"}
+          type={"text"}
+          name={"manufacturer"}
+          required={true}
+          defaultValue={state?.values?.manufacturer}
+          errors={state?.errors?.manufacturer}
+          errorName={"manufacturer-error"}
+        />
+        <FormRow
+          label={"Line"}
+          type={"text"}
+          name={"gpuline"}
+          required={false}
+          defaultValue={state?.values?.gpuline}
+        />
+        <FormRow
+          label={"Model"}
+          type={"text"}
+          name={"model"}
+          required={true}
+          defaultValue={state?.values?.model}
+          errors={state?.errors?.model}
+          errorName={"model-error"}
+        />
+        <FormRow
+          label={"Cores"}
+          type={"number"}
+          name={"cores"}
+          required={true}
+          defaultValue={state?.values?.cores}
+          errors={state?.errors?.cores}
+          errorName={"cores-error"}
+        />
+        <FormRow
+          label={"TMUs"}
+          type={"number"}
+          name={"tmus"}
+          required={true}
+          defaultValue={state?.values?.tmus}
+          errors={state?.errors?.tmus}
+          errorName={"tmus-error"}
+        />
+        <FormRow
+          label={"ROPs"}
+          type={"number"}
+          name={"rops"}
+          required={true}
+          defaultValue={state?.values?.rops}
+          errors={state?.errors?.rops}
+          errorName={"rops-error"}
+        />
+        <FormRow
+          label={"VRAM (in GB)"}
+          type={"number"}
+          name={"vram"}
+          required={true}
+          defaultValue={state?.values?.vram}
+          errors={state?.errors?.vram}
+          errorName={"vram-error"}
+          step={0.001}
+        />
+        <FormRow
+          label={"Bus Width"}
+          type={"number"}
+          name={"bus"}
+          required={true}
+          defaultValue={state?.values?.bus}
+          errors={state?.errors?.bus}
+          errorName={"bus-error"}
+        />
+        <FormRow
+          label={"Memory Type"}
+          type={"text"}
+          name={"memtype"}
+          required={true}
+          defaultValue={state?.values?.memtype}
+          errors={state?.errors?.memtype}
+          errorName={"memtype-error"}
+        />
+        <FormRow
+          label={"Base Clock (in MHz)"}
+          type={"number"}
+          name={"baseclock"}
+          required={true}
+          defaultValue={state?.values?.baseclock}
+          errors={state?.errors?.baseclock}
+          errorName={"baseclock-error"}
+        />
+        <FormRow
+          label={"Boost Clock (in MHz)"}
+          type={"number"}
+          name={"boostclock"}
+          required={true}
+          defaultValue={state?.values?.boostclock}
+          errors={state?.errors?.boostclock}
+          errorName={"boostclock-error"}
+        />
+        <FormRow
+          label={"Memory Clock (in Gbps)"}
+          type={"number"}
+          name={"memclock"}
+          required={true}
+          defaultValue={state?.values?.memclock}
+          errors={state?.errors?.memclock}
+          errorName={"memclock-error"}
+        />
 
         <button
           type="submit"
@@ -143,61 +153,11 @@ export default function AddForm() {
         </button>
       </form>
 
+      {/* Display an UI message while the form action runs */}
       <Notification
         showMessage={isPending}
         message="Sending data, please wait..."
       />
-    </div>
-  );
-}
-
-// Render each row of the form
-function renderRow(
-  label: string,
-  type: string,
-  name: string,
-  required: boolean,
-  defaultValue?: string,
-  errors?: string[] | undefined,
-  errorName?: string,
-) {
-  return (
-    <div className="mb-1">
-      <label
-        className="flex flex-col w-full space-y-1 font-bold"
-        htmlFor={name}
-      >
-        <span className="w-[90%] mx-auto mb-0">{label}</span>
-        {required ? (
-          <input
-            className={`w-[80%] mx-auto bg-black mb-1 p-0.5 border-1 border-gray-700 ${errors && "border-red-500"}`}
-            id={name}
-            type={type}
-            name={name}
-            required
-            aria-describedby={`${errorName}`}
-            defaultValue={defaultValue}
-          />
-        ) : (
-          <input
-            className="w-[80%] mx-auto bg-black mb-1 p-0.5 border-1 border-gray-700"
-            id={name}
-            type={type}
-            name={name}
-            defaultValue={defaultValue}
-          />
-        )}
-      </label>
-      {errors && (
-        <div id="customer-error" aria-live="polite" aria-atomic="true">
-          {errors &&
-            errors.map((error: string) => (
-              <p className="w-[80%] mx-auto text-sm text-red-500" key={error}>
-                {error}
-              </p>
-            ))}
-        </div>
-      )}
     </div>
   );
 }
