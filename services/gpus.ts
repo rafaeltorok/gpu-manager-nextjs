@@ -29,12 +29,16 @@ export async function getGpu(slug: string): Promise<GpuType | undefined> {
 }
 
 export async function addGpu(data: NewGpu): Promise<GpuType | null> {
+  await connectToDatabase();
+
   const newGpu = new Gpu(data);
   const storedGpu = await newGpu.save();
   return storedGpu;
 }
 
 export async function updateSpecs(gpu: GpuType): Promise<GpuType | null> {
+  await connectToDatabase();
+
   const updatedGpu = await Gpu.findByIdAndUpdate(gpu.id, gpu, {
     new: true,
     runValidators: true,
@@ -43,5 +47,7 @@ export async function updateSpecs(gpu: GpuType): Promise<GpuType | null> {
 }
 
 export async function removeGpu(id: string): Promise<void> {
+  await connectToDatabase();
+  
   await Gpu.findByIdAndDelete(id);
 }

@@ -23,6 +23,7 @@ export default function Title({
           text-2xl font-extrabold
           rounded-tl-xl
           text-center
+          break-words
           ${firstGpuClass}
         `}
       >
@@ -36,6 +37,7 @@ export default function Title({
           text-2xl font-extrabold
           rounded-tr-xl
           text-center
+          break-words
           ${secondGpuClass}
         `}
       >
