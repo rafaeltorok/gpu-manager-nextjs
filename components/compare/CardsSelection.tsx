@@ -56,6 +56,28 @@ export default function Selection({ gpus }: SelectionProps) {
     });
   }
 
+  // Handle swapping the comparison cards when clicking on the "Swap" button
+  function handleSwap() {
+    const params = new URLSearchParams(searchParams);
+
+    // Backs up the original values
+    const firstBackup = firstSelection;
+    const secondBackup = secondSelection;
+
+    // Swaps the current selection fields values
+    setFirstSelection(secondBackup);
+    setSecondSelection(firstBackup);
+
+    // Swap the params values for both cards
+    params.set("first", secondBackup);
+    params.set("second", firstBackup);
+
+    // Add the slug values into the URL params
+    startTransition(() => {
+      replace(`${pathname}?${params.toString()}`);
+    });
+  }
+
   // Generate an array containing only the slug value and full model name
   // of each card, for the select list presentation only
   const mappedModelNames: MappedModel[] = gpus.map((g) => ({
@@ -76,23 +98,48 @@ export default function Selection({ gpus }: SelectionProps) {
         bg-black/50
         border-2 border-gray-700 rounded
         p-5
+        relative
       "
     >
-      <SelectField
-        mappedModelNames={mappedModelNames}
-        order="first"
-        label="First card:"
-        selectOption={firstSelection}
-        setSelection={setFirstSelection}
-      />
-      <SelectField
-        mappedModelNames={mappedModelNames}
-        order="second"
-        label="Second card:"
-        selectOption={secondSelection}
-        setSelection={setSecondSelection}
-      />
+      {/* Swap button */}
+      <button
+        type="button"
+        className="
+          text-white
+          w-[100px]
+          border-2 border-gray-600 rounded
+          bg-black/50 hover:bg-gray-700 active:bg-gray-700
+          mx-auto
+          absolute
+          top-0 right-0
+        "
+        onClick={() => handleSwap()}
+      >
+        <span className="text-2xl">⇅</span> Swap
+      </button>
 
+      {/* Wrapper for the cards selection fields */}
+      <div className="my-2 flex flex-col gap-3">
+        {/* First card selection */}
+        <SelectField
+          mappedModelNames={mappedModelNames}
+          order="first"
+          label="First card:"
+          selectOption={firstSelection}
+          setSelection={setFirstSelection}
+        />
+
+        {/* Second card selection */}
+        <SelectField
+          mappedModelNames={mappedModelNames}
+          order="second"
+          label="Second card:"
+          selectOption={secondSelection}
+          setSelection={setSecondSelection}
+        />
+      </div>
+
+      {/* Confirm button */}
       <button
         type="submit"
         className="

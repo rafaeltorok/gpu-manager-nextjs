@@ -54,6 +54,8 @@ export default function Title({
           text-md font-extrabold
           rounded-tr-xl
           text-center
+          overflow-auto
+          scrollbar-none
         "
       >
         Difference (in %)
