@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 // Services
-import { getGpu } from "@/services/gpus";
+import { getGpu } from "@/lib/data";
 
 // Utils
 import getManufacturerColor from "@/utils/getManufacturerColor";

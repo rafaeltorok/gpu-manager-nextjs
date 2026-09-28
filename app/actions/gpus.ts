@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 // Services
-import { addGpu, updateSpecs, removeGpu } from "@/services/gpus";
+import { addGpu, updateSpecs, removeGpu } from "@/lib/data";
 
 // Utils
 import { generateSlug } from "@/utils/slug";
