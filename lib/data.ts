@@ -15,7 +15,6 @@ export async function getGpus() {
   const response = await Gpu.find();
   const gpus = response.map((gpu) => gpu.toJSON());
 
-  await new Promise(r => setTimeout(r, 5000))
   return mapSlugs(gpus);
 }
 
@@ -26,7 +25,6 @@ export async function getGpu(slug: string): Promise<GpuType | undefined> {
   const response = await Gpu.find();
   const gpus = mapSlugs(response.map((gpu) => gpu.toJSON()));
 
-  await new Promise(r => setTimeout(r, 5000))
   return gpus.find((gpu) => gpu.slug === slug);
 }
 
