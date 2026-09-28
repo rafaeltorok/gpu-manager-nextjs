@@ -1,7 +1,5 @@
 # GPU Manager
 
-Simple GPU List style app to train Next.js.
-
 ## Table of Contents
 - [About](#about)
 - [Setup](#setup)
@@ -11,6 +9,16 @@ Simple GPU List style app to train Next.js.
 
 
 ## About
+
+GPU Manager is the home for your favorite graphics card's specifications. Built with Next.js, Mongoose and Tailwind CSS.
+
+**Features:**
+
+- Add and remove any card you want.
+- Edit their specs directly inside of their data tables.
+- Override their Boost and Memory Clock speeds to check the theoretical performance improvements.
+- Compare any two cards' specs and performance.
+
 
 ### Screenshots
 
