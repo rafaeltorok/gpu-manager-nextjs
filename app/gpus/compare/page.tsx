@@ -1,5 +1,5 @@
 // Services
-import { getGpu, getGpus } from "@/services/gpus";
+import { getGpu, getGpus } from "@/lib/data";
 
 // Utils
 import { mapSlugs } from "@/utils/slug";

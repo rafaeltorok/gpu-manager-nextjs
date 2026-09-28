@@ -48,6 +48,6 @@ export async function updateSpecs(gpu: GpuType): Promise<GpuType | null> {
 
 export async function removeGpu(id: string): Promise<void> {
   await connectToDatabase();
-  
+
   await Gpu.findByIdAndDelete(id);
 }
