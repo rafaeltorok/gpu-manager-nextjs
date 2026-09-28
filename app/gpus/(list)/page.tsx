@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // Services
-import { getGpus } from "@/services/gpus";
+import { getGpus } from "@/lib/data";
 
 // Utils
 import getManufacturerColor from "@/utils/getManufacturerColor";
