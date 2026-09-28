@@ -21,8 +21,8 @@ export default function GpuTableLoading() {
           "
         >
           Loading graphics card data...
-        </div>          
-  
+        </div>
+
         {/* Wrapper for the data section of the table */}
         <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
           {/* Wrapper for the Specifications section */}
@@ -34,7 +34,7 @@ export default function GpuTableLoading() {
             {renderStandardRow()}
             {renderStandardRow()}
           </div>
-  
+
           {/* Wrapper for the Clock speeds section */}
           <div className="sm:flex sm:flex-col">
             <div className="bg-gray-600/50 dark:bg-gray-900/75 text-center py-5 w-full" />
@@ -42,7 +42,7 @@ export default function GpuTableLoading() {
             {renderStandardRow()}
             {renderStandardRow()}
           </div>
-  
+
           {/* Wrapper for the Performance section */}
           <div className="sm:flex sm:flex-col">
             <div className="bg-gray-600/50 dark:bg-gray-900/75 text-center py-5 w-full" />
@@ -52,7 +52,7 @@ export default function GpuTableLoading() {
             {renderStandardRow()}
           </div>
         </div>
-  
+
         {/* Wrapper for the table controls */}
         <div
           className="
@@ -80,14 +80,14 @@ function renderStandardRow() {
           bg-gray-600/50 dark:bg-gray-800/75
           border-1 border-gray-700/50
           px-2 py-4 w-2/5"
-        />
+      />
       <div
         className="
           bg-gray-700/50 dark:bg-gray-900/75
           border-1 border-gray-700/50
           px-2 py-1 w-3/5
         "
-      />  
+      />
     </div>
   );
 }
