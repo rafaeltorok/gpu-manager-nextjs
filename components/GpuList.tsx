@@ -25,7 +25,7 @@ export default function GpuList({
   paginatedGpus,
   currentPage,
   totalPages,
-  searchQuery
+  searchQuery,
 }: GpuListProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -37,18 +37,14 @@ export default function GpuList({
 
     function onKeyDown(event: KeyboardEvent) {
       // Left arrow key
-      if (
-        event.key === "ArrowLeft" && currentPage > 1
-      ) {
+      if (event.key === "ArrowLeft" && currentPage > 1) {
         params.set("page", (currentPage - 1).toString());
         if (searchQuery) params.set("query", searchQuery);
         router.push(`${pathname}?${params.toString()}`);
       }
 
       // Right arrow key
-      if (
-        event.key === "ArrowRight" && currentPage < totalPages
-      ) {
+      if (event.key === "ArrowRight" && currentPage < totalPages) {
         params.set("page", (currentPage + 1).toString());
         if (searchQuery) params.set("query", searchQuery);
         router.push(`${pathname}?${params.toString()}`);
@@ -65,18 +61,14 @@ export default function GpuList({
       const params = new URLSearchParams(searchParams);
 
       // Previous page
-      if (
-        eventData.dir === "Right" && currentPage > 1
-      ) {
+      if (eventData.dir === "Right" && currentPage > 1) {
         params.set("page", (currentPage - 1).toString());
         if (searchQuery) params.set("query", searchQuery);
         router.push(`${pathname}?${params.toString()}`);
       }
 
       // Next page
-      if (
-        eventData.dir === "Left" && currentPage < totalPages
-      ) {
+      if (eventData.dir === "Left" && currentPage < totalPages) {
         params.set("page", (currentPage + 1).toString());
         if (searchQuery) params.set("query", searchQuery);
         router.push(`${pathname}?${params.toString()}`);
@@ -85,9 +77,7 @@ export default function GpuList({
   });
 
   return (
-    <div
-      {...swipeHandler}
-    >
+    <div {...swipeHandler}>
       {paginatedGpus.map((gpu) => (
         <div
           key={gpu.id}

@@ -32,7 +32,12 @@ interface ComponentProps {
 }
 
 // Client component
-export default function GpuTable({ gpu, gpuClass, previous, next }: ComponentProps) {
+export default function GpuTable({
+  gpu,
+  gpuClass,
+  previous,
+  next,
+}: ComponentProps) {
   // Define the table modes
   const [editMode, setEditMode] = useState(false);
   const [overrideMode, setOverrideMode] = useState(false);
@@ -58,16 +63,12 @@ export default function GpuTable({ gpu, gpuClass, previous, next }: ComponentPro
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       // Left arrow key
-      if (
-        event.key === "ArrowLeft" && previous && !openModal
-      ) {
+      if (event.key === "ArrowLeft" && previous && !openModal) {
         router.push(`/gpus/${previous.slug}`);
       }
 
       // Right arrow key
-      if (
-        event.key === "ArrowRight" && next && !openModal
-      ) {
+      if (event.key === "ArrowRight" && next && !openModal) {
         router.push(`/gpus/${next.slug}`);
       }
     }
@@ -80,16 +81,12 @@ export default function GpuTable({ gpu, gpuClass, previous, next }: ComponentPro
   const swipeHandler = useSwipeable({
     onSwiped: (eventData: SwipeEventData) => {
       // Previous page
-      if (
-        eventData.dir === "Right" && previous && !openModal
-      ) {
+      if (eventData.dir === "Right" && previous && !openModal) {
         router.push(`/gpus/${previous.slug}`);
       }
 
       // Next page
-      if (
-        eventData.dir === "Left" && next  && !openModal
-      ) {
+      if (eventData.dir === "Left" && next && !openModal) {
         router.push(`/gpus/${next.slug}`);
       }
     },
