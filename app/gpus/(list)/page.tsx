@@ -77,7 +77,12 @@ export default async function Page(props: {
         </h3>
       ) : (
         <>
-          <GpuList paginatedGpus={paginatedGpus} />
+          <GpuList
+            paginatedGpus={paginatedGpus}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            searchQuery={query}
+          />
 
           <div className="mt-5 flex w-full justify-center">
             <Pagination totalPages={totalPages} />
