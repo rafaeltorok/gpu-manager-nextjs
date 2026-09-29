@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 // Services
 import { getGpu, getGpus } from "@/lib/data";
@@ -74,6 +75,22 @@ export default async function Page({
           next={next}
         />
       </form>
+
+      <Link
+        href={"/gpus"}
+        className="
+          w-[300px]
+          block
+          mx-auto text-center
+          py-2 mb-5 mt-2
+          bg-black/50
+          border-1 border-gray-700
+          hover:bg-gray-900 active:bg-gray-900
+          rounded-md
+        "
+      >
+        Return
+      </Link>
     </div>
   );
 }
