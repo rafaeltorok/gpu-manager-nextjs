@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 
 // Services
-import { getGpu } from "@/lib/data";
+import { getGpu, getGpus } from "@/lib/data";
 
 // Utils
 import getManufacturerColor from "@/utils/getManufacturerColor";
+import { mapSlugs } from "@/utils/slug";
 
 // Components
 import GpuTable from "@/components/gpu/GpuTable";
@@ -45,6 +46,17 @@ export default async function Page({
   // Handle invalid urls
   if (!gpu) notFound();
 
+  // Fetch all available graphics cards for the arrows navigation
+  const gpus = await getGpus();
+  const mappedSlugs = mapSlugs(gpus);
+
+  // Get the index position for the current graphics card
+  const currentIndex = mappedSlugs.findIndex((g) => g.id === gpu.id);
+
+  // Determine the previous and next cards, if available
+  const previous = mappedSlugs[currentIndex - 1] || null;
+  const next = mappedSlugs[currentIndex + 1] || null;
+
   // Add the manufacturer color scheme to the data table
   const gpuClass = getManufacturerColor(
     `${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`,
@@ -55,7 +67,12 @@ export default async function Page({
       <form>
         <input type="hidden" name="id" value={gpu.id} />
 
-        <GpuTable gpu={gpu} gpuClass={gpuClass} />
+        <GpuTable
+          gpu={gpu}
+          gpuClass={gpuClass}
+          previous={previous}
+          next={next}
+        />
       </form>
     </div>
   );
