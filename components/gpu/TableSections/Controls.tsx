@@ -35,81 +35,51 @@ export default function Controls({
     >
       {/* Override mode - Allows temporarily modifying the clock speeds */}
       {!editMode && (
-        <>
-          {overrideMode ? (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => {
-                setOverrideMode(false);
-              }}
-            >
-              Confirm
-            </button>
-          ) : (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => setOverrideMode(true)}
-            >
-              Override Clocks
-            </button>
-          )}
-        </>
+        <button
+          className="
+            w-full
+            px-1 py-1
+            bg-black/50
+            border-1 border-gray-700
+            hover:bg-gray-800 active:bg-gray-800
+            rounded-xl
+          "
+          type="submit"
+          formAction={() => {
+            if (overrideMode) {
+              setOverrideMode(false);
+            } else {
+              setOverrideMode(true);
+            }
+          }}
+        >
+          {overrideMode ? "Confirm" : "Override Clocks"}
+        </button>
       )}
 
       {/* Edit mode - Alter the database data for an existing graphics card */}
       {!overrideMode && (
-        <>
-          {editMode ? (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={async (formData) => {
-                setEditMode(false);
-                await editGpu(formData);
-              }}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => setEditMode(true)}
-            >
-              Edit
-            </button>
-          )}
-        </>
+        <button
+          className="
+            w-full
+            px-1 py-1
+            bg-black/50
+            border-1 border-gray-700
+            hover:bg-gray-800 active:bg-gray-800
+            rounded-xl
+          "
+          type="submit"
+          formAction={async (formData) => {
+            if (editMode) {
+              setEditMode(false);
+              await editGpu(formData);
+            } else {
+              setEditMode(true);
+            }
+          }}
+        >
+          {editMode ? "Save" : "Edit"}
+        </button>
       )}
 
       {/* Using any table modes, display the "Cancel" button instead of "Remove" */}
@@ -130,7 +100,7 @@ export default function Controls({
             setGpuData(gpu);
           }}
         >
-          Cancel
+          {overrideMode ? "Reset" : "Cancel"}
         </button>
       ) : (
         <button
