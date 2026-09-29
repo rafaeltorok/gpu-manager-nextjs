@@ -53,7 +53,7 @@ export default function Controls({
             }
           }}
         >
-          {overrideMode ? "Confirm" : "Override Clocks"}
+          {overrideMode ? "Confirm" : "Override Clock"}
         </button>
       )}
 
