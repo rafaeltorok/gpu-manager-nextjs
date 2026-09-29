@@ -4,8 +4,8 @@ import type { GpuType } from "../types/gpu";
 export function generateSlug(fullModelName: string): string {
   return fullModelName
     .toLowerCase()
-    .replace(/\s+/g, "-")  // Convert all whitespaces to a dash
-    .replace(/[^a-z0-9-]/, "");  // Remove any non-numerical or non-alphabetical symbols
+    .replace(/\s+/g, "-") // Convert all whitespaces to a dash
+    .replace(/[^a-z0-9-]/, ""); // Remove any non-numerical or non-alphabetical symbols
 }
 
 // Add a slug field to each GPU type object

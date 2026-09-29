@@ -32,25 +32,28 @@ export default function GpuList({
   const router = useRouter();
 
   // Navigates to either the previous or next page within the GPUs list
-  const handlePageNavigation = useCallback(( direction: "prev" | "next" ) => {
-    const params = new URLSearchParams(searchParams);
-    let goToPage = 1;
+  const handlePageNavigation = useCallback(
+    (direction: "prev" | "next") => {
+      const params = new URLSearchParams(searchParams);
+      let goToPage = 1;
 
-    if (direction === "prev") {
-      goToPage = currentPage - 1;
-    } else if (direction === "next") {
-      goToPage = currentPage + 1;
-    }
+      if (direction === "prev") {
+        goToPage = currentPage - 1;
+      } else if (direction === "next") {
+        goToPage = currentPage + 1;
+      }
 
-    // Set the page number into the URL
-    params.set("page", (goToPage).toString());
+      // Set the page number into the URL
+      params.set("page", goToPage.toString());
 
-    // If a search term is available, insert it into the URL
-    if (searchQuery) params.set("query", searchQuery);
+      // If a search term is available, insert it into the URL
+      if (searchQuery) params.set("query", searchQuery);
 
-    // Navigate to the new route
-    router.push(`${pathname}?${params.toString()}`);
-  }, [currentPage, pathname, searchParams, router, searchQuery]);
+      // Navigate to the new route
+      router.push(`${pathname}?${params.toString()}`);
+    },
+    [currentPage, pathname, searchParams, router, searchQuery],
+  );
 
   // Handles keyboard navigation
   useEffect(() => {
@@ -83,7 +86,7 @@ export default function GpuList({
         handlePageNavigation("next");
       }
     },
-    delta: 100,  // Define the min amount of pixels before a swipe is registered
+    delta: 100, // Define the min amount of pixels before a swipe is registered
   });
 
   return (
