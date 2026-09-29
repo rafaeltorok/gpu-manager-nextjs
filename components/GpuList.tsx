@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 // React
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSwipeable } from "react-swipeable";
 
 // Utils
@@ -31,49 +31,59 @@ export default function GpuList({
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  // Navigates to either the previous or next page within the GPUs list
+  const handlePageNavigation = useCallback(( direction: "prev" | "next" ) => {
+    const params = new URLSearchParams(searchParams);
+    let goToPage = 1;
+
+    if (direction === "prev") {
+      goToPage = currentPage - 1;
+    } else if (direction === "next") {
+      goToPage = currentPage + 1;
+    }
+
+    // Set the page number into the URL
+    params.set("page", (goToPage).toString());
+
+    // If a search term is available, insert it into the URL
+    if (searchQuery) params.set("query", searchQuery);
+
+    // Navigate to the new route
+    router.push(`${pathname}?${params.toString()}`);
+  }, [currentPage, pathname, searchParams, router, searchQuery]);
+
   // Handles keyboard navigation
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-
     function onKeyDown(event: KeyboardEvent) {
       // Left arrow key
       if (event.key === "ArrowLeft" && currentPage > 1) {
-        params.set("page", (currentPage - 1).toString());
-        if (searchQuery) params.set("query", searchQuery);
-        router.push(`${pathname}?${params.toString()}`);
+        handlePageNavigation("prev");
       }
 
       // Right arrow key
       if (event.key === "ArrowRight" && currentPage < totalPages) {
-        params.set("page", (currentPage + 1).toString());
-        if (searchQuery) params.set("query", searchQuery);
-        router.push(`${pathname}?${params.toString()}`);
+        handlePageNavigation("next");
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [currentPage, totalPages, searchQuery, router, pathname, searchParams]);
+  }, [currentPage, totalPages, handlePageNavigation]);
 
   // Handles the Touch screen swipe to change the page
   const swipeHandler = useSwipeable({
     onSwiped: (eventData: SwipeEventData) => {
-      const params = new URLSearchParams(searchParams);
-
       // Previous page
       if (eventData.dir === "Right" && currentPage > 1) {
-        params.set("page", (currentPage - 1).toString());
-        if (searchQuery) params.set("query", searchQuery);
-        router.push(`${pathname}?${params.toString()}`);
+        handlePageNavigation("prev");
       }
 
       // Next page
       if (eventData.dir === "Left" && currentPage < totalPages) {
-        params.set("page", (currentPage + 1).toString());
-        if (searchQuery) params.set("query", searchQuery);
-        router.push(`${pathname}?${params.toString()}`);
+        handlePageNavigation("next");
       }
     },
+    delta: 100,  // Define the min amount of pixels before a swipe is registered
   });
 
   return (
