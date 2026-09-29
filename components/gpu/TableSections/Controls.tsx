@@ -9,8 +9,8 @@ interface ControlsProps {
   setGpuData: (data: GpuType) => void;
   editMode: boolean;
   setEditMode: (mode: boolean) => void;
-  calculateMode: boolean;
-  setCalculateMode: (mode: boolean) => void;
+  overrideMode: boolean;
+  setOverrideMode: (mode: boolean) => void;
   setOpenModal: (open: boolean) => void;
 }
 
@@ -19,8 +19,8 @@ export default function Controls({
   setGpuData,
   editMode,
   setEditMode,
-  calculateMode,
-  setCalculateMode,
+  overrideMode,
+  setOverrideMode,
   setOpenModal,
 }: ControlsProps) {
   return (
@@ -33,87 +33,57 @@ export default function Controls({
       font-bold
       gap-1"
     >
-      {/* Calculate mode */}
+      {/* Override mode - Allows temporarily modifying the clock speeds */}
       {!editMode && (
-        <>
-          {calculateMode ? (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => {
-                setCalculateMode(false);
-              }}
-            >
-              Confirm
-            </button>
-          ) : (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => setCalculateMode(true)}
-            >
-              Calculate performance
-            </button>
-          )}
-        </>
+        <button
+          className="
+            w-full
+            px-1 py-1
+            bg-black/50
+            border-1 border-gray-700
+            hover:bg-gray-800 active:bg-gray-800
+            rounded-xl
+          "
+          type="submit"
+          formAction={() => {
+            if (overrideMode) {
+              setOverrideMode(false);
+            } else {
+              setOverrideMode(true);
+            }
+          }}
+        >
+          {overrideMode ? "Confirm" : "Override Clock"}
+        </button>
       )}
 
-      {/* Edit mode */}
-      {!calculateMode && (
-        <>
-          {editMode ? (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={async (formData) => {
-                setEditMode(false);
-                await editGpu(formData);
-              }}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              className="
-                w-full
-                px-1 py-1
-                bg-black/50
-                border-1 border-gray-700
-                hover:bg-gray-800 active:bg-gray-800
-                rounded-xl
-              "
-              type="submit"
-              formAction={() => setEditMode(true)}
-            >
-              Edit
-            </button>
-          )}
-        </>
+      {/* Edit mode - Alter the database data for an existing graphics card */}
+      {!overrideMode && (
+        <button
+          className="
+            w-full
+            px-1 py-1
+            bg-black/50
+            border-1 border-gray-700
+            hover:bg-gray-800 active:bg-gray-800
+            rounded-xl
+          "
+          type="submit"
+          formAction={async (formData) => {
+            if (editMode) {
+              setEditMode(false);
+              await editGpu(formData);
+            } else {
+              setEditMode(true);
+            }
+          }}
+        >
+          {editMode ? "Save" : "Edit"}
+        </button>
       )}
 
-      {/* When using any table modes, show the "Cancel" button instead of the "Remove" one */}
-      {editMode || calculateMode ? (
+      {/* Using any table modes, display the "Cancel" button instead of "Remove" */}
+      {editMode || overrideMode ? (
         <button
           className="
             w-full
@@ -126,11 +96,11 @@ export default function Controls({
           type="submit"
           formAction={() => {
             setEditMode(false);
-            setCalculateMode(false);
+            setOverrideMode(false);
             setGpuData(gpu);
           }}
         >
-          Cancel
+          {overrideMode ? "Reset" : "Cancel"}
         </button>
       ) : (
         <button

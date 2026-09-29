@@ -1,13 +1,9 @@
-import Link from "next/link";
-
 // Services
 import { getGpus } from "@/lib/data";
 
-// Utils
-import getManufacturerColor from "@/utils/getManufacturerColor";
-
 // Components
 import SearchBar from "@/components/SearchBar";
+import GpuList from "@/components/GpuList";
 import Pagination from "@/components/Pagination";
 
 // TypeScript types
@@ -81,27 +77,12 @@ export default async function Page(props: {
         </h3>
       ) : (
         <>
-          {paginatedGpus.map((gpu) => (
-            <div key={gpu.id}>
-              <Link href={`/gpus/${gpu.slug}`}>
-                <button
-                  className={`
-                    mx-auto my-1
-                    font-bold
-                    py-3 px-2
-                    min-w-[300px] w-[350px] max-w-[80%]
-                    border-1 border-gray-700 rounded
-                    bg-black hover:bg-gray-800
-                    text-xl
-                    hover:underline
-                    ${getManufacturerColor(`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`)}
-                  `}
-                >
-                  {gpu.manufacturer} {gpu.gpuline} {gpu.model}
-                </button>
-              </Link>
-            </div>
-          ))}
+          <GpuList
+            paginatedGpus={paginatedGpus}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            searchQuery={query}
+          />
 
           <div className="mt-5 flex w-full justify-center">
             <Pagination totalPages={totalPages} />

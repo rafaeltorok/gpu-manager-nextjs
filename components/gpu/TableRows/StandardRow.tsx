@@ -8,7 +8,7 @@ interface ComponentProps {
   data: string | number;
   gpuClass: string;
   editMode: boolean;
-  calculateMode?: boolean;
+  overrideMode?: boolean;
   originalData: GpuType;
   name: keyof GpuType;
   setData: (gpuData: GpuType) => void;
@@ -20,7 +20,7 @@ export default function StandardRow({
   data,
   gpuClass,
   editMode,
-  calculateMode,
+  overrideMode,
   originalData,
   name,
   setData,
@@ -28,7 +28,7 @@ export default function StandardRow({
   return (
     <>
       {/* Render an input field to allow the user to edit the row data */}
-      {editMode || calculateMode ? (
+      {editMode || overrideMode ? (
         <div className="flex w-full sm:flex-1">
           <div className="text-left font-normal bg-[#252525]/50 border-1 border-gray-600 px-2 py-1 w-2/5">
             <label htmlFor={name}>{header}</label>
