@@ -83,6 +83,7 @@ export default function GpuList({
         handlePageNavigation("next");
       }
     },
+    delta: 100,  // Define the min amount of pixels before a swipe is registered
   });
 
   return (

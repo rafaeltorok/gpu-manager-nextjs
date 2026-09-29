@@ -90,6 +90,7 @@ export default function GpuTable({
         router.push(`/gpus/${next.slug}`);
       }
     },
+    delta: 100,  // Define the min amount of pixels before a swipe is registered
   });
 
   // Handle removing a graphics card from the list
