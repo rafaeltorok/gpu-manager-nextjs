@@ -9,8 +9,8 @@ interface ControlsProps {
   setGpuData: (data: GpuType) => void;
   editMode: boolean;
   setEditMode: (mode: boolean) => void;
-  calculateMode: boolean;
-  setCalculateMode: (mode: boolean) => void;
+  overrideMode: boolean;
+  setOverrideMode: (mode: boolean) => void;
   setOpenModal: (open: boolean) => void;
 }
 
@@ -19,8 +19,8 @@ export default function Controls({
   setGpuData,
   editMode,
   setEditMode,
-  calculateMode,
-  setCalculateMode,
+  overrideMode,
+  setOverrideMode,
   setOpenModal,
 }: ControlsProps) {
   return (
@@ -33,10 +33,10 @@ export default function Controls({
       font-bold
       gap-1"
     >
-      {/* Calculate mode */}
+      {/* Override mode - Allows temporarily modifying the clock speeds */}
       {!editMode && (
         <>
-          {calculateMode ? (
+          {overrideMode ? (
             <button
               className="
                 w-full
@@ -48,7 +48,7 @@ export default function Controls({
               "
               type="submit"
               formAction={() => {
-                setCalculateMode(false);
+                setOverrideMode(false);
               }}
             >
               Confirm
@@ -64,16 +64,16 @@ export default function Controls({
                 rounded-xl
               "
               type="submit"
-              formAction={() => setCalculateMode(true)}
+              formAction={() => setOverrideMode(true)}
             >
-              Calculate performance
+              Override Clocks
             </button>
           )}
         </>
       )}
 
-      {/* Edit mode */}
-      {!calculateMode && (
+      {/* Edit mode - Alter the database data for an existing graphics card */}
+      {!overrideMode && (
         <>
           {editMode ? (
             <button
@@ -112,8 +112,8 @@ export default function Controls({
         </>
       )}
 
-      {/* When using any table modes, show the "Cancel" button instead of the "Remove" one */}
-      {editMode || calculateMode ? (
+      {/* Using any table modes, display the "Cancel" button instead of "Remove" */}
+      {editMode || overrideMode ? (
         <button
           className="
             w-full
@@ -126,7 +126,7 @@ export default function Controls({
           type="submit"
           formAction={() => {
             setEditMode(false);
-            setCalculateMode(false);
+            setOverrideMode(false);
             setGpuData(gpu);
           }}
         >

@@ -31,7 +31,7 @@ interface ComponentProps {
 export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
   // Define the table modes
   const [editMode, setEditMode] = useState(false);
-  const [calculateMode, setCalculateMode] = useState(false);
+  const [overrideMode, setOverrideMode] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   const router = useRouter();
@@ -94,7 +94,7 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
           gpuData={gpuData}
           setGpuData={setGpuData}
           editMode={editMode}
-          calculateMode={calculateMode}
+          overrideMode={overrideMode}
           gpuClass={gpuClass}
         />
 
@@ -108,8 +108,8 @@ export default function GpuTable({ gpu, gpuClass }: ComponentProps) {
         setGpuData={setGpuData}
         editMode={editMode}
         setEditMode={setEditMode}
-        calculateMode={calculateMode}
-        setCalculateMode={setCalculateMode}
+        overrideMode={overrideMode}
+        setOverrideMode={setOverrideMode}
         setOpenModal={setOpenModal}
       />
 

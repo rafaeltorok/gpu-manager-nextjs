@@ -9,7 +9,7 @@ interface ClockSpeedsProps {
   gpuData: GpuType;
   setGpuData: (data: GpuType) => void;
   editMode: boolean;
-  calculateMode: boolean;
+  overrideMode: boolean;
   gpuClass: string;
 }
 
@@ -17,7 +17,7 @@ export default function ClockSpeeds({
   gpuData,
   setGpuData,
   editMode,
-  calculateMode,
+  overrideMode,
   gpuClass,
 }: ClockSpeedsProps) {
   return (
@@ -37,7 +37,7 @@ export default function ClockSpeeds({
         data={`${gpuData.boostclock} MHz`}
         gpuClass={gpuClass}
         editMode={editMode}
-        calculateMode={calculateMode}
+        overrideMode={overrideMode}
         originalData={gpuData}
         setData={setGpuData}
         name="boostclock"
@@ -47,7 +47,7 @@ export default function ClockSpeeds({
         data={`${gpuData.memclock} Gbps effective`}
         gpuClass={gpuClass}
         editMode={editMode}
-        calculateMode={calculateMode}
+        overrideMode={overrideMode}
         originalData={gpuData}
         setData={setGpuData}
         name="memclock"
