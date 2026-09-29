@@ -89,23 +89,22 @@ export default function GpuList({
       {...swipeHandler}
     >
       {paginatedGpus.map((gpu) => (
-        <div key={gpu.id}>
+        <div
+          key={gpu.id}
+          className={`
+            mx-auto my-1
+            font-bold
+            py-3 px-2
+            min-w-[300px] w-[350px] max-w-[80%]
+            border-1 border-gray-700 rounded
+            bg-black hover:bg-gray-800
+            text-xl
+            hover:underline
+            ${getManufacturerColor(`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`)}
+          `}
+        >
           <Link href={`/gpus/${gpu.slug}`}>
-            <button
-              className={`
-                mx-auto my-1
-                font-bold
-                py-3 px-2
-                min-w-[300px] w-[350px] max-w-[80%]
-                border-1 border-gray-700 rounded
-                bg-black hover:bg-gray-800
-                text-xl
-                hover:underline
-                ${getManufacturerColor(`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`)}
-              `}
-            >
-              {gpu.manufacturer} {gpu.gpuline} {gpu.model}
-            </button>
+            {gpu.manufacturer} {gpu.gpuline} {gpu.model}
           </Link>
         </div>
       ))}
