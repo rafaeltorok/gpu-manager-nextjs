@@ -36,14 +36,10 @@ export default function ComparisonLoading() {
           {/* Wrapper for the cards selection fields */}
           <div className="mb-2 mt-9 flex flex-col gap-9">
             {/* First card selection */}
-            <div
-              className="flex w-full border-2 border-gray-700/75 rounded py-5"
-            />
+            <div className="flex w-full border-2 border-gray-700/75 rounded py-5" />
 
             {/* Second card selection */}
-            <div
-              className="flex w-full border-2 border-gray-700/75 rounded py-5"
-            />
+            <div className="flex w-full border-2 border-gray-700/75 rounded py-5" />
           </div>
 
           {/* Confirm button */}
