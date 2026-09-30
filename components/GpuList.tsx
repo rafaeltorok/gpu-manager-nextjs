@@ -90,12 +90,13 @@ export default function GpuList({
   });
 
   return (
-    <div {...swipeHandler}>
+    <div className="flex flex-col gap-1" {...swipeHandler}>
       {paginatedGpus.map((gpu) => (
-        <div
+        <Link
           key={gpu.id}
+          href={`/gpus/${gpu.slug}`}
           className={`
-            mx-auto my-1
+            mx-auto
             font-bold
             py-3 px-2
             min-w-[300px] w-[350px] max-w-[80%]
@@ -106,10 +107,8 @@ export default function GpuList({
             ${getManufacturerColor(`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`)}
           `}
         >
-          <Link href={`/gpus/${gpu.slug}`}>
-            {gpu.manufacturer} {gpu.gpuline} {gpu.model}
-          </Link>
-        </div>
+          {gpu.manufacturer} {gpu.gpuline} {gpu.model}
+        </Link>
       ))}
     </div>
   );
