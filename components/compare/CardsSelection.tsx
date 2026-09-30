@@ -86,75 +86,77 @@ export default function Selection({ gpus }: SelectionProps) {
   }));
 
   return (
-    <form
-      action={handleSelection}
+    <div
       className="
-        flex flex-col
-        mx-auto mb-10
-        align-left
         max-w-[400px]
         min-w-[300px]
-        gap-5
-        bg-black/50
-        border-2 border-gray-700 rounded
-        p-5
-        relative
+        mx-auto
+        mt-5
+        mb-10
       "
     >
-      {/* Swap button */}
-      <button
-        type="button"
+      <form
+        action={handleSelection}
         className="
-          text-white
-          w-[100px]
-          border-2 border-gray-600 rounded
-          bg-black/50 hover:bg-gray-700 active:bg-gray-700
-          mx-auto
-          absolute
-          top-0 right-0
-        "
-        onClick={() => handleSwap()}
-      >
-        <span className="text-2xl">⇅</span> Swap
-      </button>
-
-      {/* Wrapper for the cards selection fields */}
-      <div className="my-2 flex flex-col gap-3">
-        {/* First card selection */}
-        <SelectField
-          mappedModelNames={mappedModelNames}
-          order="first"
-          label="First card:"
-          selectOption={firstSelection}
-          setSelection={setFirstSelection}
-        />
-
-        {/* Second card selection */}
-        <SelectField
-          mappedModelNames={mappedModelNames}
-          order="second"
-          label="Second card:"
-          selectOption={secondSelection}
-          setSelection={setSecondSelection}
-        />
-      </div>
-
-      {/* Confirm button */}
-      <button
-        type="submit"
-        className="
-          border-2 border-gray-600 rounded-xl
-          p-2
-          bg-black/50 hover:bg-gray-700 active:bg-gray-700
+          flex flex-col
+          align-left
+          gap-2
+          bg-black/50
+          border-2 border-gray-700 rounded-xl
+          p-5
         "
       >
-        Confirm
-      </button>
+        {/* Wrapper for the cards selection fields */}
+        <div className="my-2 flex flex-col gap-3">
+          {/* First card selection */}
+          <SelectField
+            mappedModelNames={mappedModelNames}
+            order="first"
+            label="First card:"
+            selectOption={firstSelection}
+            setSelection={setFirstSelection}
+          />
 
-      <Notification
-        showMessage={isPending}
-        message="Loading comparison, please wait..."
-      />
-    </form>
+          {/* Second card selection */}
+          <SelectField
+            mappedModelNames={mappedModelNames}
+            order="second"
+            label="Second card:"
+            selectOption={secondSelection}
+            setSelection={setSecondSelection}
+          />
+        </div>
+
+        {/* Confirm button */}
+        <button
+          type="submit"
+          className="
+            border-2 border-gray-600 rounded-xl
+            p-2
+            bg-black/50 hover:bg-gray-700 active:bg-gray-700
+          "
+        >
+          Confirm
+        </button>
+
+        {/* Swap button */}
+        <button
+          type="button"
+          className="
+            border-2 border-gray-600 rounded-xl
+            p-1
+            bg-black/50 hover:bg-gray-700 active:bg-gray-700
+          "
+          onClick={() => handleSwap()}
+        >
+          <span className="text-2xl">⇅</span> Swap
+        </button>
+
+        <Notification
+          showMessage={isPending}
+          message="Loading comparison, please wait..."
+        />
+      </form>
+    </div>
   );
 }
