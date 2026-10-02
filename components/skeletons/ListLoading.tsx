@@ -1,28 +1,30 @@
 export default function ListLoading() {
   return (
-    <div className="mx-auto text-center animate-pulse">
+    <div className="animate-pulse">
       <h1
         className="
-          mx-auto mt-8 mb-2
+          mt-4
           text-2xl text-center
-          text-gray-300 dark:text-gray-600
+          text-gray-300 dark:text-gray-600/50
           font-bold
         "
       >
-        Loading available graphics cards...
+        Loading graphics cards...
       </h1>
 
-      <div className="w-[300px] mx-auto text-center">
+      <div className="min-w-[300px] w-[350px] max-w-[80%] sm:max-w-[350px] mx-auto">
         {/* Search Bar skeleton */}
-        <div className="mx-auto text-center">
-          <input
-            className="bg-gray-400 dark:bg-gray-700 p-4 mx-auto my-2 rounded"
-            disabled
-          />
-        </div>
+        <div
+          className="
+            mx-auto my-2
+            bg-gray-400/75 dark:bg-gray-700/75
+            rounded
+            w-[250px] h-[50px]
+          "
+        />
 
         {/* List items skeleton */}
-        <div className="flex flex-col mx-auto text-center gap-0.5 items-center align-center">
+        <div className="flex flex-col gap-1">
           {renderListItemSkeleton()}
           {renderListItemSkeleton()}
           {renderListItemSkeleton()}
@@ -35,37 +37,14 @@ export default function ListLoading() {
       </div>
 
       {/* Pagination skeleton */}
-      <div className="inline-flex mt-3 mb-5">
-        {/* Left nav arrow skeleton */}
-        <div
-          className="
-            h-10 w-10
-            rounded-md border border-gray-700
-            mr-2 md:mr-4
-            bg-gray-600 dark:bg-gray-900
-          "
-        />
-
-        {/* Page numbers skeleton */}
-        <div className="flex -space-x-px">
-          {renderPageNumberSkeleton()}
-          {renderPageNumberSkeleton()}
-          {renderPageNumberSkeleton()}
-          {renderPageNumberSkeleton()}
-          {renderPageNumberSkeleton()}
-          {renderPageNumberSkeleton()}
-        </div>
-
-        {/* Right nav arrow skeleton */}
-        <div
-          className="
-            h-10 w-10
-            rounded-md border border-gray-700
-            ml-2 md:ml-4
-            bg-gray-600 dark:bg-gray-900
-          "
-        />
-      </div>
+      <div
+        className="
+          w-[350px] h-[40px]
+          bg-gray-600 dark:bg-gray-900
+          mt-5 mb-5 mx-auto
+          rounded-xl
+        "
+      />
     </div>
   );
 }
@@ -75,24 +54,9 @@ function renderListItemSkeleton() {
   return (
     <div
       className="
-        my-1
-        py-6 px-10
-        min-w-[300px] sm:min-w-[350px] w-[350px] max-w-[80%]
-        border-1 border-gray-700 rounded
-        bg-gray-600 dark:bg-gray-900
-      "
-    />
-  );
-}
-
-function renderPageNumberSkeleton() {
-  return (
-    <div
-      className="
-        h-10 w-10
-        border border-gray-700
-        bg-gray-600 dark:bg-gray-900
-        first:rounded-l-md last:rounded-r-md
+        border-1 border-gray-700/75 rounded
+        bg-gray-500/75 dark:bg-gray-800/75
+        h-[50px]
       "
     />
   );
