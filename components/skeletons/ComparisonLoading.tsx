@@ -105,7 +105,9 @@ export default function ComparisonLoading() {
 }
 
 function renderSelectionField() {
-  return <div className="flex bg-gray-600 dark:bg-gray-900/75 rounded h-[45px]" />;
+  return (
+    <div className="flex bg-gray-600 dark:bg-gray-900/75 rounded h-[45px]" />
+  );
 }
 
 function renderSectionHeader() {

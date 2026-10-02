@@ -22,7 +22,7 @@ export default function GpuTableLoading() {
         </div>
 
         {/* Wrapper for the data section of the table */}
-        <div 
+        <div
           className="
             sm:flex sm:grid sm:grid-cols-3
             lg:h-[250px] sm:h-[300px]
@@ -63,9 +63,13 @@ export default function GpuTableLoading() {
 }
 
 function renderHeader() {
-  return <div className="bg-gray-600/50 dark:bg-gray-800/75 text-center h-[45px] w-full" />;
+  return (
+    <div className="bg-gray-600/50 dark:bg-gray-800/75 text-center h-[45px] w-full" />
+  );
 }
 
 function renderDataSection() {
-  return <div className="bg-gray-700 dark:bg-gray-900 h-[150px] sm:h-[250px] lg:h-[200px] m-1 rounded" />;
+  return (
+    <div className="bg-gray-700 dark:bg-gray-900 h-[150px] sm:h-[250px] lg:h-[200px] m-1 rounded" />
+  );
 }
