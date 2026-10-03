@@ -1,3 +1,7 @@
+"use client";
+
+import { useTransition } from "react";
+
 // Components
 import GpuList from "./GpuList";
 import Pagination from "./Pagination";
@@ -18,6 +22,8 @@ export default function ListContainer({
   totalPages,
   searchQuery,
 }: ListContainerProps) {
+  const [isPending, startTransition] = useTransition();
+
   return (
     <div>
       <GpuList
@@ -25,10 +31,16 @@ export default function ListContainer({
         currentPage={currentPage}
         totalPages={totalPages}
         searchQuery={searchQuery}
+        startTransition={startTransition}
+        isPending={isPending}
       />
 
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} />
+        <Pagination
+          totalPages={totalPages}
+          startTransition={startTransition}
+          isPending={isPending}
+        />
       </div>
     </div>
   );

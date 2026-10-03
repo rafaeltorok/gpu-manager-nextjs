@@ -6,6 +6,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 // React
 import { useEffect, useCallback } from "react";
 import { useSwipeable } from "react-swipeable";
+import { RotatingLines } from "react-loader-spinner";
 
 // Utils
 import getManufacturerColor from "@/utils/getManufacturerColor";
@@ -13,12 +14,15 @@ import getManufacturerColor from "@/utils/getManufacturerColor";
 // TypeScript types
 import type { GpuType } from "@/types/gpu";
 import type { SwipeEventData } from "react-swipeable";
+import type { TransitionStartFunction } from "react";
 
 interface GpuListProps {
   paginatedGpus: GpuType[];
   currentPage: number;
   totalPages: number;
   searchQuery: string | undefined;
+  startTransition: TransitionStartFunction;
+  isPending: boolean;
 }
 
 export default function GpuList({
@@ -26,6 +30,8 @@ export default function GpuList({
   currentPage,
   totalPages,
   searchQuery,
+  startTransition,
+  isPending,
 }: GpuListProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -50,9 +56,11 @@ export default function GpuList({
       if (searchQuery) params.set("query", searchQuery);
 
       // Navigate to the new route
-      router.push(`${pathname}?${params.toString()}`);
+      startTransition(() => {
+        router.push(`${pathname}?${params.toString()}`);
+      });
     },
-    [currentPage, pathname, searchParams, router, searchQuery],
+    [currentPage, pathname, searchParams, router, searchQuery, startTransition],
   );
 
   // Handles keyboard navigation
@@ -105,11 +113,25 @@ export default function GpuList({
             text-xl
             hover:underline
             ${getManufacturerColor(`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`)}
+            ${isPending && "opacity-40 pointer-events-none"}
           `}
         >
           {gpu.manufacturer} {gpu.gpuline} {gpu.model}
         </Link>
       ))}
+
+      {/* Renders a loading spinner when navigating through pages */}
+      {isPending && (
+        <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="48"
+            visible={true}
+          />
+        </div>
+      )}
     </div>
   );
 }
