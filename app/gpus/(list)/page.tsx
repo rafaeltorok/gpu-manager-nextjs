@@ -3,8 +3,7 @@ import { getGpus } from "@/lib/data";
 
 // Components
 import SearchBar from "@/components/SearchBar";
-import GpuList from "@/components/GpuList";
-import Pagination from "@/components/Pagination";
+import ListContainer from "@/components/ListContainer";
 
 // TypeScript types
 import type { GpuType } from "@/types/gpu";
@@ -76,18 +75,12 @@ export default async function Page(props: {
           No graphics cards were found...
         </h3>
       ) : (
-        <>
-          <GpuList
-            paginatedGpus={paginatedGpus}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            searchQuery={query}
-          />
-
-          <div className="mt-5 flex w-full justify-center">
-            <Pagination totalPages={totalPages} />
-          </div>
-        </>
+        <ListContainer
+          paginatedGpus={paginatedGpus}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          searchQuery={query}
+        />        
       )}
     </div>
   );
