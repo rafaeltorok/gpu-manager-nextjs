@@ -19,6 +19,7 @@ import ClockSpeeds from "./TableSections/ClockSpeeds";
 import Performance from "./TableSections/Performance";
 import Controls from "./TableSections/Controls";
 import ConfirmMessage from "./ConfirmMessage";
+import NavArrows from "./NavArrows";
 
 // TypeScript types
 import type { GpuType } from "../../types/gpu";
@@ -113,6 +114,7 @@ export default function GpuTable({
         mx-auto mt-6
         rounded-xl
         wrap-break-word
+        relative
       "
       {...swipeHandler}
     >
@@ -122,6 +124,9 @@ export default function GpuTable({
         editMode={editMode}
         gpuClass={gpuClass}
       />
+
+      {/* Navigation arrows */}
+      <NavArrows previous={previous?.slug || ""} next={next?.slug || ""} />
 
       {/* Wrapper for the data section of the table */}
       <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
