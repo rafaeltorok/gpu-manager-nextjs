@@ -79,7 +79,6 @@ export default async function Page(props: {
           paginatedGpus={paginatedGpus}
           currentPage={currentPage}
           totalPages={totalPages}
-          searchQuery={query}
         />        
       )}
     </div>
