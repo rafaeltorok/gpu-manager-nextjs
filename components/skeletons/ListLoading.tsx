@@ -54,7 +54,7 @@ function renderListItemSkeleton() {
   return (
     <div
       className="
-        border-1 border-gray-700/75 rounded
+        rounded
         bg-gray-500/75 dark:bg-gray-800/75
         h-[50px]
       "
