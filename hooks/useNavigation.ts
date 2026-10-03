@@ -1,27 +1,34 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useTransition } from "react";
+import { useTransition, useCallback } from "react";
 
 export default function useNavigation() {
+  // Handles displaying a loading spinner within the GpuList component
   const [isPending, startTransition] = useTransition();
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  function navigate(pageNumber: number) {
-    const params = new URLSearchParams(searchParams);
-    const searchQuery = searchParams.get("query");
+  const navigate = useCallback((pageNumber: number) => {
+    // Prevent double-firing when the page is still loading
+    if (!isPending) {
+      const params = new URLSearchParams(searchParams);
 
-    // Set the page number into the URL
-    params.set("page", pageNumber.toString());
+      // Get the search term, if available
+      const searchQuery = searchParams.get("query");
 
-    // If a search term is available, insert it into the URL
-    if (searchQuery) params.set("query", searchQuery);
+      // Set the page number into the URL
+      params.set("page", pageNumber.toString());
 
-    // Navigate to the new route
-    startTransition(() => {
-      router.push(`${pathname}?${params.toString()}`);
-    });
-  }
+      // If a search term is available, insert it into the URL
+      if (searchQuery) params.set("query", searchQuery);
+
+      // Navigate to the new route
+      startTransition(() => {
+        router.push(`${pathname}?${params.toString()}`, { scroll: true });
+      });
+    }
+  }, [pathname, router, searchParams, isPending]);
   
   return { navigate, isPending };
 }
