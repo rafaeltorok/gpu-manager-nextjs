@@ -21,7 +21,7 @@ export default function ListContainer({
   currentPage,
   totalPages,
 }: ListContainerProps) {
-  const {isPending, navigate} = useNavigation();
+  const { isPending, navigate } = useNavigation();
 
   return (
     <div>

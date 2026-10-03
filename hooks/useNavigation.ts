@@ -9,26 +9,29 @@ export default function useNavigation() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const navigate = useCallback((pageNumber: number) => {
-    // Prevent double-firing when the page is still loading
-    if (!isPending) {
-      const params = new URLSearchParams(searchParams);
+  const navigate = useCallback(
+    (pageNumber: number) => {
+      // Prevent double-firing when the page is still loading
+      if (!isPending) {
+        const params = new URLSearchParams(searchParams);
 
-      // Get the search term, if available
-      const searchQuery = searchParams.get("query");
+        // Get the search term, if available
+        const searchQuery = searchParams.get("query");
 
-      // Set the page number into the URL
-      params.set("page", pageNumber.toString());
+        // Set the page number into the URL
+        params.set("page", pageNumber.toString());
 
-      // If a search term is available, insert it into the URL
-      if (searchQuery) params.set("query", searchQuery);
+        // If a search term is available, insert it into the URL
+        if (searchQuery) params.set("query", searchQuery);
 
-      // Navigate to the new route
-      startTransition(() => {
-        router.push(`${pathname}?${params.toString()}`, { scroll: true });
-      });
-    }
-  }, [pathname, router, searchParams, isPending]);
-  
+        // Navigate to the new route
+        startTransition(() => {
+          router.push(`${pathname}?${params.toString()}`, { scroll: true });
+        });
+      }
+    },
+    [pathname, router, searchParams, isPending],
+  );
+
   return { navigate, isPending };
 }

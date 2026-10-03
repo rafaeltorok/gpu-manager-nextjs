@@ -31,9 +31,9 @@ export default function PaginationArrow({
     <button
       type="button"
       className={className}
-      onClick={() => { 
+      onClick={() => {
         if (direction === "left") {
-          navigate(currentPage - 1)
+          navigate(currentPage - 1);
         } else if (direction === "right") {
           navigate(currentPage + 1);
         }

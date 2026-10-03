@@ -32,9 +32,9 @@ export default function PaginationNumber({
     <button
       type="button"
       className={className}
-      onClick={() => { 
+      onClick={() => {
         if (currentPage !== Number(page)) {
-          navigate(Number(page))
+          navigate(Number(page));
         }
       }}
       disabled={isPending}

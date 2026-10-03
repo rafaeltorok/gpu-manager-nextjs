@@ -79,7 +79,7 @@ export default async function Page(props: {
           paginatedGpus={paginatedGpus}
           currentPage={currentPage}
           totalPages={totalPages}
-        />        
+        />
       )}
     </div>
   );

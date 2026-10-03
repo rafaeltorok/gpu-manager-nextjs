@@ -21,7 +21,9 @@ export default function Pagination({
   const allPages = generatePagination(currentPage, totalPages);
 
   return (
-    <div className={`inline-flex mb-5 ${isPending && "opacity-40 pointer-events-none"}`}>
+    <div
+      className={`inline-flex mb-5 ${isPending && "opacity-40 pointer-events-none"}`}
+    >
       <PaginationArrow
         direction="left"
         navigate={navigate}
