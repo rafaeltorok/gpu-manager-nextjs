@@ -3,11 +3,13 @@ import clsx from "clsx";
 export default function PaginationArrow({
   direction,
   navigate,
+  isPending,
   currentPage,
   isDisabled,
 }: {
   direction: "left" | "right";
   navigate: (pageNumber: number) => void;
+  isPending: boolean;
   currentPage: number;
   isDisabled?: boolean;
 }) {
@@ -36,6 +38,7 @@ export default function PaginationArrow({
           navigate(currentPage + 1);
         }
       }}
+      disabled={isPending}
     >
       {icon}
     </button>

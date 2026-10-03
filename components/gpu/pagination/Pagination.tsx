@@ -24,8 +24,9 @@ export default function Pagination({
     <div className={`inline-flex mb-5 ${isPending && "opacity-40 pointer-events-none"}`}>
       <PaginationArrow
         direction="left"
-        currentPage={currentPage}
         navigate={navigate}
+        isPending={isPending}
+        currentPage={currentPage}
         isDisabled={currentPage <= 1}
       />
 
@@ -44,8 +45,9 @@ export default function Pagination({
               page={page}
               navigate={navigate}
               currentPage={currentPage}
-              position={position}
+              isPending={isPending}
               isActive={currentPage === page}
+              position={position}
             />
           );
         })}
@@ -54,6 +56,7 @@ export default function Pagination({
       <PaginationArrow
         direction="right"
         navigate={navigate}
+        isPending={isPending}
         currentPage={currentPage}
         isDisabled={currentPage >= totalPages}
       />

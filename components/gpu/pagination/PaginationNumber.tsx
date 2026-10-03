@@ -4,14 +4,16 @@ export default function PaginationNumber({
   page,
   navigate,
   currentPage,
-  position,
+  isPending,
   isActive,
+  position,
 }: {
   page: number | string;
   navigate: (pageNumber: number) => void;
   currentPage: number;
-  position?: "first" | "last" | "middle" | "single";
+  isPending: boolean;
   isActive: boolean;
+  position?: "first" | "last" | "middle" | "single";
 }) {
   const className = clsx(
     "flex h-10 w-10 items-center justify-center text-sm border border-gray-600",
@@ -35,6 +37,7 @@ export default function PaginationNumber({
           navigate(Number(page))
         }
       }}
+      disabled={isPending}
     >
       {page}
     </button>
