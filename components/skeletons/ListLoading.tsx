@@ -3,7 +3,7 @@ export default function ListLoading() {
     <div className="animate-pulse">
       <h1
         className="
-          mt-4
+          my-5
           text-2xl text-center
           text-gray-300 dark:text-gray-600/50
           font-bold
@@ -13,16 +13,6 @@ export default function ListLoading() {
       </h1>
 
       <div className="min-w-[300px] w-[350px] max-w-[80%] sm:max-w-[350px] mx-auto">
-        {/* Search Bar skeleton */}
-        <div
-          className="
-            mx-auto my-2
-            bg-gray-400/75 dark:bg-gray-700/75
-            rounded
-            w-[250px] h-[50px]
-          "
-        />
-
         {/* List items skeleton */}
         <div className="flex flex-col gap-1">
           {renderListItemSkeleton()}
