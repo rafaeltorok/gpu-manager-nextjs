@@ -43,6 +43,7 @@ export default function ConfirmMessage({
           my-auto sm:my-5
           backdrop:bg-black/50
           backdrop:backdrop-blur-[3px]
+          top-1/2 -translate-y-1/2
         "
       >
         <p
