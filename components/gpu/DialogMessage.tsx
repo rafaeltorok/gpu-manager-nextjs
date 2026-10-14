@@ -1,13 +1,13 @@
 import { useRef, useEffect } from "react";
 
 interface DialogMessageProps {
-  message: string;
+  messages: string[];
   showDialogMessage: boolean;
   setShowDialogMessage: (show: boolean) => void;
 }
 
 export default function DialogMessage({
-  message,
+  messages,
   showDialogMessage,
   setShowDialogMessage,
 }: DialogMessageProps) {
@@ -39,15 +39,18 @@ export default function DialogMessage({
         "
         onClose={() => setShowDialogMessage(false)}
       >
-        <p
-          className="
-            text-xl
-            font-bold-xl
-            p-3
-          "
-        >
-          {message}
-        </p>
+        {messages.map((m: string) => (
+          <p
+            key={m}
+            className="
+              text-xl
+              font-bold-xl
+              p-3
+            "
+          >
+            {m}
+          </p>
+        ))}
         <button
           type="button"
           onClick={() => setShowDialogMessage(false)}
