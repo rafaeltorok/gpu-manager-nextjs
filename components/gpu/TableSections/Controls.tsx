@@ -1,6 +1,3 @@
-// Server actions
-import { editGpu } from "@/app/actions/gpus";
-
 // TypeScript types
 import type { GpuType } from "@/types/gpu";
 
@@ -36,6 +33,7 @@ export default function Controls({
       {/* Override mode - Allows temporarily modifying the clock speeds */}
       {!editMode && (
         <button
+          key="override-button"
           className="
             w-full
             px-1 py-1
@@ -44,8 +42,8 @@ export default function Controls({
             hover:bg-gray-800 active:bg-gray-800
             rounded-xl
           "
-          type="submit"
-          formAction={() => {
+          type="button"
+          onClick={() => {
             if (overrideMode) {
               setOverrideMode(false);
             } else {
@@ -59,32 +57,46 @@ export default function Controls({
 
       {/* Edit mode - Alter the database data for an existing graphics card */}
       {!overrideMode && (
-        <button
-          className="
-            w-full
-            px-1 py-1
-            bg-black/50
-            border-1 border-gray-700
-            hover:bg-gray-800 active:bg-gray-800
-            rounded-xl
-          "
-          type="submit"
-          formAction={async (formData) => {
-            if (editMode) {
-              setEditMode(false);
-              await editGpu(formData);
-            } else {
-              setEditMode(true);
-            }
-          }}
-        >
-          {editMode ? "Save" : "Edit"}
-        </button>
+        <>
+          {editMode ? (
+            <button
+              key="save-button"
+              className="
+                w-full
+                px-1 py-1
+                bg-black/50
+                border-1 border-gray-700
+                hover:bg-gray-800 active:bg-gray-800
+                rounded-xl
+              "
+              type="submit"
+            >
+              Save
+            </button>
+          ) : (
+            <button
+              key="edit-button"
+              className="
+                w-full
+                px-1 py-1
+                bg-black/50
+                border-1 border-gray-700
+                hover:bg-gray-800 active:bg-gray-800
+                rounded-xl
+              "
+              type="button"
+              onClick={() => setEditMode(true)}
+            >
+              Edit
+            </button> 
+          )}
+        </>
       )}
 
       {/* Using any table modes, display the "Cancel" button instead of "Remove" */}
       {editMode || overrideMode ? (
         <button
+          key="reset-cancel-button"
           className="
             w-full
             px-1 py-1
@@ -93,8 +105,8 @@ export default function Controls({
             hover:bg-gray-800 active:bg-gray-800
             rounded-xl
           "
-          type="submit"
-          formAction={() => {
+          type="button"
+          onClick={() => {
             setEditMode(false);
             setOverrideMode(false);
             setGpuData(gpu);
@@ -104,6 +116,7 @@ export default function Controls({
         </button>
       ) : (
         <button
+          key="remove-button"
           className="
             w-full
             px-1 py-1
