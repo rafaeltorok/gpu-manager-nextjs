@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 
 // Server actions
-import { deleteGpu } from "@/app/actions/gpus";
+import { deleteGpu, editGpu } from "@/app/actions/gpus";
 
 // React
-import { useState, useEffect } from "react";
+import { useState, useEffect, useActionState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 // Utils
@@ -20,10 +20,13 @@ import Performance from "./TableSections/Performance";
 import Controls from "./TableSections/Controls";
 import ConfirmMessage from "./ConfirmMessage";
 import NavArrows from "./NavArrows";
+import Notification from "../Notification";
+import DialogMessage from "./DialogMessage";
 
 // TypeScript types
 import type { GpuType } from "../../types/gpu";
 import type { SwipeEventData } from "react-swipeable";
+import type { State } from "@/app/actions/gpus";
 
 interface ComponentProps {
   gpu: GpuType;
@@ -42,12 +45,27 @@ export default function GpuTable({
   // Define the table modes
   const [editMode, setEditMode] = useState(false);
   const [overrideMode, setOverrideMode] = useState(false);
+
+  // Handles displaying the remove graphics card confirmation message
   const [openModal, setOpenModal] = useState(false);
 
-  const router = useRouter();
+  // Handles displaying validation errors during edit mode
+  const [showDialogMessage, setShowDialogMessage] = useState(false);
+  const [messages, setMessages] = useState<string[]>([]);
 
   // Create a copy of the original GPU data to modify it
   const [gpuData, setGpuData] = useState(gpu);
+
+  // Handles the update validation messages
+  const initialState: State = { message: null, errors: {} };
+
+  // Handle updating the graphics card data
+  const [state, formAction, isPending] = useActionState(
+    editGpu,
+    initialState,
+  );
+
+  const router = useRouter();
 
   // Get the theoretical performance for the current graphics card
   const performance = calculatePerformance(gpuData);
@@ -56,6 +74,7 @@ export default function GpuTable({
   useEffect(() => {
     async function handleUpdate() {
       setGpuData(gpu);
+      setEditMode(false);
     }
     handleUpdate();
   }, [gpu]);
@@ -77,6 +96,20 @@ export default function GpuTable({
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [previous, next, router, openModal]);
+
+  // Handles mapping the validation error messages to be displayed by the dialog component
+  useEffect(() => {
+    const fieldErrors = (Object.values(state?.errors ?? {}) as string[][]).flat();
+
+    const list =
+      fieldErrors.length > 0 ? fieldErrors : state?.message ? [state.message] : [];
+
+    // Initial state (or nothing to show): do nothing
+    if (list.length === 0) return;
+
+    setMessages(list);
+    setShowDialogMessage(true);
+  }, [state]);
 
   // Handles the Touch screen swipe to change the page
   const swipeHandler = useSwipeable({
@@ -106,7 +139,7 @@ export default function GpuTable({
   }
 
   return (
-    <div
+    <form
       className="
         w-full
         min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
@@ -116,8 +149,13 @@ export default function GpuTable({
         wrap-break-word
         relative
       "
+      action={formAction}
       {...swipeHandler}
     >
+      {/* Provides the ID to the action responsible for updating the specs */}
+      <input type="hidden" name="id" value={gpu.id} />
+
+      {/* Full model name on the top of the table */}
       <Title
         gpuData={gpuData}
         setGpuData={setGpuData}
@@ -162,6 +200,7 @@ export default function GpuTable({
         setOpenModal={setOpenModal}
       />
 
+      {/* Show message to confirm a graphics card removal */}
       <ConfirmMessage
         id={gpu.id}
         openModal={openModal}
@@ -170,6 +209,19 @@ export default function GpuTable({
         fullModelName={`${gpu.manufacturer} ${gpu.gpuline} ${gpu.model}`}
         gpuClass={gpuClass}
       />
-    </div>
+
+      {/* Displays validation errors, if necessary */}
+      <DialogMessage
+        messages={messages}
+        showDialogMessage={showDialogMessage}
+        setShowDialogMessage={setShowDialogMessage}
+      />
+
+      {/* Display an UI message while the update action runs */}
+      <Notification
+        showMessage={isPending}
+        message="Updating graphics card data..."
+      />
+    </form>
   );
 }
