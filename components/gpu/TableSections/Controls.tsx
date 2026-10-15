@@ -88,7 +88,7 @@ export default function Controls({
               onClick={() => setEditMode(true)}
             >
               Edit
-            </button> 
+            </button>
           )}
         </>
       )}

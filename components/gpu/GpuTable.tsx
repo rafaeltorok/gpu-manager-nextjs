@@ -60,10 +60,7 @@ export default function GpuTable({
   const initialState: State = { message: null, errors: {} };
 
   // Handle updating the graphics card data
-  const [state, formAction, isPending] = useActionState(
-    editGpu,
-    initialState,
-  );
+  const [state, formAction, isPending] = useActionState(editGpu, initialState);
 
   const router = useRouter();
 
@@ -99,10 +96,18 @@ export default function GpuTable({
 
   // Handles displaying validation errors on the dialog component
   useEffect(() => {
-    const fieldErrors = (Object.values(state?.errors ?? { error: "Error updating data" }) as string[][]).flat();
+    const fieldErrors = (
+      Object.values(
+        state?.errors ?? { error: "Error updating data" },
+      ) as string[][]
+    ).flat();
 
     const list =
-      fieldErrors.length > 0 ? fieldErrors : state?.message ? [state.message] : [];
+      fieldErrors.length > 0
+        ? fieldErrors
+        : state?.message
+          ? [state.message]
+          : [];
 
     // During the initial state (or no messages): do nothing
     if (list.length === 0) return;
@@ -219,10 +224,7 @@ export default function GpuTable({
       />
 
       {/* Displays validation errors, if necessary */}
-      <DialogMessage
-        messages={messages}
-        ref={dialogRef}
-      />
+      <DialogMessage messages={messages} ref={dialogRef} />
 
       {/* Display an UI message while the update action runs */}
       <Notification

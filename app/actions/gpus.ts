@@ -130,7 +130,7 @@ export async function createGpu(
   try {
     // Store the new graphics card into MongoDB
     storedGpu = (await addGpu({
-      ...validatedFields.data
+      ...validatedFields.data,
     })) as GpuType;
   } catch (err: unknown) {
     if (err instanceof Error) {
@@ -155,11 +155,14 @@ export async function createGpu(
 }
 
 // Update an existing graphics card specs
-export async function editGpu(prevState: State, formData: FormData): Promise<State> {
+export async function editGpu(
+  prevState: State,
+  formData: FormData,
+): Promise<State> {
   const id = formData.get("id") as string;
 
   // Validate fields with Zod
-  const validatedFields = handleValidation(formData); 
+  const validatedFields = handleValidation(formData);
 
   // If any required fields are invalid, return the errors
   if (!validatedFields.success) {
@@ -187,7 +190,7 @@ export async function editGpu(prevState: State, formData: FormData): Promise<Sta
   let updatedGpu: GpuType | undefined;
 
   try {
-    // Update the database specs    
+    // Update the database specs
     updatedGpu = (await updateSpecs({
       ...validatedFields.data,
       id,
@@ -204,7 +207,7 @@ export async function editGpu(prevState: State, formData: FormData): Promise<Sta
   if (!updatedGpu) {
     return { message: "Failed to update graphics card specifications." };
   }
-  
+
   // Generate a new slug for the updated graphics card
   const slug = generateSlug(
     `${updatedGpu.manufacturer} ${updatedGpu.gpuline} ${updatedGpu.model}`,

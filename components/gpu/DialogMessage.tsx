@@ -5,10 +5,7 @@ interface DialogMessageProps {
   ref: RefObject<HTMLDialogElement | null>;
 }
 
-export default function DialogMessage({
-  messages,
-  ref,
-}: DialogMessageProps) {
+export default function DialogMessage({ messages, ref }: DialogMessageProps) {
   return (
     <dialog
       ref={ref}
@@ -44,7 +41,7 @@ export default function DialogMessage({
           </p>
         ))}
       </div>
-      
+
       <button
         type="button"
         autoFocus
