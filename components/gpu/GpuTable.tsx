@@ -99,15 +99,19 @@ export default function GpuTable({
 
   // Handles displaying validation errors on the dialog component
   useEffect(() => {
-    const fieldErrors = (Object.values(state?.errors ?? { error: "ERROR!" }) as string[][]).flat();
+    const fieldErrors = (Object.values(state?.errors ?? { error: "Error updating data" }) as string[][]).flat();
 
     const list =
       fieldErrors.length > 0 ? fieldErrors : state?.message ? [state.message] : [];
 
-    // Initial state (or nothing to show): do nothing
+    // During the initial state (or no messages): do nothing
     if (list.length === 0) return;
 
-    setMessages(list);
+    // Sets the list of messages to be displayed by the dialog element
+    function handleMessages() {
+      setMessages(list);
+    }
+    handleMessages();
 
     // Display the HTML <dialog> element
     dialogRef.current?.showModal();
@@ -141,66 +145,68 @@ export default function GpuTable({
   }
 
   return (
-    <form
-      className="
-        w-full
-        min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
-        border-5 border-gray-700
-        mx-auto mt-6
-        rounded-xl
-        wrap-break-word
-        relative
-      "
-      action={formAction}
-      {...swipeHandler}
-    >
-      {/* Provides the ID to the action responsible for updating the specs */}
-      <input type="hidden" name="id" value={gpu.id} />
+    <div>
+      <form
+        className="
+          w-full
+          min-w-[300px] max-w-[400px] lg:max-w-[900px] md:max-w-[700px] sm:max-w-[600px]
+          border-5 border-gray-700
+          mx-auto mt-6
+          rounded-xl
+          wrap-break-word
+          relative
+        "
+        action={formAction}
+        {...swipeHandler}
+      >
+        {/* Provides the ID to the action responsible for updating the specs */}
+        <input type="hidden" name="id" value={gpu.id} />
 
-      {/* Full model name on the top of the table */}
-      <Title
-        gpuData={gpuData}
-        setGpuData={setGpuData}
-        editMode={editMode}
-        gpuClass={gpuClass}
-      />
-
-      {/* Navigation arrows */}
-      <NavArrows previous={previous?.slug || ""} next={next?.slug || ""} />
-
-      {/* Wrapper for the data section of the table */}
-      <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
-        {/* Wrapper for the Specifications section */}
-        <Specifications
+        {/* Full model name on the top of the table */}
+        <Title
           gpuData={gpuData}
           setGpuData={setGpuData}
           editMode={editMode}
           gpuClass={gpuClass}
         />
 
-        {/* Wrapper for the Clock speeds section */}
-        <ClockSpeeds
-          gpuData={gpuData}
+        {/* Navigation arrows */}
+        <NavArrows previous={previous?.slug || ""} next={next?.slug || ""} />
+
+        {/* Wrapper for the data section of the table */}
+        <div className="sm:grid sm:grid-cols-3 lg:h-[250px] sm:h-[300px]">
+          {/* Wrapper for the Specifications section */}
+          <Specifications
+            gpuData={gpuData}
+            setGpuData={setGpuData}
+            editMode={editMode}
+            gpuClass={gpuClass}
+          />
+
+          {/* Wrapper for the Clock speeds section */}
+          <ClockSpeeds
+            gpuData={gpuData}
+            setGpuData={setGpuData}
+            editMode={editMode}
+            overrideMode={overrideMode}
+            gpuClass={gpuClass}
+          />
+
+          {/* Wrapper for the Performance section */}
+          <Performance performance={performance} gpuClass={gpuClass} />
+        </div>
+
+        {/* Wrapper for the table controls */}
+        <Controls
+          gpu={gpu}
           setGpuData={setGpuData}
           editMode={editMode}
+          setEditMode={setEditMode}
           overrideMode={overrideMode}
-          gpuClass={gpuClass}
+          setOverrideMode={setOverrideMode}
+          setOpenModal={setOpenModal}
         />
-
-        {/* Wrapper for the Performance section */}
-        <Performance performance={performance} gpuClass={gpuClass} />
-      </div>
-
-      {/* Wrapper for the table controls */}
-      <Controls
-        gpu={gpu}
-        setGpuData={setGpuData}
-        editMode={editMode}
-        setEditMode={setEditMode}
-        overrideMode={overrideMode}
-        setOverrideMode={setOverrideMode}
-        setOpenModal={setOpenModal}
-      />
+      </form>
 
       {/* Show message to confirm a graphics card removal */}
       <ConfirmMessage
@@ -223,6 +229,6 @@ export default function GpuTable({
         showMessage={isPending}
         message="Updating graphics card data..."
       />
-    </form>
+    </div>
   );
 }
