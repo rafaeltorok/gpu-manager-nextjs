@@ -73,11 +73,8 @@ const FormSchema = z.object({
 
 const CreateGpu = FormSchema.omit({ id: true });
 
-// Create and store a new graphics card into MongoDB
-export async function createGpu(
-  prevState: State,
-  formData: FormData,
-): Promise<State> {
+// Handle the Zod validation
+function handleValidation(formData: FormData) {
   // Validate fields with Zod
   const validatedFields = CreateGpu.safeParse({
     manufacturer: formData.get("manufacturer"),
@@ -93,6 +90,17 @@ export async function createGpu(
     boostclock: formData.get("boostclock"),
     memclock: formData.get("memclock"),
   });
+
+  return validatedFields;
+}
+
+// Create and store a new graphics card into MongoDB
+export async function createGpu(
+  prevState: State,
+  formData: FormData,
+): Promise<State> {
+  // Validate fields with Zod
+  const validatedFields = handleValidation(formData);
 
   // If any required fields are invalid, return the errors
   if (!validatedFields.success) {
@@ -117,39 +125,12 @@ export async function createGpu(
     };
   }
 
-  // Prepare the data to be inserted into the database
-  const {
-    manufacturer,
-    gpuline,
-    model,
-    cores,
-    tmus,
-    rops,
-    vram,
-    bus,
-    memtype,
-    baseclock,
-    boostclock,
-    memclock,
-  } = validatedFields.data;
-
   let storedGpu;
 
   try {
     // Store the new graphics card into MongoDB
     storedGpu = (await addGpu({
-      manufacturer,
-      gpuline,
-      model,
-      cores,
-      tmus,
-      rops,
-      vram,
-      bus,
-      memtype,
-      baseclock,
-      boostclock,
-      memclock,
+      ...validatedFields.data,
     })) as GpuType;
   } catch (err: unknown) {
     if (err instanceof Error) {
@@ -174,37 +155,68 @@ export async function createGpu(
 }
 
 // Update an existing graphics card specs
-export async function editGpu(formData: FormData) {
+export async function editGpu(
+  prevState: State,
+  formData: FormData,
+): Promise<State> {
   const id = formData.get("id") as string;
 
-  // Extract the graphics card data from the form
-  const data: GpuType = {
-    id: id,
-    manufacturer: formData.get("manufacturer") as string,
-    gpuline: formData.get("gpuline") as string,
-    model: formData.get("model") as string,
-    cores: Number(formData.get("cores")),
-    tmus: Number(formData.get("tmus")),
-    rops: Number(formData.get("rops")),
-    vram: Number(formData.get("vram")),
-    bus: Number(formData.get("bus")),
-    memtype: formData.get("memtype") as string,
-    baseclock: Number(formData.get("baseclock")),
-    boostclock: Number(formData.get("boostclock")),
-    memclock: Number(formData.get("memclock")),
-  };
+  // Validate fields with Zod
+  const validatedFields = handleValidation(formData);
 
-  // Update its database specs
-  const updatedGpu = await updateSpecs(data);
+  // If any required fields are invalid, return the errors
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Invalid fields, failed to update graphics card.",
+      // prevent the values from being erased during a validation error
+      values: {
+        manufacturer: formData.get("manufacturer") as string,
+        gpuline: formData.get("gpuline") as string,
+        model: formData.get("model") as string,
+        cores: formData.get("cores") as string,
+        tmus: formData.get("tmus") as string,
+        rops: formData.get("rops") as string,
+        vram: formData.get("vram") as string,
+        bus: formData.get("bus") as string,
+        memtype: formData.get("memtype") as string,
+        baseclock: formData.get("baseclock") as string,
+        boostclock: formData.get("boostclock") as string,
+        memclock: formData.get("memclock") as string,
+      },
+    };
+  }
+
+  let updatedGpu: GpuType | undefined;
+
+  try {
+    // Update the database specs
+    updatedGpu = (await updateSpecs({
+      ...validatedFields.data,
+      id,
+    })) as GpuType;
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error(err);
+      return { message: "Database Error: Failed to update graphics card." };
+    } else {
+      console.error(String(err));
+    }
+  }
+
+  if (!updatedGpu) {
+    return { message: "Failed to update graphics card specifications." };
+  }
+
+  // Generate a new slug for the updated graphics card
+  const slug = generateSlug(
+    `${updatedGpu.manufacturer} ${updatedGpu.gpuline} ${updatedGpu.model}`,
+  );
 
   // On a successful updated, redirect to the card's data page
-  if (updatedGpu) {
-    const slug = generateSlug(
-      `${updatedGpu.manufacturer} ${updatedGpu.gpuline} ${updatedGpu.model}`,
-    );
-    revalidatePath(`/gpus/${slug}`);
-    redirect(`/gpus/${slug}`);
-  }
+  // Prevents a 404 not found error when the model name is modified
+  revalidatePath(`/gpus/${slug}`);
+  redirect(`/gpus/${slug}`);
 }
 
 // Remove a graphics card from the database
