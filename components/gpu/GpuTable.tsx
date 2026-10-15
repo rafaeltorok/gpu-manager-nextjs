@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { deleteGpu, editGpu } from "@/app/actions/gpus";
 
 // React
-import { useState, useEffect, useActionState } from "react";
+import { useState, useEffect, useActionState, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 
 // Utils
@@ -46,17 +46,17 @@ export default function GpuTable({
   const [editMode, setEditMode] = useState(false);
   const [overrideMode, setOverrideMode] = useState(false);
 
-  // Handles displaying the remove graphics card confirmation message
+  // Handle displaying the remove graphics card confirmation message
   const [openModal, setOpenModal] = useState(false);
 
-  // Handles displaying validation errors during edit mode
-  const [showDialogMessage, setShowDialogMessage] = useState(false);
+  // Handle displaying validation errors during edit mode
   const [messages, setMessages] = useState<string[]>([]);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   // Create a copy of the original GPU data to modify it
   const [gpuData, setGpuData] = useState(gpu);
 
-  // Handles the update validation messages
+  // Handle the update validation messages
   const initialState: State = { message: null, errors: {} };
 
   // Handle updating the graphics card data
@@ -97,9 +97,9 @@ export default function GpuTable({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [previous, next, router, openModal]);
 
-  // Handles mapping the validation error messages to be displayed by the dialog component
+  // Handles displaying validation errors on the dialog component
   useEffect(() => {
-    const fieldErrors = (Object.values(state?.errors ?? {}) as string[][]).flat();
+    const fieldErrors = (Object.values(state?.errors ?? { error: "ERROR!" }) as string[][]).flat();
 
     const list =
       fieldErrors.length > 0 ? fieldErrors : state?.message ? [state.message] : [];
@@ -108,8 +108,10 @@ export default function GpuTable({
     if (list.length === 0) return;
 
     setMessages(list);
-    setShowDialogMessage(true);
-  }, [state]);
+
+    // Display the HTML <dialog> element
+    dialogRef.current?.showModal();
+  }, [state, dialogRef]);
 
   // Handles the Touch screen swipe to change the page
   const swipeHandler = useSwipeable({
@@ -213,8 +215,7 @@ export default function GpuTable({
       {/* Displays validation errors, if necessary */}
       <DialogMessage
         messages={messages}
-        showDialogMessage={showDialogMessage}
-        setShowDialogMessage={setShowDialogMessage}
+        ref={dialogRef}
       />
 
       {/* Display an UI message while the update action runs */}

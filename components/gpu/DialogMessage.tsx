@@ -1,63 +1,55 @@
-import { useRef, useEffect } from "react";
+import { RefObject } from "react";
 
 interface DialogMessageProps {
   messages: string[];
-  showDialogMessage: boolean;
-  setShowDialogMessage: (show: boolean) => void;
+  ref: RefObject<HTMLDialogElement | null>;
 }
 
 export default function DialogMessage({
   messages,
-  showDialogMessage,
-  setShowDialogMessage,
+  ref,
 }: DialogMessageProps) {
-  const ref = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    if (showDialogMessage) {
-      ref.current?.showModal();
-    } else {
-      ref.current?.close();
-    }
-  }, [showDialogMessage]);
-
   return (
-    <div>
-      <dialog
-        className="
-          justify-center
-          align-center
-          p-5
-          bg-black
-          text-white
-          border-2 border-gray-600 rounded-xl
-          mx-auto
-          my-auto sm:my-5
-          backdrop:bg-black/50
-          backdrop:backdrop-blur-[3px]
-          top-1/2 -translate-y-1/2
-        "
-        onClose={() => setShowDialogMessage(false)}
-      >
-        {messages.map((m: string) => (
-          <p
-            key={m}
-            className="
-              text-xl
-              font-bold-xl
-              p-3
-            "
-          >
-            {m}
-          </p>
-        ))}
-        <button
-          type="button"
-          onClick={() => setShowDialogMessage(false)}
+    <dialog
+      ref={ref}
+      className="
+        p-5
+        bg-black
+        text-white
+        border-2 border-gray-600 rounded-xl
+        mx-auto
+        backdrop:bg-black/50
+        backdrop:backdrop-blur-[3px]
+        top-1/2 -translate-y-1/2
+      "
+      onClose={() => ref.current?.close()}
+    >
+      {messages.map((m: string) => (
+        <p
+          key={m}
+          className="
+            text-xl
+            font-bold-xl
+            py-1
+          "
         >
-          Close
-        </button>
-      </dialog>
-    </div>
+          {m}
+        </p>
+      ))}
+      <button
+        type="button"
+        autoFocus
+        className="
+          w-full
+          border-2 border-gray-600 rounded-xl
+          p-2
+          hover:bg-gray-700 active:bg-gray-700
+          mx-auto mt-2
+        "
+        onClick={() => ref.current?.close()}
+      >
+        Close
+      </button>
+    </dialog>
   );
 }
