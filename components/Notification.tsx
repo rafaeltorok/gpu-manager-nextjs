@@ -24,14 +24,11 @@ export default function Notification({
       ref={ref}
       onCancel={(e) => e.preventDefault()} // stop Esc from closing it mid-load
       className="
-        justify-center
-        align-center
         p-5
         bg-black
         text-white
         border-2 border-gray-600 rounded-xl
         mx-auto
-        my-auto sm:my-5
         backdrop:bg-black/50
         backdrop:backdrop-blur-[3px]
         top-1/2 -translate-y-1/2

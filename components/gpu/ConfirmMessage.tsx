@@ -40,7 +40,6 @@ export default function ConfirmMessage({
           text-white
           border-2 border-gray-600 rounded-xl
           mx-auto
-          my-auto sm:my-5
           backdrop:bg-black/50
           backdrop:backdrop-blur-[3px]
           top-1/2 -translate-y-1/2
@@ -50,7 +49,6 @@ export default function ConfirmMessage({
           className="
             text-xl
             font-bold-xl
-            p-3
             mb-5
           "
         >
@@ -61,7 +59,7 @@ export default function ConfirmMessage({
           <button
             type="button"
             className="
-              sm:w-1/2
+              w-full
               border-2 border-gray-600 rounded-xl
               p-2
               hover:bg-gray-700 active:bg-gray-700
@@ -77,7 +75,7 @@ export default function ConfirmMessage({
             type="button"
             autoFocus
             className="
-              sm:w-1/2
+              w-full
               border-2 border-gray-600 rounded-xl
               p-2
               hover:bg-gray-700 active:bg-gray-700
