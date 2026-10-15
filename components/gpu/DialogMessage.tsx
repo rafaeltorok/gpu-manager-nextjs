@@ -24,18 +24,27 @@ export default function DialogMessage({
       "
       onClose={() => ref.current?.close()}
     >
-      {messages.map((m: string) => (
-        <p
-          key={m}
-          className="
-            text-xl
-            font-bold-xl
-            py-1
-          "
-        >
-          {m}
-        </p>
-      ))}
+      {/* Wrapper for the validation errors */}
+      <div
+        className="
+          max-h-[200px]
+          overflow-auto
+        "
+      >
+        {messages.map((m: string) => (
+          <p
+            key={m}
+            className="
+              text-xl
+              font-bold-xl
+              py-1
+            "
+          >
+            {m}
+          </p>
+        ))}
+      </div>
+      
       <button
         type="button"
         autoFocus
