@@ -25,7 +25,7 @@ export default function Limit() {
         className="bg-black color-white border border-gray-700 rounded px-1 ml-2 mt-2"
         name="limit-choice"
         id="limit-choice"
-        defaultValue={"8"}
+        defaultValue={searchParams.get("limit")?.toString() || "8"}
         onChange={(e) => handleLimit(e.target.value)}
       >
         <option value="3">3</option>
