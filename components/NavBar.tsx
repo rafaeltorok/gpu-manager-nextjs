@@ -1,10 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function NavBar() {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
+
+  // Prevents background page scrolling while the Hamburger menu is open
+  useEffect(() => {
+    if (isNavOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  });
 
   return (
     <div>
