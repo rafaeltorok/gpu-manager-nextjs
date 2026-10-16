@@ -4,6 +4,7 @@ import { getGpus } from "@/lib/data";
 // Components
 import SearchBar from "@/components/SearchBar";
 import ListContainer from "@/components/ListContainer";
+import Limit from "@/components/Limit";
 
 // TypeScript types
 import type { GpuType } from "@/types/gpu";
@@ -17,17 +18,17 @@ export default async function Page(props: {
   searchParams?: Promise<{
     query?: string;
     page?: string;
+    limit?: string;
   }>;
 }) {
   // Fetch all graphics cards from the database
   const gpus: GpuType[] = await getGpus();
   let filteredGpus: GpuType[] = gpus;
 
-  const ITEMS_PER_PAGE = 8;
-
   // Extract the query search term
   const searchParams = await props.searchParams;
   const query = searchParams?.query;
+  const itemsPerPage = Number(searchParams?.limit) || 8;
 
   // If the database is empty, display a proper message
   if (gpus.length === 0 && !query) {
@@ -48,7 +49,7 @@ export default async function Page(props: {
   }
 
   // Define the amount of pages to be displayed
-  const totalPages = Math.ceil(filteredGpus.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredGpus.length / itemsPerPage);
 
   // Get the current page number
   const requestedPage = Number(searchParams?.page);
@@ -60,14 +61,16 @@ export default async function Page(props: {
       : 1;
 
   // Define the offset
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = offset + ITEMS_PER_PAGE;
+  const offset = (currentPage - 1) * itemsPerPage;
+  const endIndex = offset + itemsPerPage;
 
   // Divide the amount of cards based on the pagination number
   const paginatedGpus = filteredGpus.slice(offset, endIndex);
 
   return (
     <div className="my-2 text-center">
+      <Limit />
+
       <SearchBar />
 
       {filteredGpus.length === 0 ? (
