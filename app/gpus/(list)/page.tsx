@@ -68,7 +68,7 @@ export default async function Page(props: {
   const paginatedGpus = filteredGpus.slice(offset, endIndex);
 
   return (
-    <div className="my-2 text-center">
+    <main className="my-2 text-center">
       <Limit />
 
       <SearchBar />
@@ -84,6 +84,6 @@ export default async function Page(props: {
           totalPages={totalPages}
         />
       )}
-    </div>
+    </main>
   );
 }

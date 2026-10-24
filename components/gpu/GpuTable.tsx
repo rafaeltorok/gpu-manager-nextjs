@@ -150,7 +150,7 @@ export default function GpuTable({
   }
 
   return (
-    <div>
+    <section>
       <form
         className="
           w-full
@@ -231,6 +231,6 @@ export default function GpuTable({
         showMessage={isPending}
         message="Updating graphics card data..."
       />
-    </div>
+    </section>
   );
 }

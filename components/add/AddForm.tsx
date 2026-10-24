@@ -23,7 +23,7 @@ export default function AddForm() {
   );
 
   return (
-    <div>
+    <section>
       <form
         action={formAction}
         className="w-full max-w-[400px] mx-auto border-1 border-gray-700 p-3 rounded bg-black/50"
@@ -159,6 +159,6 @@ export default function AddForm() {
         showMessage={isPending}
         message="Sending data, please wait..."
       />
-    </div>
+    </section>
   );
 }

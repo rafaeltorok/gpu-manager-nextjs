@@ -33,14 +33,14 @@ export default function ListContainer({
         navigate={navigate}
       />
 
-      <div className="mt-5 flex w-full justify-center">
+      <footer className="mt-5 flex w-full justify-center">
         <Pagination
           totalPages={totalPages}
           currentPage={currentPage}
           isPending={isPending}
           navigate={navigate}
         />
-      </div>
+      </footer>
     </div>
   );
 }

@@ -86,7 +86,7 @@ export default function Selection({ gpus }: SelectionProps) {
   }));
 
   return (
-    <div
+    <header
       className="
         max-w-[400px]
         min-w-[300px]
@@ -157,6 +157,6 @@ export default function Selection({ gpus }: SelectionProps) {
           message="Loading comparison, please wait..."
         />
       </form>
-    </div>
+    </header>
   );
 }

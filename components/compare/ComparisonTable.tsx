@@ -118,61 +118,65 @@ export default function ComparisonTable({
   }
 
   return (
-    <form
-      action={handleClocksUpdate}
-      className="
-        flex flex-col
-        overflow-auto
-        min-w-[300px]
-        max-w-[500px]
-        mx-auto
-        p-1
-        bg-black/50
-        border-4 border-gray-700 rounded-xl
-      "
-    >
-      {/* Wrapper to the main title containing both cards' model names */}
-      <ComparisonTitle
-        firstModelName={firstGpuData?.model || "N/A"}
-        secondModelName={secondGpuData?.model || "N/A"}
-        firstGpuClass={firstGpuClass}
-        secondGpuClass={secondGpuClass}
-      />
+    <main>
+      <section>
+        <form
+          action={handleClocksUpdate}
+          className="
+            flex flex-col
+            overflow-auto
+            min-w-[300px]
+            max-w-[500px]
+            mx-auto
+            p-1
+            bg-black/50
+            border-4 border-gray-700 rounded-xl
+          "
+        >
+          {/* Wrapper to the main title containing both cards' model names */}
+          <ComparisonTitle
+            firstModelName={firstGpuData?.model || "N/A"}
+            secondModelName={secondGpuData?.model || "N/A"}
+            firstGpuClass={firstGpuClass}
+            secondGpuClass={secondGpuClass}
+          />
 
-      {/* Wrapper for the Specifications section */}
-      <Specifications
-        firstGpuData={firstGpuData}
-        secondGpuData={secondGpuData}
-        firstGpuClass={firstGpuClass}
-        secondGpuClass={secondGpuClass}
-      />
+          {/* Wrapper for the Specifications section */}
+          <Specifications
+            firstGpuData={firstGpuData}
+            secondGpuData={secondGpuData}
+            firstGpuClass={firstGpuClass}
+            secondGpuClass={secondGpuClass}
+          />
 
-      {/* Wrapper for the Clock Speeds section */}
-      <ClockSpeeds
-        firstGpuClockSpeeds={firstClocks}
-        secondGpuClockSpeeds={secondClocks}
-        firstGpuClass={firstGpuClass}
-        secondGpuClass={secondGpuClass}
-        editMode={editMode}
-      />
+          {/* Wrapper for the Clock Speeds section */}
+          <ClockSpeeds
+            firstGpuClockSpeeds={firstClocks}
+            secondGpuClockSpeeds={secondClocks}
+            firstGpuClass={firstGpuClass}
+            secondGpuClass={secondGpuClass}
+            editMode={editMode}
+          />
 
-      {/* Wrapper for the Theoretical Performance section */}
-      <Performance
-        firstGpuClass={firstGpuClass}
-        secondGpuClass={secondGpuClass}
-        firstGpuDisplayPerformance={firstGpuDisplayPerformance}
-        secondGpuDisplayPerformance={secondGpuDisplayPerformance}
-        firstGpuRawPerformance={firstGpuRawPerformance}
-        secondGpuRawPerformance={secondGpuRawPerformance}
-      />
+          {/* Wrapper for the Theoretical Performance section */}
+          <Performance
+            firstGpuClass={firstGpuClass}
+            secondGpuClass={secondGpuClass}
+            firstGpuDisplayPerformance={firstGpuDisplayPerformance}
+            secondGpuDisplayPerformance={secondGpuDisplayPerformance}
+            firstGpuRawPerformance={firstGpuRawPerformance}
+            secondGpuRawPerformance={secondGpuRawPerformance}
+          />
 
-      {/* Wrapper for the table controls */}
-      <Controls
-        editMode={editMode}
-        setEditMode={setEditMode}
-        handleClocksReset={handleClocksReset}
-      />
-    </form>
+          {/* Wrapper for the table controls */}
+          <Controls
+            editMode={editMode}
+            setEditMode={setEditMode}
+            handleClocksReset={handleClocksReset}
+          />
+        </form>
+      </section>
+    </main>
   );
 }
 

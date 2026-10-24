@@ -64,8 +64,8 @@ export default async function Page({
   );
 
   return (
-    <div>
-      <div>
+    <main>
+      <section>
         <input type="hidden" name="id" value={gpu.id} />
 
         <GpuTable
@@ -74,7 +74,7 @@ export default async function Page({
           previous={previous}
           next={next}
         />
-      </div>
+      </section>
 
       <Link
         href={"/gpus"}
@@ -91,6 +91,6 @@ export default async function Page({
       >
         Return
       </Link>
-    </div>
+    </main>
   );
 }
