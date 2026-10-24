@@ -134,7 +134,7 @@ export default function AddForm() {
           defaultValue={state?.values?.memclock}
           errors={state?.errors?.memclock}
           errorName={"memclock-error"}
-          step={0.01}
+          step={0.001}
         />
 
         <button
