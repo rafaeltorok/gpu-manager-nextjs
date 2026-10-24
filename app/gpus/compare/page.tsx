@@ -35,13 +35,13 @@ export default async function Page(props: {
   const secondGpuData = await getGpu(secondSlug || "");
 
   return (
-    <div>
+    <main>
       <Selection gpus={mappedSlugs} />
 
       <ComparisonTable
         firstGpuData={firstGpuData}
         secondGpuData={secondGpuData}
       />
-    </div>
+    </main>
   );
 }

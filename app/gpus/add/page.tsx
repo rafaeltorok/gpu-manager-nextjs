@@ -12,9 +12,11 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <div>
-      <h2 className="text-center p-6 text-xl font-bold">
-        Add new graphics card
-      </h2>
+      <header>
+        <h2 className="text-center p-6 text-xl font-bold">
+          Add new graphics card
+        </h2>
+      </header>
 
       <AddForm />
     </div>

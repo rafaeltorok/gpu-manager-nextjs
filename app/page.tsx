@@ -7,8 +7,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="mx-auto text-center">
-      <h1 className="text-2xl font-bold p-10">GPU Manager</h1>
-      <div>
+      <header>
+        <h1 className="text-2xl font-bold p-10">GPU Manager</h1>
+      </header>
+
+      <main>
         <section className="w-[80%] min-w-[300px] max-w-[400px] mx-auto">
           Full-stack Next.js + MongoDB web application
           <p className="font-bold text-left mt-6">Features:</p>
@@ -25,8 +28,12 @@ export default function Home() {
 
         <br />
 
-        <em className="text-gray-500">Developed by Rafael G. Torok. 2026.</em>
-      </div>
+        <footer>
+          <p>
+            <em className="text-gray-500">Developed by Rafael G. Torok. 2026.</em>
+          </p>
+        </footer>
+      </main>
     </div>
   );
 }
